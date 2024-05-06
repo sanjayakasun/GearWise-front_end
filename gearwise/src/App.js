@@ -9,18 +9,24 @@ import Location from './Components/Location/Location';
 import Reviews from './Components/Reviews/Reviews';
 import Test from './Components/Carousel/Test';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Advertistments from './Components/Advertistments/Advertistments';
+import Fotter from './Components/Fotter/Fotter';
+import Upbutton from './Components/Upbutton/Upbutton';
 
 function App() {
   return (
     <div className="App">
         <Topbar/>
         <Navbar/>
-        <Test/>
+        {/* <Test/> */}
         <Aboutus/>
         <Service/>
         <Packages/>
         <Location/>
-        <Reviews/>
+        {/* <Reviews/> */}
+        <Advertistments/>
+        <Fotter/>
+        <Upbutton/>
     </div>
   );
 }

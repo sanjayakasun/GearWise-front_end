@@ -19,7 +19,7 @@ export default function Aboutus() {
                         </div>
                         <div class="about-content">
                             <p>
-                                Lorem ipsum dolor sit amet elit. In vitae turpis. Donec in hendre dui, vel blandit massa. Ut vestibu suscipi cursus. Cras quis porta nulla, ut placerat risus. Aliquam nec magna eget velit luctus dictum
+                            Welcome to <strong>GearWise</strong> system of <strong>Autospa service Station</strong>, your ultimate destination for premium automated car care. At GearWise, we've redefined the car wash and maintenance experience by combining cutting-edge technology with unparalleled convenience and exceptional service.
                             </p>
                             <ul>
                                 <li><i class="far fa-check-circle"></i>Seats washing</li>
