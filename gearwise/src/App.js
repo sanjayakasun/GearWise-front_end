@@ -1,34 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-import Topbar from './Components/Topbar/Topbar';
-import Navbar from './Components/Navbar/Navbar';
-import Aboutus from './Components/Aboutus/Aboutus';
-import Service from './Components/Service/Service';
-import Packages from './Components/Packages/Packages';
-import Location from './Components/Location/Location';
-import Reviews from './Components/Reviews/Reviews';
-import Test from './Components/Carousel/Test';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Advertistments from './Components/Advertistments/Advertistments';
-import Fotter from './Components/Fotter/Fotter';
-import Upbutton from './Components/Upbutton/Upbutton';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Sidebar from './Components/Sidebar/Sidebar.js';
+import Dashboard from './Pages/Dashboard.jsx';
+import Advertisment from './Pages/Advertisment.jsx';
+import Profile from './Pages/Profile.jsx';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-        <Topbar/>
-        <Navbar/>
-        {/* <Test/> */}
-        <Aboutus/>
-        <Service/>
-        <Packages/>
-        <Location/>
-        {/* <Reviews/> */}
-        <Advertistments/>
-        <Fotter/>
-        <Upbutton/>
-    </div>
+    <BrowserRouter>
+      <Sidebar>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/advertisment" element={<Advertisment />} />
+          <Route path="/profile" element={<Profile />} />
+
+        </Routes>
+      </Sidebar>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
