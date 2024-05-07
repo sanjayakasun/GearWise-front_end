@@ -24,11 +24,11 @@ export default function Fotter() {
                     <div class="col-lg-3 col-md-6" >
                         <div class="footer-link">
                             <h2>Popular Links</h2>
-                            <a href=""  style={{textDecoration:'none'}}>About Us</a>
-                            <a href="" style={{textDecoration:'none'}}>Contact Us</a>
-                            <a href="" style={{textDecoration:'none'}}>Our Service</a>
+                            <a href="/About"  style={{textDecoration:'none'}}>About Us</a>
+                            <a href="/Contact" style={{textDecoration:'none'}}>Contact Us</a>
+                            <a href="/Service" style={{textDecoration:'none'}}>Our Service</a>
                             <a href="" style={{textDecoration:'none'}}>Service Points</a>
-                            <a href="" style={{textDecoration:'none'}}>Pricing Plan</a>
+                            <a href="/Packages" style={{textDecoration:'none'}}>Pricing Plan</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
