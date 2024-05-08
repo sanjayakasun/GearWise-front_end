@@ -1,4 +1,7 @@
 
+import React from 'react';
+import Supp_dash from './Pages/Supp_dash.jsx';
+import Moderator_dash from './Pages/Moderator_dash.jsx';
 import logo from './logo.svg';
 import './App.css';
 import Topbar from './Components/Topbar/Topbar';
@@ -22,7 +25,7 @@ import Contact from './Pages/Contactuspage';
 import Ad_page from './Pages/Ad_page';
 import Queue_page from './Pages/Queue_page';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
         <BrowserRouter>
@@ -38,6 +41,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
