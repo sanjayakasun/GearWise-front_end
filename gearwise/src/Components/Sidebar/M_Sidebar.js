@@ -24,11 +24,7 @@ const Sidebar = ({children}) => {
             name:"Profile",
             icon:<FaUserAlt/>
         },
-        {
-            path:"/advertisment",
-            name:"Advertisment",
-            icon:<FaRegChartBar/>
-        },
+       
         {
             path:"/logout",
             name:"Logout",

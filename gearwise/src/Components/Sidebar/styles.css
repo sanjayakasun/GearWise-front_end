@@ -6,7 +6,13 @@
 
 html, body {
   overflow: hidden; /* Hide the scrollbar */
-  height: 100%; /* Ensure the body takes up the full height of the viewport */
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url('./Bg.jpeg');
+  background-size: cover; /* Cover the entire background */
+  background-repeat: no-repeat;
 }
 
 .container {
@@ -20,6 +26,7 @@ main {
   margin: 0;
   padding: 40px 0px 0px 40px;
   overflow-y: auto; /* Add overflow-y: auto to allow vertical scrolling within the main content */
+
 }
 
 .sidebar {
@@ -85,4 +92,10 @@ main {
   margin: 0;
   width: 100vh;
   height: 60vh;
+}
+.form1{
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  opacity: 0.9;
 }
