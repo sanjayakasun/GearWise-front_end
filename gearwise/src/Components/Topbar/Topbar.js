@@ -8,8 +8,8 @@ export default function Topbar() {
                 <div className="row align-items-center">
                     <div className="col-lg-4 col-md-12">
                         <div className="logo">
-                            <a href="index.html">
-                                <h1>Gear<span>Wise</span></h1>
+                            <a href="/" style={{textDecoration: 'none'}}>
+                                <h1 >Gear<span>Wise</span></h1>
                                 {/* <img src="img/logo.jpg" alt="Logo"> */}
                             </a>
                         </div>

@@ -13,21 +13,19 @@ export default function Navbar() {
 
                     <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div className="navbar-nav mr-auto">
-                            <a href="index.html" className="nav-item nav-link active">Home</a>
-                            <a href="about.html" className="nav-item nav-link">About</a>
-                            <a href="service.html" className="nav-item nav-link">Service</a>
-                            <a href="price.html" className="nav-item nav-link">Price</a>
-                            <a href="location.html" className="nav-item nav-link">Washing Points</a>
+                            <a href="/" className="nav-item nav-link active">Home</a>
+                            <a href="/About" className="nav-item nav-link">About</a>
+                            <a href="/Service" className="nav-item nav-link">Service</a>
+                            <a href="/Packages" className="nav-item nav-link">Packages</a>
+                            <a href="/Contact" className="nav-item nav-link">Contact us</a>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div className="dropdown-menu">
-                                    <a href="blog.html" className="dropdown-item">Blog Grid</a>
-                                    <a href="single.html" className="dropdown-item">Detail Page</a>
-                                    <a href="team.html" className="dropdown-item">Team Member</a>
-                                    <a href="booking.html" className="dropdown-item">Schedule Booking</a>
+                                    <a href="/Queue" className="dropdown-item">Waiting for Service</a>
+                                    <a href="/Advertistments" className="dropdown-item">Supplier Advertistments</a>
+                                    <a href="/Booking" className="dropdown-item">Schedule Booking</a>
                                 </div>
                             </div>
-                            <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
                         <div className="ml-auto">
                             <a className="btn btn-custom" href="#">Get Appointment</a>

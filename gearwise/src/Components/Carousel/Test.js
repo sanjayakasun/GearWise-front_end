@@ -11,12 +11,12 @@ function Test() {
   };
   return (
     <div style={centerTextStyle}>
-      <Carousel fade>
+      <Carousel fade >
         <Carousel.Item>
-          <img className="d-block w-100" src={Img1} alt="First slide" />
-          <Carousel.Caption>
-            <h3>Washing & Detailing</h3>
-            <h1>Keep your Car Newer</h1>
+          <img className="d-block w-100" src={Img1} alt="First slide"/>
+          <Carousel.Caption style={{justifyContent:'center'}}>
+            <h3 style={{color:'red',textTransform:'uppercase'}}>Washing & Detailing</h3>
+            <h1 style={{fontSize:'92px'}}>Keep your Car Newer</h1>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             <a class="btn btn-custom" href="">
               Explore More
@@ -42,7 +42,6 @@ function Test() {
             <p>
               Praesent commodo cursus magna, tetur.
             </p>
-
             <a class="btn btn-custom" href="">
               Explore More
             </a>
