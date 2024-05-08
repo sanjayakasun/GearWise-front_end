@@ -1,4 +1,8 @@
 import React from 'react'
+import Img1 from '../../img/mobil.jpg'
+import Img2 from '../../img/3m.png'
+import Img3 from '../../img/audi.png'
+import Img4 from '../../img/wuerth.jpg'
 
 export default function Fotter() {
   return (
@@ -43,8 +47,13 @@ export default function Fotter() {
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-newsletter">
-                            <h2>Newsletter</h2>
-                            
+                            <h2>powerd By</h2>
+                            <img src={Img1} alt="Image" style={{width:'100px'}}/>
+                            {' '}
+                            <img src={Img4} alt="Image" style={{width:'100px'}}/>
+                            <img src={Img2} alt="Image" style={{width:'100px'}}/>
+                            {' '}
+                            <img src={Img3} alt="Image" style={{width:'100px'}}/>
                         </div>
                     </div>
                 </div>
