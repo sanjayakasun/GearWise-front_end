@@ -49,10 +49,16 @@ export default function Fotter() {
                     <div className="col-lg-3 col-md-6">
                         <div className="footer-newsletter">
                             <h2>powerd By</h2>
+                            <div  style={{display:'flex',justifyContent:'space-between'}}>
                             <img src={Img1} alt="Image" style={{width:'100px'}}/>
+                            {''}
                             <img src={Img4} alt="Image" style={{width:'100px'}}/>
-                            <img src={Img2} alt="Image" style={{width:'100px'}}/>
+                            </div >
+                            <div  style={{display:'flex',justifyContent:'space-between',marginTop:'30px'}}>
+                            <img src={Img2} alt="Image" style={{width:'120px'}}/>
+                            {' '}
                             <img src={Img3} alt="Image" style={{width:'100px'}}/>
+                            </div>
                         </div>
                     </div>
                 </div>

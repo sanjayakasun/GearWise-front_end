@@ -9,6 +9,8 @@ import Packages_page from './Pages/Packages_page';
 import Contact from './Pages/Contactuspage';
 import Ad_page from './Pages/Ad_page';
 import Queue_page from './Pages/Queue_page';
+import MDashboard from './Pages/MDashboard';
+import Profile from './Pages/Profile';
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Advertistments" element={<Ad_page/>} />
         <Route path="/Queue" element={<Queue_page/>} />
+        <Route path="/dashboard" element={<MDashboard />} />
+          <Route path="/profile" element={<Profile />} />
       </Routes>
       </BrowserRouter>
     </div>
