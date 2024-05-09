@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const M_Dashboard = () => {
+const MDashboard = () => {
     // State variables to store form data
     const [vehiclePlate, setVehiclePlate] = useState('');
     const [vehicleType, setVehicleType] = useState('');
@@ -64,4 +64,4 @@ const M_Dashboard = () => {
     );
 };
 
-export default M_Dashboard;
+export default MDashboard;

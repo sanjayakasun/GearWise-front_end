@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar/M_Sidebar';
 import Profile from './Profile';
-import M_Dashboard from './M_Dashboard';
 import Logout from './Logout';
+import MDashboard from './MDashboard';
 
 
 const Moderator_dash = () => {
@@ -11,11 +11,8 @@ const Moderator_dash = () => {
     <BrowserRouter>
       <Sidebar>
         <Routes>
-          <Route path="/" element={<M_Dashboard />} />
-          <Route path="/dashboard" element={<M_Dashboard />} />
+          <Route path="/dashboard" element={<MDashboard />} />
           <Route path="/profile" element={<Profile />} />
-
-
         </Routes>
       </Sidebar>
     </BrowserRouter>
