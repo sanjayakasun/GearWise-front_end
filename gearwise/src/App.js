@@ -9,13 +9,16 @@ import Packages_page from './Pages/Packages_page';
 import Contact from './Pages/Contactuspage';
 import Ad_page from './Pages/Ad_page';
 import Queue_page from './Pages/Queue_page';
+import Profile from './Components/Profile/Profile';
+import Profile_page from './Pages/Profile_page';
+import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import MDashboard from './Pages/MDashboard';
-import Profile from './Pages/Profile';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
+
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="">
         <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -25,11 +28,14 @@ const App = () => {
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Advertistments" element={<Ad_page/>} />
         <Route path="/Queue" element={<Queue_page/>} />
+        <Route path="/Profile" element={<Profile_page/>} />
         <Route path="/dashboard" element={<MDashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
       </Routes>
       </BrowserRouter>
+ 
+      
     </div>
   );
 };
