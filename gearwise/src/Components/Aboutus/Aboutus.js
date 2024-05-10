@@ -27,7 +27,7 @@ export default function Aboutus() {
                                 <li><i class="far fa-check-circle"></i>Interior wet cleaning</li>
                                 <li><i class="far fa-check-circle"></i>Window wiping</li>
                             </ul>
-                            <a class="btn btn-custom" href="">Learn More</a>
+                            <a class="btn btn-custom" href="/About">Learn More</a>
                         </div>
                     </div>
                 </div>

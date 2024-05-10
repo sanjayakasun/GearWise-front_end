@@ -279,12 +279,14 @@ a:focus {
     color: #202C45;
     background: #ffffff;
     box-shadow: inset 0 0 0 0 #E81C2E;
+    visibility: visible;
 }
 
 .nav-bar .btn:hover {
     color: #ffffff;
     background: #E81C2E;
     box-shadow: inset 200px 0 0 0 #E81C2E;
+    visibility: visible;
 }
 
 @media (min-width: 992px) {
