@@ -1,9 +1,8 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import Img1 from "../../img/carousel-1.jpg";
-import Img2 from "../../img/carousel-2.jpg";
-import Img3 from "../../img/carousel-3.jpg";
-import "./Carousel.css";
+import Img1 from "../../img/car3.jpg";
+import Img2 from "../../img/car4.jpg";
+import Img3 from "../../img/car.jpg";
 
 function Test() {
   const centerTextStyle = {
@@ -13,38 +12,29 @@ function Test() {
     <div style={centerTextStyle}>
       <Carousel fade >
         <Carousel.Item>
-          <img className="d-block w-100" src={Img1} alt="First slide"/>
-          <Carousel.Caption style={{justifyContent:'center'}}>
+          <img className="carousel-img d-block w-100" src={Img1} alt="First slide"/>
+          <Carousel.Caption style={{justifyContent:'center',top:'3vh'}}>
             <h3 style={{color:'red',textTransform:'uppercase'}}>Washing & Detailing</h3>
-            <h1 style={{fontSize:'92px'}}>Keep your Car Newer</h1>
+            <h1 style={{fontSize:'50px'}}>Keep your Car Newer</h1>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            <a class="btn btn-custom" href="">
-              Explore More
-            </a>
           </Carousel.Caption>      
         </Carousel.Item>
         <Carousel.Item>
-          <img src={Img2} className="d-block w-100" alt="Second slide" />
-          <Carousel.Caption>
-            <h3>Washing & Detailing</h3>
-            <h1>Quality service for you</h1>
+          <img src={Img2} className="carousel-img d-block w-100" alt="Second slide" />
+          <Carousel.Caption style={{justifyContent:'center',top:'3vh'}}>
+            <h3 style={{color:'red',textTransform:'uppercase'}}>Washing & Detailing</h3>
+            <h1 style={{fontSize:'50px'}}>Quality service for you</h1>
             <p>Lorem ipsum dolor sit amet.</p>
-            <a class="btn btn-custom" href="">
-              Explore More
-            </a>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img src={Img3} className="d-block w-100" alt="Third slide" />
-          <Carousel.Caption>
-            <h3>Washing & Detailing</h3>
-            <h1>Exterior & Interior Washing</h1>
+          <img src={Img3} className="carousel-img d-block w-100" alt="Third slide" />
+          <Carousel.Caption style={{justifyContent:'center',top:'3vh'}}>
+            <h3 style={{color:'red',textTransform:'uppercase'}}>Washing & Detailing</h3>
+            <h1 style={{fontSize:'50px'}}>Exterior & Interior Washing</h1>
             <p>
               Praesent commodo cursus magna, tetur.
             </p>
-            <a class="btn btn-custom" href="">
-              Explore More
-            </a>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

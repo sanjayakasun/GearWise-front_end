@@ -1,18 +1,7 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import Topbar from './Components/Topbar/Topbar';
-import Navbar from './Components/Navbar/Navbar';
-import Aboutus from './Components/Aboutus/Aboutus';
-import Service from './Components/Service/Service';
-import Packages from './Components/Packages/Packages';
-import Location from './Components/Location/Location';
-import Reviews from './Components/Reviews/Reviews';
-import Test from './Components/Carousel/Test';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter,Route, Router, Routes } from 'react-router-dom';
-import Advertistments from './Components/Advertistments/Advertistments';
-import Fotter from './Components/Fotter/Fotter';
-import Upbutton from './Components/Upbutton/Upbutton';
 import Home from './Pages/Home';
 import Aboutus_page from './Pages/Aboutus_page';
 import Service_page from './Pages/Service_page';
@@ -23,8 +12,11 @@ import Queue_page from './Pages/Queue_page';
 import Profile from './Components/Profile/Profile';
 import Profile_page from './Pages/Profile_page';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
+import MDashboard from './Pages/MDashboard';
+import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
 
-function App() {
+
+const App = () => {
   return (
     <div className="">
         <BrowserRouter>
@@ -37,12 +29,15 @@ function App() {
         <Route path="/Advertistments" element={<Ad_page/>} />
         <Route path="/Queue" element={<Queue_page/>} />
         <Route path="/Profile" element={<Profile_page/>} />
+        <Route path="/dashboard" element={<MDashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/Reviews" element={<Reviewsfromdb />} />
       </Routes>
       </BrowserRouter>
  
       
     </div>
   );
-}
+};
 
 export default App;

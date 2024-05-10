@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Advertistments from '../Components/Advertistments/Advertistments';
 import Fotter from '../Components/Fotter/Fotter';
 import Upbutton from '../Components/Upbutton/Upbutton';
+import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn';
 
 
 export default function Home() {
@@ -18,12 +19,13 @@ export default function Home() {
     <div>
       <Topbar/>
         <Navbar/>
-        {/* <Test/> */}
+        <Test/>
+        <Appointmentbtn/>
         <Aboutus/>
         <Service/>
         <Packages/>
         <Location/>
-        {/* <Reviews/> */}
+        <Reviews/>
         <Advertistments/>
         <Fotter/>
         <Upbutton/>
