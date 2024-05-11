@@ -15,6 +15,7 @@ import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import MDashboard from './Pages/MDashboard';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
 import Vehicle_history from './Pages/Vehicle_history';
+import Review from './Pages/Review';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/dashboard" element={<MDashboard />} />
         <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
+        <Route path="/Review" element={<Review />} />
       </Routes>
       </BrowserRouter>
  
