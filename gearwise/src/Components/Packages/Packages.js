@@ -26,7 +26,7 @@ export default function Packages() {
                                 </ul>
                             </div>
                             <div className="price-footer">
-                                <a className="btn btn-custom" href="">Book Now</a>
+                                {/* <a className="btn btn-custom" href="">Book Now</a> */}
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ export default function Packages() {
                                 </ul>
                             </div>
                             <div className="price-footer">
-                                <a className="btn btn-custom" href="">Book Now</a>
+                                {/* <a className="btn btn-custom" href="">Book Now</a> */}
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@ export default function Packages() {
                                 </ul>
                             </div>
                             <div className="price-footer">
-                                <a className="btn btn-custom" href="">Book Now</a>
+                                {/* <a className="btn btn-custom" href="">Book Now</a> */}
                             </div>
                         </div>
                     </div>

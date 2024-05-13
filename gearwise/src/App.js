@@ -14,6 +14,7 @@ import Profile_page from './Pages/Profile_page';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import MDashboard from './Pages/MDashboard';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
+import Appointments from './Pages/Appointments';
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/dashboard" element={<MDashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
+        <Route path="/Appointment" element={<Appointments />} />
       </Routes>
       </BrowserRouter>
  

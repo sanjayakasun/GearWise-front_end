@@ -20,7 +20,6 @@ export default function Home() {
       <Topbar/>
         <Navbar/>
         <Test/>
-        <Appointmentbtn/>
         <Aboutus/>
         <Service/>
         <Packages/>

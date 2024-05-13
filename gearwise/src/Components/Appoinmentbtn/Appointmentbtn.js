@@ -5,7 +5,7 @@ export default function Appointmentbtn() {
     <div>
         <div className="ml-auto">
             <center>
-            <a className="btn btn-custom" href="#">Get Appointment</a>
+            <a className="btn btn-custom" href="">Get Appointment</a>
             </center>
         </div>
     </div>
