@@ -3,12 +3,12 @@ import React from 'react';
 const A_Product = () => {
     return (
         <div>
-      <h3 class=" tpoic6 h6  mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Supplied <span class="text-blue-800 dark:text-blue-500">Product</span> Details</h3>
 
       <div className=" div1 flex justify-center items-center h-screen">
 
 <section className="container px-4 mx-auto">
-<div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+<div className="overflow-hidden md:rounded-lg">      <h3 class=" tpoic6 h6  mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Supplied <span class="text-blue-800 dark:text-blue-500">Product</span> Details</h3>
+
 <div className="flex flex-col">
   <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

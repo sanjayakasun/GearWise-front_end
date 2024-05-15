@@ -4,14 +4,15 @@
    
   }
   
-  .bodd {
-    
+  html, body {
+    overflow: -moz-hidden-unscrollable; /* Hide the scrollbar */
     height: 100%;
     width: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0 ;
+    padding: 0;
     background-image: url('./Bg.jpeg');
     background-size: cover; /* Cover the entire background */
+    background-repeat: no-repeat;
     position: absolute;
   }
   .text-center {
@@ -44,9 +45,9 @@
     padding: 0;
     top: 0;
     left: 0;
-    position: fixed;
-}
-
+    position: fixed; /* Fix the sidebar position */
+  
+  }
   
   .top_section {
     display: flex;
@@ -73,6 +74,7 @@
     transition: all 0.5s;
     margin: 0 ;
     text-decoration: none;
+  
   }
   
   .link:hover {
@@ -110,6 +112,8 @@
     border-radius: 20px;
     opacity: 0.9;
   }
+  
+  
   .tpoic6{
     padding-top: 0px;
     padding-bottom: 0%;
