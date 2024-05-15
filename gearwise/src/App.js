@@ -14,7 +14,16 @@ import Profile_page from './Pages/Profile_page';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import MDashboard from './Pages/MDashboard';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
-import Appointments from './Pages/Appointments';
+import Appointments from './Components/Appoinment.jsx';
+
+import Admin_dash from './Pages/Admin_dash.jsx';
+import A_Dashboard from './Components/A_Dashboard.jsx';
+import Admin_appoinment from './Pages/Admin_appoinment.jsx';
+import Admin_alert from './Pages/Admin_alert.jsx';
+import Admin_cus from './Pages/Admin_cus.jsx';
+import Admin_rew from './Pages/Admin_rew.jsx';
+import Admin_product from './Pages/Admin_product.jsx';
+import Admin_ad from './Pages/Admin_ad.jsx';
 
 
 const App = () => {
@@ -34,6 +43,16 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
         <Route path="/Appointment" element={<Appointments />} />
+        <Route path="/Admin" element={<Admin_dash />} />
+        <Route path="/dashboard" element={<A_Dashboard />} />
+        <Route path="/customer" element={<Admin_cus />} />
+       <Route path="/review" element={<Admin_rew />} />
+       <Route path="/appoinment" element={<Admin_appoinment />} />
+       <Route path="/advertisment" element={<Admin_ad />} />
+       <Route path="/product" element={<Admin_product />} />
+       <Route path="/alert" element={<Admin_alert />} />
+        
+      
       </Routes>
       </BrowserRouter>
  
