@@ -4,11 +4,14 @@ const M_alert = () => {
     return (
         
         <div className=" div1 flex justify-center items-center h-screen">
-                        <h3 class="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Vehicle<br/> <span class="text-blue-800 dark:text-blue-500">Alert<br/></span> Details</h3>
 
         <section className="container px-4 mx-auto">
-            <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+            
+            <div className="overflow-hidden md:rounded-lg">
+
                 <div className="flex flex-col">
+                <h3 class="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Vehicle<span class="text-blue-800 dark:text-blue-500">Alert</span> Details</h3>
+
                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">

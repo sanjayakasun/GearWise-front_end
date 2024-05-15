@@ -5,6 +5,7 @@ import {
     FaBars,
     FaUserAlt,
     FaRegChartBar,
+    FaExclamationTriangle,
     
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
@@ -15,9 +16,14 @@ const Sidebar = ({children}) => {
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/",
+            path:"/moderator",
             name:"Dashboard",
             icon:<FaTh/>
+        },
+        {
+            path:"/mAlert",
+            name:"Alert",
+            icon:<FaExclamationTriangle  />
         },
         {
             path:"/profile",
