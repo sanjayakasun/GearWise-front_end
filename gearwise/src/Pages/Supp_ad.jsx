@@ -1,8 +1,7 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar/Sidebar'
-import Dashboard from '../Components/Dashboard'
-
-export default function Supp_dash() {
+import Upload_ad from '../Components/Upload_ad'
+export default function Supp_ad() {
 
   return (
 <div className='bodd'>
@@ -18,7 +17,7 @@ export default function Supp_dash() {
                
           </div>
           <div className='mt-5'>
-            <Dashboard/>
+            <Upload_ad/>
           </div>
         </div>
       </div>

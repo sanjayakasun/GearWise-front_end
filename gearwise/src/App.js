@@ -25,6 +25,8 @@ import Admin_rew from './Pages/Admin_rew.jsx';
 import Admin_product from './Pages/Admin_product.jsx';
 import Admin_ad from './Pages/Admin_ad.jsx';
 import Moderator_alert from './Pages/Moderator_alert.jsx';
+import Supp_dash from './Pages/Supp_dash.jsx';
+import Supp_ad from './Pages/Supp_ad.jsx';
 
 const App = () => {
   return (
@@ -51,6 +53,9 @@ const App = () => {
        <Route path="/alert" element={<Admin_alert />} />
        <Route path="/moderator" element={<Moderator_dash />} />
        <Route path="/mAlert" element={<Moderator_alert />} />
+       <Route path="/supp" element={<Supp_dash />} />
+       <Route path="/upload_ad" element={<Supp_ad />} />
+
 
 
         

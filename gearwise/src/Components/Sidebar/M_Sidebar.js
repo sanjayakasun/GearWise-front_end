@@ -4,7 +4,7 @@ import {
     FaTh,
     FaBars,
     FaUserAlt,
-    FaRegChartBar,
+    FaSignOutAlt,
     FaExclamationTriangle,
     
 }from "react-icons/fa";
@@ -34,7 +34,7 @@ const Sidebar = ({children}) => {
         {
             path:"/logout",
             name:"Logout",
-            icon:<FaRegChartBar/>
+            icon:<FaSignOutAlt/>
         },
     ]
     return (
