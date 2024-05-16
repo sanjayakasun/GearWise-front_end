@@ -13,7 +13,7 @@ import Profile from './Components/Profile/Profile';
 import Profile_page from './Pages/Profile_page';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
-import Appointments from './Components/Appoinment.jsx';
+import Appointments_admin from './Components/Appoinment.jsx';
 import Vehicle_history from './Pages/Vehicle_history';
 import Review from './Pages/Review';
 import Appointments from './Pages/Appointments';
@@ -47,7 +47,7 @@ const App = () => {
         <Route path="/AppointmentList" element={<Viewappointment/>} />
         <Route path="/Profile" element={<Profile_page/>} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/dashboard" element={<MDashboard />} />
+        {/* <Route path="/dashboard" element={<MDashboard />} /> */}
         <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
         <Route path="/Review" element={<Review />} />
@@ -55,7 +55,7 @@ const App = () => {
         <Route path="/Admin" element={<Admin_dash />} />
         <Route path="/customer" element={<Admin_cus />} />
        <Route path="/review" element={<Admin_rew />} />
-       <Route path="/appoinment" element={<Admin_appoinment />} />
+       <Route path="/appoinment_admin" element={<Admin_appoinment />} />
        <Route path="/advertisment" element={<Admin_ad />} />
        <Route path="/product" element={<Admin_product />} />
        <Route path="/alert" element={<Admin_alert />} />

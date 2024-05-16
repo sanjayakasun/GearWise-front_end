@@ -5,25 +5,24 @@
   }
   
   html, body {
-    overflow: -moz-hidden-unscrollable; /* Hide the scrollbar */
-    height: 100%;
+    /* overflow: -moz-hidden-unscrollable; Hide the scrollbar */
+    /* height: 100%;
     width: 100%;
     margin: 0 ;
     padding: 0;
-    background-image: url('./Bg.jpeg');
-    background-size: cover; /* Cover the entire background */
-    background-repeat: no-repeat;
-    position: absolute;
+    background-size: cover; Cover the entire background */
+    /* background-repeat: no-repeat;
+    position: absolute; */
   }
   .text-center {
     text-align: center;
   }
   
   .container {
-    display: flex;
+    /* display: flex;
     margin: 0 ;
     padding: 0 !important;
-    width: 100% ;
+    width: 100% ; */
   }
   
   main {
@@ -66,7 +65,7 @@
     margin: 0px !important;
   }
   
-  .link {
+  .link_sidebar {
     display: flex;
     color: #fff;
     padding: 10px 15px;
@@ -77,13 +76,13 @@
   
   }
   
-  .link:hover {
+  .link_sidebar:hover {
     background: lightskyblue;
     color: #000;
     transition: all 0.5s;
   }
   
-  .active {
+  .link_sidebar:active {
     background: lightskyblue;
     color: #000;
     margin: 0 ;
