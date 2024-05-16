@@ -3,9 +3,15 @@ import './styles.css';
 import {
     FaTh,
     FaBars,
-    FaUserAlt,
+    
+    FaUsers,
+    FaSignOutAlt ,
     FaAd,
-    FaSignOutAlt,
+  
+    FaStar ,
+    FaCalendarAlt,
+    FaBox ,
+    FaExclamationTriangle ,
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
@@ -15,25 +21,47 @@ const Sidebar = ({children}) => {
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/supp",
+            path:"/admin",
             name:"Dashboard",
             icon:<FaTh/>
         },
+       
         {
-            path:"/profile",
-            name:"Profile",
-            icon:<FaUserAlt/>
+            path:"/customer",
+            name:"Customer",
+            icon:<FaUsers/>
         },
         {
-            path:"/upload_ad",
+            path:"/review",
+            name:"Review & Ratings",
+            icon:<FaStar  />
+        },
+        {
+            path:"/appoinment",
+            name:"Appoinment",
+            icon:<FaCalendarAlt/>
+        },
+        {
+            path:"/alert",
+            name:"Alert",
+            icon:<FaExclamationTriangle  />
+        },
+        {
+            path:"/product",
+            name:"Product",
+            icon:<FaBox  />
+        },
+        {
+            path:"/advertisment",
             name:"Advertisment",
-            icon:<FaAd/>
+            icon:<FaAd />
         },
         {
             path:"/logout",
             name:"Logout",
-            icon:<FaSignOutAlt/>
+            icon:<FaSignOutAlt />
         },
+        
     ]
     return (
         <div className="container">

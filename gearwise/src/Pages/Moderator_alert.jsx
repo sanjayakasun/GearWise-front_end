@@ -1,9 +1,9 @@
 import React from 'react'
-import M_Dashboard from '../Components/M_Dashboard';
+import M_alert from '../Components/M_alert';
 import M_Sidebar from '../Components/Sidebar/M_Sidebar'
 
 
-export default function Moderator_dash() {
+export default function Moderator_alert() {
 
   return (
 <div className='bodd'>
@@ -16,15 +16,18 @@ export default function Moderator_dash() {
 
           <div className='sticky-top'>
             
+           {/* <Navbar/>           */}
                
           </div>
           <div className='mt-5'>
-            <M_Dashboard/>
+            <M_alert />
           </div>
+{/* <Fotter/> */}
         </div>
       </div>
     </div>
 
     </div>
+   
   )
 }

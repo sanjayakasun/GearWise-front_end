@@ -1,16 +1,14 @@
 import React from 'react'
-import M_Dashboard from '../Components/M_Dashboard';
-import M_Sidebar from '../Components/Sidebar/M_Sidebar'
-
-
-export default function Moderator_dash() {
+import Sidebar from '../Components/Sidebar/Sidebar'
+import Upload_ad from '../Components/Upload_ad'
+export default function Supp_ad() {
 
   return (
 <div className='bodd'>
     <div className='  container-fluid'>
       <div className='row'>
         <div className='col-2'>
-          <M_Sidebar />
+          <Sidebar />
         </div>
         <div className='col-10 row'>
 
@@ -19,7 +17,7 @@ export default function Moderator_dash() {
                
           </div>
           <div className='mt-5'>
-            <M_Dashboard/>
+            <Upload_ad/>
           </div>
         </div>
       </div>
