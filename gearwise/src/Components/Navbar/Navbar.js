@@ -17,20 +17,20 @@ export default function Navbar() {
                             <a href="/" className="nav-item nav-link active">Home</a>
                             <a href="/About" className="nav-item nav-link">About</a>
                             <a href="/Service" className="nav-item nav-link">Service</a>
-                            <a href="/Packages" className="nav-item nav-link">Packages</a>
+                            <a href="/Appointment" className="nav-item nav-link">Get Appointment</a>
                             <a href="/Advertistments" className="nav-item nav-link">Advertistments</a>
                             <a href="/Contact" className="nav-item nav-link">Contact us</a>
-                            {/* <div className="nav-item dropdown">
+                            <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div className="dropdown-menu">
-                                    <a href="/Queue" className="dropdown-item">Waiting for Service</a>
-                                    <a href="/Advertistments" className="dropdown-item">Supplier Advertistments</a>
-                                    <a href="/Booking" className="dropdown-item">Schedule Booking</a>
+                                    <a href="/AppointmentList" className="dropdown-item">View Appointment</a>
+                                    <a href="/profile" className="dropdown-item">profile</a>
+                                    <a href="/Booking" className="dropdown-item"></a>
                                 </div>
-                            </div> */}
+                            </div>
                         </div>
                         <div className="ml-auto">
-                            <a className="btn btn-custom" href="#">Get Appointment</a>
+                            <a className="btn btn-custom" href="/Appointment">Login</a>
                         </div>
                     </div>
                 </nav>

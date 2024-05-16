@@ -16,6 +16,10 @@ import MDashboard from './Pages/MDashboard';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
 import Vehicle_history from './Pages/Vehicle_history';
 import Review from './Pages/Review';
+import Appointments from './Pages/Appointments';
+import Viewappointment from './Pages/Viewappointment';
+import Rewardpage from './Pages/Rewardpage';
+
 
 const App = () => {
   return (
@@ -28,12 +32,14 @@ const App = () => {
         <Route path="/Packages" element={<Packages_page/>} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Advertistments" element={<Ad_page/>} />
-        <Route path="/Queue" element={<Queue_page/>} />
+        <Route path="/AppointmentList" element={<Viewappointment/>} />
         <Route path="/Profile" element={<Profile_page/>} />
         <Route path="/dashboard" element={<MDashboard />} />
         <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
         <Route path="/Review" element={<Review />} />
+        <Route path="/Appointment" element={<Appointments />} />
+        <Route path="/Reward" element={<Rewardpage />} /> 
       </Routes>
       </BrowserRouter>
  
