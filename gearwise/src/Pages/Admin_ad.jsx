@@ -20,7 +20,7 @@ export default function Admin_ad() {
            {/* <Navbar/>           */}
                
           </div>
-          <div className='mt-5'>
+          <div className='x mt-5'>
             <A_Advertisment />
           </div>
 {/* <Fotter/> */}

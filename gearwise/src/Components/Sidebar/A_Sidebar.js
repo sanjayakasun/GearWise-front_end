@@ -32,12 +32,12 @@ const Sidebar = ({children}) => {
             icon:<FaUsers/>
         },
         {
-            path:"/review",
+            path:"/areview",
             name:"Review & Ratings",
             icon:<FaStar  />
         },
         {
-            path:"/appoinment",
+            path:"/appoinment_admin",
             name:"Appoinment",
             icon:<FaCalendarAlt/>
         },
@@ -64,7 +64,7 @@ const Sidebar = ({children}) => {
         
     ]
     return (
-        <div className="container">
+        <div className="containerrr">
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
                <div className="top_section">
                    <h1 style={{display: isOpen ? "block" : "none" }} className="logo">Logo </h1>

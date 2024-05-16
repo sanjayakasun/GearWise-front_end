@@ -1,129 +1,127 @@
 * {
-    margin: 0;
-    padding: 0;
-   
-  }
-  
-  html, body {
-    /* overflow: -moz-hidden-unscrollable; Hide the scrollbar */
-    /* height: 100%;
-    width: 100%;
-    margin: 0 ;
-    padding: 0;
-    background-size: cover; Cover the entire background */
-    /* background-repeat: no-repeat;
-    position: absolute; */
-  }
-  .text-center {
-    text-align: center;
-  }
-  
-  .container {
-    /* display: flex;
-    margin: 0 ;
-    padding: 0 !important;
-    width: 100% ; */
-  }
-  
-  main {
-    width: 100%;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center;
-    margin: 0 ;
-    padding: 40px 0px 0px 40px;
-    overflow-y: auto; /* Add overflow-y: auto to allow vertical scrolling within the main content */
-  
-  }
-  .sidebar {
-    background: #000;
-    color: #fff;
-    height: 100vh;
-    width: 200px;
-    transition: all 0.5s;
-    margin: 0;
-    padding: 0;
-    top: 0;
-    left: 0;
-    position: fixed; /* Fix the sidebar position */
-  
-  }
-  
-  .top_section {
-    display: flex;
-    align-items: center;
-    padding: 20px 15px;
-    margin: 0 ;
-  }
-  
-  .logo {
-    font-size: 30px;
-  }
-  
-  .bars {
-    display: flex;
-    font-size: 25px;
-    margin: 0px !important;
-  }
-  
-  .link_sidebar {
-    display: flex;
-    color: #fff;
-    padding: 10px 15px;
-    gap: 15px;
-    transition: all 0.5s;
-    margin: 0 ;
-    text-decoration: none;
-  
-  }
-  
-  .link_sidebar:hover {
-    background: lightskyblue;
-    color: #000;
-    transition: all 0.5s;
-  }
-  
-  .link_sidebar:active {
-    background: lightskyblue;
-    color: #000;
-    margin: 0 ;
-  }
-  
-  .icon,
-  .link_text {
-    font-size: 20px;
-  }
-  .ad {
-    padding: 0px 0px 0px 20px;
-    margin: 0 ;
-   
-  }
-  
-  .ad1 {
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100vh;
-    height: 60vh;
-  }
-  .form1{
-    padding: 20px;
-    padding-right: 60px;
-    background-color: #fff;
-    border-radius: 20px;
-    opacity: 0.9;
-  }
-  
-  
-  .tpoic6{
-    padding-top: 0px;
-    padding-bottom: 0%;
-    font-size: 34px;
-    font-weight: 900;
-  }
-  .cardd {
-    background-color: #c9e5fae0;
-    border-radius: 8px;
-    padding: 5px;
-    transition: background-color 0.3s;
+  margin: 0;
+  padding: 0;
 }
 
-  
+.bodd {
+  height: 100%;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-image: url('./Bg.jpeg');
+  background-size: cover; 
+  position: absolute;
+  background-attachment: fixed; /* Fix the background image */
+
+}
+
+.text-center {
+  text-align: center;
+}
+
+.containerrr {
+  display: flex;
+  margin: 0 ;
+  padding: 0 !important;
+  width: 100% ; 
+}
+
+main {
+  width: 100%;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center;
+  margin: 0 ;
+  padding: 40px 0px 0px 40px;
+  overflow-y: auto; /* Add overflow-y: auto to allow vertical scrolling within the main content */
+}
+
+.sidebar {
+  background: #000;
+  color: #fff;
+  height: 100vh;
+  width: 200px;
+  transition: all 0.5s;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  position: fixed; /* Fix the sidebar position */
+}
+
+.top_section {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px;
+  margin: 0 ;
+}
+
+.logo {
+  font-size: 30px;
+}
+
+.bars {
+  display: flex;
+  font-size: 25px;
+  margin: 0px !important;
+}
+
+.link_sidebar {
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+  margin: 0 ;
+  text-decoration: none;
+}
+
+.link_sidebar:hover {
+  background: lightskyblue;
+  color: #000;
+  transition: all 0.5s;
+}
+
+.link_sidebar:active {
+  background: lightskyblue;
+  color: #000;
+  margin: 0 ;
+}
+
+.icon,
+.link_text {
+  font-size: 20px;
+}
+
+.ad {
+  padding: 0px 0px 0px 20px;
+  margin: 0 ;
+}
+
+.ad1 {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100vh;
+  height: 60vh;
+}
+
+.form1{
+  padding: 20px;
+  padding-right: 60px;
+  background-color: #fff;
+  border-radius: 20px;
+  opacity: 0.9;
+}
+
+.tpoic6{
+  padding-top: 0px;
+  padding-bottom: 0%;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.cardd {
+  background-color: #c9e5fae0;
+  border-radius: 8px;
+  padding: 5px;
+  transition: background-color 0.3s;
+}
