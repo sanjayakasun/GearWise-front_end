@@ -12,6 +12,7 @@ import Advertistments from '../Components/Advertistments/Advertistments';
 import Fotter from '../Components/Fotter/Fotter';
 import Upbutton from '../Components/Upbutton/Upbutton';
 import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn';
+import Rewarding from '../Components/Rewarding/Rewarding';
 
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
         <Aboutus/>
         <Service/>
         <Packages/>
+        <Rewarding/>
         <Location/>
         <Reviews/>
         <Advertistments/>
