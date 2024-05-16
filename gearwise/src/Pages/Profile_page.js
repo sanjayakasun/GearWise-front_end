@@ -6,6 +6,7 @@ import Fotter from '../Components/Fotter/Fotter'
 import Profile from '../Components/Profile/Profile'
 import Profilesidebar from '../Components/Profilesidebar/Profilesidebar'
 import '../Components/Profile/stylep.css'
+import Profilevehicle from '../Components/Profilevehicle/Profilevehicle'
 
 
 
@@ -28,7 +29,7 @@ export default function Profile_page() {
           <div className='mt-5'>
             <Profile />
           </div>
-{/* <Fotter/> */}
+{/* <Fotter/> */} 
         </div>
       </div>
     </div>

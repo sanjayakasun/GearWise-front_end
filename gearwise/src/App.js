@@ -14,6 +14,8 @@ import Profile_page from './Pages/Profile_page';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import MDashboard from './Pages/MDashboard';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
+import Vehicle_history from './Pages/Vehicle_history';
+import Review from './Pages/Review';
 import Appointments from './Pages/Appointments';
 import Viewappointment from './Pages/Viewappointment';
 import Rewardpage from './Pages/Rewardpage';
@@ -33,8 +35,9 @@ const App = () => {
         <Route path="/AppointmentList" element={<Viewappointment/>} />
         <Route path="/Profile" element={<Profile_page/>} />
         <Route path="/dashboard" element={<MDashboard />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
+        <Route path="/Review" element={<Review />} />
         <Route path="/Appointment" element={<Appointments />} />
         <Route path="/Reward" element={<Rewardpage />} /> 
       </Routes>
