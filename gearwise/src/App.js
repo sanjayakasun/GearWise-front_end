@@ -14,6 +14,11 @@ import Profile_page from './Pages/Profile_page';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
 import Appointments from './Components/Appoinment.jsx';
+import Vehicle_history from './Pages/Vehicle_history';
+import Review from './Pages/Review';
+import Appointments from './Pages/Appointments';
+import Viewappointment from './Pages/Viewappointment';
+import Rewardpage from './Pages/Rewardpage';
 
 import Admin_dash from './Pages/Admin_dash.jsx';
 import Moderator_dash from './Pages/Moderator_dash.jsx';
@@ -39,10 +44,13 @@ const App = () => {
         <Route path="/Packages" element={<Packages_page/>} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Advertistments" element={<Ad_page/>} />
-        <Route path="/Queue" element={<Queue_page/>} />
+        <Route path="/AppointmentList" element={<Viewappointment/>} />
         <Route path="/Profile" element={<Profile_page/>} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<MDashboard />} />
+        <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
+        <Route path="/Review" element={<Review />} />
         <Route path="/Appointment" element={<Appointments />} />
         <Route path="/Admin" element={<Admin_dash />} />
         <Route path="/customer" element={<Admin_cus />} />
@@ -55,11 +63,7 @@ const App = () => {
        <Route path="/mAlert" element={<Moderator_alert />} />
        <Route path="/supp" element={<Supp_dash />} />
        <Route path="/upload_ad" element={<Supp_ad />} />
-
-
-
-        
-      
+        <Route path="/Reward" element={<Rewardpage />} /> 
       </Routes>
       </BrowserRouter>
  
