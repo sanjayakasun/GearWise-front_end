@@ -10,9 +10,8 @@
   padding: 0 !important;
   background-image: url('./Bg.jpeg');
   background-size: cover; 
-  position: absolute;
+  position: fixed; /* Fix the background image */
   background-attachment: fixed; /* Fix the background image */
-
 }
 
 .text-center {
