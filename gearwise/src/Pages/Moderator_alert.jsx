@@ -19,7 +19,7 @@ export default function Moderator_alert() {
            {/* <Navbar/>           */}
                
           </div>
-          <div className='mt-5'>
+          <div className=' mt-5'>
             <M_alert />
           </div>
 {/* <Fotter/> */}
