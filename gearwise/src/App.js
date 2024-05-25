@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter,Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter,Route, Router, Routes,useLocation} from 'react-router-dom';
 import Home from './Pages/Home';
 import Aboutus_page from './Pages/Aboutus_page';
 import Service_page from './Pages/Service_page';
@@ -19,10 +19,8 @@ import Review from './Pages/Review';
 import Appointments from './Pages/Appointments';
 import Viewappointment from './Pages/Viewappointment';
 import Rewardpage from './Pages/Rewardpage';
-
 import Admin_dash from './Pages/Admin_dash.jsx';
 import Moderator_dash from './Pages/Moderator_dash.jsx';
-
 import Admin_appoinment from './Pages/Admin_appoinment.jsx';
 import Admin_alert from './Pages/Admin_alert.jsx';
 import Admin_cus from './Pages/Admin_cus.jsx';

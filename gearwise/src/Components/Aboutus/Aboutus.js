@@ -1,7 +1,11 @@
 import React from 'react'
 import Img1 from '../../img/about.jpg'
+import { useLocation } from 'react-router-dom';
 
 export default function Aboutus() {
+    const location = useLocation();
+    const hideButtonPath = '/About';
+    const hideButton = location.pathname === hideButtonPath;
   return (
     <div>
         <div class="about">
@@ -27,7 +31,7 @@ export default function Aboutus() {
                                 <li><i class="far fa-check-circle"></i>Interior wet cleaning</li>
                                 <li><i class="far fa-check-circle"></i>Window wiping</li>
                             </ul>
-                            <a class="btn btn-custom" href="/About">Learn More</a>
+                            {!hideButton && <a class="btn btn-custom" href="/About">Learn More</a>}
                         </div>
                     </div>
                 </div>

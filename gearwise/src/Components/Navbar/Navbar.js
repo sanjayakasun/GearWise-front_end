@@ -30,7 +30,7 @@ export default function Navbar() {
                             </div>
                         </div>
                         <div className="ml-auto">
-                            <a className="btn btn-custom" href="/Appointment">Login</a>
+                            <a className="btn btn-custom" href="/Login">Login</a>
                         </div>
                     </div>
                 </nav>
