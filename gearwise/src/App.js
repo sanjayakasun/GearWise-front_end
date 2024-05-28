@@ -9,8 +9,8 @@ import Packages_page from './Pages/Packages_page';
 import Contact from './Pages/Contactuspage';
 import Ad_page from './Pages/Ad_page';
 import Queue_page from './Pages/Queue_page';
-import Profile from './Components/Profile/Profile';
-import Profile_page from './Pages/Profile_page';
+import Profile from './Components/Profile/Profile.js';
+import Profile_page from './Pages/Profile_page.js';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
 import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
 import Appointments_admin from './Components/Appoinment.jsx';
@@ -30,6 +30,8 @@ import Admin_ad from './Pages/Admin_ad.jsx';
 import Moderator_alert from './Pages/Moderator_alert.jsx';
 import Supp_dash from './Pages/Supp_dash.jsx';
 import Supp_ad from './Pages/Supp_ad.jsx';
+import Profile1 from './Components/Profile/Profile.js';
+ 
 
 const App = () => {
   return (
@@ -44,7 +46,8 @@ const App = () => {
         <Route path="/Advertistments" element={<Ad_page/>} />
         <Route path="/AppointmentList" element={<Viewappointment/>} />
         <Route path="/Profile" element={<Profile_page/>} />
-        <Route path="/profile" element={<Profile />} />
+         
+        <Route path="/Profile" element={<Profile />} />
         {/* <Route path="/dashboard" element={<MDashboard />} /> */}
         <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Reviews" element={<Reviewsfromdb />} />
