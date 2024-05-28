@@ -30,6 +30,8 @@ import Admin_ad from './Pages/Admin_ad.jsx';
 import Moderator_alert from './Pages/Moderator_alert.jsx';
 import Supp_dash from './Pages/Supp_dash.jsx';
 import Supp_ad from './Pages/Supp_ad.jsx';
+import Profile1 from './Components/Profile1/Profile1.js';
+import Profile_page1 from './Pages/Profile_page1.js'
 
 const App = () => {
   return (
@@ -44,6 +46,7 @@ const App = () => {
         <Route path="/Advertistments" element={<Ad_page/>} />
         <Route path="/AppointmentList" element={<Viewappointment/>} />
         <Route path="/Profile" element={<Profile_page/>} />
+        <Route path="/Profile1" element={<Profile_page1/>} />
         <Route path="/profile" element={<Profile />} />
         {/* <Route path="/dashboard" element={<MDashboard />} /> */}
         <Route path="/Vehicle_history" element={<Vehicle_history />} />

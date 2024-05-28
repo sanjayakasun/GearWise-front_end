@@ -9,31 +9,18 @@ import Profilesidebar from '../Components/Profilesidebar/Profilesidebar';
 import Profile from '../Components/Profile/Profile'
 
 const Vehicle_history = () => {
-    return (
-        // <div className='boddy'>
-        // <div className='  container-fluid'>
-          <div className='row'>
-            <div className='col-2'>
-              <Profilesidebar />
-            </div>
-            <div className='col-10 row'>
-    
-              <div className='sticky-top'>
-                
-               <Navbar/>          
-                   
-              </div>
-              <div className='mt-6'>
-                {/* <Profile /> */}
-                <Profilevehicle/>
-              </div>
-    <Fotter/> 
-            </div>
-          </div>
-        // </div>
-    
-        // </div>
-    );
+  return (
+    <div>
+        <Topbar/>
+        <Navbar/>
+        <Pageheader/>
+       {/* <Profile1/> */}
+       <Profilevehicle/>
+        
+      
+      <Fotter/>
+    </div>
+  )
 };
 
 export default Vehicle_history;
