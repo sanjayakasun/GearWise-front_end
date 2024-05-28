@@ -6,7 +6,7 @@ import Aboutus from '../Components/Aboutus/Aboutus'
 import Fotter from '../Components/Fotter/Fotter'
 import Profilevehicle from '../Components/Profilevehicle/Profilevehicle';
 import Profilesidebar from '../Components/Profilesidebar/Profilesidebar';
-import Profile from '../Components/Profile/Profile'
+ 
 
 const Vehicle_history = () => {
   return (
