@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar/A_Sidebar';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import './Sidebar/styles.css';
 
 const Customer = () => {
     const [customers, setCustomers] = useState([]);
 
-    // Fetch customers when the component mounts
     useEffect(() => {
         const fetchCustomers = async () => {
             try {
@@ -14,18 +17,17 @@ const Customer = () => {
                 setCustomers(response.data);
             } catch (error) {
                 console.error("There was an error fetching the customers!", error);
+                toast.error("There was an error fetching the customers!");
             }
         };
         fetchCustomers();
     }, []);
 
-    // Handle status toggle
     const handleToggleStatus = async (customerId, currentStatus) => {
         const newStatus = currentStatus === 'active' ? 'deactivated' : 'active';
         try {
             const response = await axios.put(`http://localhost:4005/api/customers/${customerId}/toggle-status`);
-            alert(response.data.message);
-            // Update the local state to reflect the change
+            toast.success(response.data.message);
             setCustomers(prevCustomers =>
                 prevCustomers.map(customer =>
                     customer._id === customerId ? { ...customer, status: newStatus } : customer
@@ -33,7 +35,25 @@ const Customer = () => {
             );
         } catch (error) {
             console.error("There was an error toggling the customer status!", error);
+            toast.error("There was an error toggling the customer status!");
         }
+    };
+
+    const showConfirmation = (customerId, currentStatus) => {
+        confirmAlert({
+            title: 'Confirm to submit',
+            message: `Are you sure you want to ${currentStatus === 'active' ? 'deactivate' : 'activate'} this customer?`,
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => handleToggleStatus(customerId, currentStatus)
+                },
+                {
+                    label: 'No',
+                    onClick: () => { /* Do nothing */ }
+                }
+            ]
+        });
     };
 
     return (
@@ -86,7 +106,7 @@ const Customer = () => {
                                             <th scope="col" className="px-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                                                        No of Appointments
+                                                        Number of Appointments
                                                     </span>
                                                 </div>
                                             </th>
@@ -104,13 +124,12 @@ const Customer = () => {
                                                     </span>
                                                 </div>
                                             </th>
-                                            <th scope="col" className="px-6 py-3 text-end"></th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
-                                        {customers.map(customer => (
+                                        {customers.map((customer) => (
                                             <tr key={customer._id}>
-                                                <td className="size-px whitespace-nowrap" style={{ paddingLeft: '20px' }}>
+                                                 <td className="size-px whitespace-nowrap" style={{ paddingLeft: '20px' }}>
                                                     <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
                                                         <div className="flex items-center gap-x-3">
                                                             <div className="grow">
@@ -127,17 +146,17 @@ const Customer = () => {
                                                 </td>
                                                 <td className="h-px w-72 whitespace-nowrap">
                                                     <div className="px-6 py-3">
-                                                        <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">ABC 3434</span>
+                                                        <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{customer.vehicle ? customer.vehicle.vehicle_no : 'N/A'}</span>
                                                     </div>
                                                 </td>
                                                 <td className="h-px w-72 whitespace-nowrap">
                                                     <div className="px-6 py-3">
-                                                        <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">SUV</span>
+                                                        <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{customer.vehicle ? customer.vehicle.v_type : 'N/A'}</span>
                                                     </div>
                                                 </td>
                                                 <td className="size-px whitespace-nowrap">
                                                     <div className="px-6 py-3">
-                                                        <span className="text-sm text-gray-500 dark:text-neutral-500">15</span>
+                                                        <span className="text-sm text-gray-500 dark:text-neutral-500">{customer.appointmentCount}</span>
                                                     </div>
                                                 </td>
                                                 <td className="size-px whitespace-nowrap">
@@ -158,7 +177,7 @@ const Customer = () => {
                                                     <div className="px-6 py-1.5">
                                                         <button
                                                             type="button"
-                                                            onClick={() => handleToggleStatus(customer._id, customer.status)}
+                                                            onClick={() => showConfirmation(customer._id, customer.status)}
                                                             className={`py-2 px-3 inline-flex items-center gap-x-1.5 text-sm font-medium ${customer.status === 'active' ? 'text-red-700 bg-red-100 hover:bg-red-200 dark:bg-red-900 dark:hover:bg-red-800 dark:text-red-200' : 'text-green-700 bg-green-100 hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 dark:text-green-200'} rounded-md shadow-sm align-middle`}
                                                         >
                                                             {customer.status === 'active' ? 'Deactivate' : 'Activate'}
@@ -172,12 +191,12 @@ const Customer = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
