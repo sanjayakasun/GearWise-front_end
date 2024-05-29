@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const A_Dashboard = () => {
   const [customerCount, setCustomerCount] = useState(0);
@@ -13,7 +11,6 @@ const A_Dashboard = () => {
         setCustomerCount(response.data.count);
       } catch (error) {
         console.error("There was an error fetching the customer count!", error);
-        toast.error("There was an error fetching the customer count!");
       }
     };
     fetchCustomerCount();
@@ -29,7 +26,6 @@ const A_Dashboard = () => {
         setAdCount(response.data.count);
       } catch (error) {
         console.error("There was an error fetching the customer count!", error);
-        toast.error("There was an error fetching the customer count!");
       }
     };
     fetchAdCount();
@@ -46,7 +42,6 @@ const A_Dashboard = () => {
         setAppoinmentCount(response.data.count);
       } catch (error) {
         console.error("There was an error fetching the customer count!", error);
-        toast.error("There was an error fetching the customer count!");
       }
     };
     fetchAppoinmentCount();
@@ -149,7 +144,6 @@ const A_Dashboard = () => {
         <br/><br/>
         <h3 className="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Queue<br/> <span className="text-blue-800 dark:text-blue-500">& Empty<br/></span> Slots</h3>
       </div>
-      <ToastContainer />
     </div>
   );
 };

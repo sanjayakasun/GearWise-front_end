@@ -66,9 +66,8 @@ const Customer = () => {
                             <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
                                 <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                     <div>
-                                        <h3 className="topic6 h6 text-center mb-4 text-6xl font-extrabold leading-none tracking-tight text-gray-900 md:text-6xl lg:text-6xl dark:text-white">
-                                            <span className="text-blue-800 dark:text-blue-500">Registered </span>Customer <span className="text-blue-800 dark:text-blue-500">Details</span>
-                                        </h3>
+                                    <h3 class=" tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white"> <span class="text-blue-800 dark:text-blue-500">Registered </span>Customer<span class="text-blue-800 dark:text-blue-500"> Details</span></h3>
+
                                     </div>
                                     <div></div>
                                 </div>
