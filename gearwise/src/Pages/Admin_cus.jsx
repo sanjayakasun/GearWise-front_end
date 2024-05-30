@@ -1,7 +1,6 @@
 import React from 'react'
 import A_Sidebar from '../Components/Sidebar/A_Sidebar';
 import Customer from '../Components/Customer';
-import axios from 'axios';
 
 
 
