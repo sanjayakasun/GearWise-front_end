@@ -20,7 +20,7 @@ const A_Advertisment = () => {
     const handleApprove = async (id) => {
         try {
             await axios.post(`http://localhost:4005/api/ads/admin/approve/${id}`);
-            setAds(ads.filter(ad => ad._id !== id)); // Remove the approved ad from state
+            setAds(prevAds => prevAds.map(ad => ad._id === id ? { ...ad, approved: true } : ad));
         } catch (error) {
             console.error('Error approving advertisement:', error);
         }
@@ -29,7 +29,7 @@ const A_Advertisment = () => {
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:4005/api/ads/admin/${id}`);
-            setAds(ads.filter(ad => ad._id !== id)); // Remove the deleted ad from state
+            setAds(prevAds => prevAds.filter(ad => ad._id !== id));
         } catch (error) {
             console.error('Error deleting advertisement:', error);
         }
@@ -41,7 +41,7 @@ const A_Advertisment = () => {
                 {ads.map(ad => (
                     <div key={ad._id} className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
                         <div className={`h-52 flex flex-col justify-center items-center rounded-t-xl ${ad.approved ? 'bg-green-500' : 'bg-rose-500'}`}>
-                            <img src={ad.imagePath} alt="Advertisement" className="h-full w-full object-cover rounded-t-xl" />
+                            <img src={`http://localhost:4005/${ad.imagePath}`} alt="Advertisement" className="h-full w-full object-cover rounded-t-xl" onError={(e) => { e.target.onerror = null; e.target.src = 'default-image-path.jpg'; }} />
                         </div>
                         <div className="p-4 md:p-6">
                             <span className="block mb-1 text-xs font-semibold uppercase text-rose-600 dark:text-rose-500">
