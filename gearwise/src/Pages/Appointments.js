@@ -16,6 +16,8 @@ export default function Appointments() {
     <Topbar/>
     <Navbar/>
     <Pageheader/>
+    
+    <form>
     <Contactinfo/>
     <br/>
     <Vehicleinfo/>
@@ -25,6 +27,8 @@ export default function Appointments() {
     <Timeslot/>
     <br/>
     <Appointmentbtn/>
+    </form>
+  
     <Fotter/>
 
     </div>
