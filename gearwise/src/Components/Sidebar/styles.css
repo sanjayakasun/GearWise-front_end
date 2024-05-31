@@ -59,7 +59,7 @@ main {
 }
 .logg{
   color: blue;
-  padding-right:1px ;
+  padding-right:5px ;
 }
 .bars {
   display: flex;
