@@ -1,205 +1,168 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const M_alert = () => {
+    const [formData, setFormData] = useState({
+        vehicle_no: '', 
+        serviceDate: new Date(),
+    });
+    const [products, setProducts] = useState([]);
+    const [usedProducts, setUsedProducts] = useState([]);
+    const [currentSection, setCurrentSection] = useState('vehicleDetails'); 
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:4005/api/products');
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleDateChange = (date) => {
+        setFormData({ ...formData, serviceDate: date });
+    };
+
+    const handleUsedProductChange = (productId, quantity) => {
+        const updatedUsedProducts = [...usedProducts];
+        const existingProductIndex = usedProducts.findIndex(product => product.productId === productId);
+        if (existingProductIndex !== -1) {
+            updatedUsedProducts[existingProductIndex].quantity = parseInt(quantity);
+        } else {
+            updatedUsedProducts.push({ productId, quantity: parseInt(quantity) }); 
+        }
+        setUsedProducts(updatedUsedProducts);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!formData.vehicle_no) {
+            toast.error('Please select a vehicle');
+            return;
+        }
+        try {
+            const response = await axios.patch(`http://localhost:4005/api/vehicles/${formData.vehicle_no}`, {
+                nextS_date: formData.serviceDate,
+                replacedParts: usedProducts
+            });
+            console.log(response.data);
+            toast.success('Vehicle service details submitted successfully!');
+        } catch (error) {
+            console.error('There was an error!', error);
+            toast.error('There was an error submitting the form!');
+        }
+    };
+
     return (
-        
-        <div className=" div1 flex justify-center items-center h-screen">
+        <div className='background'>
+            <ToastContainer />
+           
+            <div className="max-w-md mx-auto">
+            <div className="flex items-center justify-center mb-6">
+    <a
+        href="#"
+        onClick={() => setCurrentSection('vehicleDetails')}
+        className={`w-1/2 pb-4 font-medium text-center capitalize border-b-2 ${currentSection === 'vehicleDetails' ? 'border-blue-700 text-blue-800 dark:text-white' : 'border-gray-300 text-gray-500 dark:text-gray-300'}`}
+        style={{ borderBottomWidth: currentSection === 'vehicleDetails' ? '2px' : '1px', color: currentSection === 'vehicleDetails' ? '#ffffff' : '#000000', textDecoration: 'none' }}
+    >
+        Vehicle Details
+    </a>
+    <a
+        href="#"
+        onClick={() => setCurrentSection('productDetails')}
+        className={`w-1/2 pb-4 font-medium text-center capitalize border-b-2 ${currentSection === 'productDetails' ? 'border-blue-700 text-blue-800 dark:text-white' : 'border-gray-300 text-gray-500 dark:text-gray-300'}`}
+        style={{ borderBottomWidth: currentSection === 'productDetails' ? '2px' : '1px', color: currentSection === 'productDetails' ? '#ffffff' : '#000000', textDecoration: 'none' }}
+    >
+        Product Details
+    </a>
+</div>
 
-        <section className="container px-4 mx-auto">
-            
-            <div className="overflow-hidden md:rounded-lg">
 
-                <div className="flex flex-col">
-                <h3 class="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Vehicle<span class="text-blue-800 dark:text-blue-500">Alert</span> Details</h3>
 
-                    <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-800">
-                            <tr>
-                                <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    <div class="flex items-center gap-x-3">
-                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"/>
-                                        <button class="flex items-center gap-x-2">
-                                            <span>Vehicle No</span>
+                {currentSection === 'vehicleDetails' && (
+                    <form className="form1" onSubmit={handleSubmit}>
+                         <h6 className="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-2xl dark:text-white">
+                            Vehicle <span className="text-blue-800 dark:text-blue-500">Service </span>Details
+                        </h6>
+                        <div className="relative z-0 w-full mb-4 group">
+                            <input
+                                type="text"
+                                name="vehicle_no"
+                                id="vehicleNumber"
+                                className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" "
+                                required
+                                onChange={handleChange}
+                            />
+                            <label
+                                htmlFor="vehicleNumber"
+                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                            >
+                                Vehicle Number
+                            </label>
+                        </div>
+                        <div className="relative z-0 w-full mb-5 group">
+                            <label htmlFor="serviceDate" className="block py-0.5 px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white">Next Service Date</label>
+                            <div className="relative my-6">
+                                <DatePicker
+                                    id="serviceDate"
+                                    selected={formData.serviceDate}
+                                    onChange={handleDateChange}
+                                    dateFormat="yyyy/MM/dd"
+                                    className="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-indigo-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                />
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setCurrentSection('productDetails')}
+                            className="text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                            Next
+                        </button>
+                    </form>
+                )}
 
-                                            <svg class="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                                <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                                <path d="M8.45558 7.25664V7.40664H8.60558H9.66065C9.72481 7.40664 9.74667 7.42274 9.75141 7.42691C9.75148 7.42808 9.75146 7.42993 9.75116 7.43262C9.75001 7.44265 9.74458 7.46304 9.72525 7.49314C9.72522 7.4932 9.72518 7.49326 9.72514 7.49332L7.86959 10.3529L7.86924 10.3534C7.83227 10.4109 7.79863 10.418 7.78568 10.418C7.77272 10.418 7.73908 10.4109 7.70211 10.3534L7.70177 10.3529L5.84621 7.49332C5.84617 7.49325 5.84612 7.49318 5.84608 7.49311C5.82677 7.46302 5.82135 7.44264 5.8202 7.43262C5.81989 7.42993 5.81987 7.42808 5.81994 7.42691C5.82469 7.42274 5.84655 7.40664 5.91071 7.40664H6.96578H7.11578V7.25664V0.633865C7.11578 0.42434 7.29014 0.249976 7.49967 0.249976H8.07169C8.28121 0.249976 8.45558 0.42434 8.45558 0.633865V7.25664Z" fill="currentColor" stroke="currentColor" stroke-width="0.3" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Next Service Date
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Status
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Customer
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Replaced Parts
-                                </th>
-
-                                <th scope="col" class="relative py-3.5 px-4">
-                                    <span class="sr-only">Actions</span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                            <tr>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                    <div class="inline-flex items-center gap-x-3">
-                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"/>
-
-                                        <span>#3066</span>
-                                    </div>
-                                                                </td>
-                                                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">                       <div class="relative my-6">
-                                <input id="id-date07" type="date" name="id-date07" class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-indigo-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400" />
-                                </div></td>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                    <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-
-                                        <h2 class="text-sm font-normal">Sent</h2>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                    
-                                            <h2 class="text-sm font-medium text-gray-800 dark:text-white ">Arthur Melo</h2>
-                                        
-                                    
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option>Full Service</option>
-                        <option>Oil Change</option>
-                        <option>Tire Rotation</option>
-                        <option>Brake Inspection</option>
-                    </select></td>
-                                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                    <div class="flex items-center gap-x-6">
-                                        <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                            Save
-                                        </button>
-
-                                        <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                            Alert
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                    <div class="inline-flex items-center gap-x-3">
-                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"/>
-
-                                        <span>#3065</span>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">            <div class="relative my-6">
-                                <input id="id-date07" type="date" name="id-date07" class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-indigo-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400" />
-                                </div></td>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                    <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
-                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9 3L3 9M3 3L9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-
-                                        <h2 class="text-sm font-normal">Pending</h2>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                  
-                                            <h2 class="text-sm font-medium text-gray-800 dark:text-white ">Andi Lane</h2>
-                                      
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option>Full Service</option>
-                        <option>Oil Change</option>
-                        <option>Tire Rotation</option>
-                        <option>Brake Inspection</option>
-                    </select></td>
-                                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                    <div class="flex items-center gap-x-6">
-                                        <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                            Save
-                                        </button>
-
-                                        <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                            Alert
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                          
-                            <tr>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                    <div class="inline-flex items-center gap-x-3">
-                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"/>
-
-                                        <span>#3063</span>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">            <div class="relative my-6">
-                                <input id="id-date07" type="date" name="id-date07" class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-indigo-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400" />
-                                </div></td>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                    <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-
-                                        <h2 class="text-sm font-normal">Paid</h2>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                    
-                                            <h2 class="text-sm font-medium text-gray-800 dark:text-white ">Candice Wu</h2>
-                                        
-                                    
-                                </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"><select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option>Full Service</option>
-                        <option>Oil Change</option>
-                        <option>Tire Rotation</option>
-                        <option>Brake Inspection</option>
-                    </select></td>
-                                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                    <div class="flex items-center gap-x-6">
-                                        <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                            Save
-                                        </button>
-
-                                        <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                            Alert
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                           
-                        </tbody>
-                    </table>
-                </div>
+                {currentSection === 'productDetails' && (
+                    <form className="form1" onSubmit={handleSubmit}>
+                        <h6 className="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-2xl dark:text-white">
+                            Update <span className="text-blue-800 dark:text-blue-500">Used </span>Products
+                        </h6>
+                        {products.map((product) => (
+                            <div key={product._id} className="relative z-0 w-full mb-4 group">
+                                <label htmlFor={`product-${product._id}`} className="block py-0.5 px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white">
+                                    {product.name}
+                                </label>
+                                <input
+                                    type="number"
+                                    id={`product-${product._id}`}
+                                    name="quantity"
+                                    className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder="Enter quantity used"
+                                    min={0}
+                                    onChange={(e) => handleUsedProductChange(product._id, e.target.value)}
+                                />
+                            </div>
+                        ))}
+                        <button type="submit" className="text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Submit
+                        </button>
+                    </form>
+                )}
             </div>
-        </div>
-    </div>
-
-   
-</section>
-
         </div>
     );
 };
