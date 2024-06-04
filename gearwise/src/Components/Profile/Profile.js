@@ -2,11 +2,49 @@ import React from 'react'
 import Img1 from '../../img/vehicleProfile.jpg'
 import Img2 from '../../img/Vehiclehistory.jpg'
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
-export default function Profile1() {
+
+
+export const U_Profile = () => {
+    const [formData, setCustomers] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        gender: '',
+        address: '',
+        profilePhoto: ''
+    });
+
+    const handleChange = (e) => {
+        setCustomers({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
     const location = useLocation();
     const hideButtonPath = '/Vehicle_history';
     const hideButton = location.pathname === hideButtonPath;
+
+
+    async function getOneCusprofile() {
+        try {
+            const result = await axios.get("http://localhost:4005/api/customers/customerspro/665ac56fe1c1526588d9da9d");
+            setCustomers(result.data);
+            console.log(result.data);
+        } catch (error) {
+            console.error('Error loading data:', error);
+        }
+    }
+    useEffect(() => {
+        getOneCusprofile();
+    }, []);
+
+
+
+
     return (
         <div>
             <div class="about">
@@ -55,7 +93,7 @@ export default function Profile1() {
                                             </p>
                                         </div>
                                         <div className='max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto'>
-                                            <form>
+                                            <form >
 
                                                 <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
                                                     <div className="sm:col-span-3">
@@ -69,19 +107,14 @@ export default function Profile1() {
                                                         <div className="flex items-center gap-5">
                                                             <img
                                                                 className="cv"
-                                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKXAKjp8fE3184PDV2Z5SgVCbC2OGqKY2uL-LSCkxfJw&s"
+                                                                src={formData.profilePhoto}
                                                                 alt="Image Description"
                                                                 style={{ width: '48px', height: '48px' }} />
                                                             <div className="flex gap-x-2">
                                                                 <div>
-                                                                    <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-                                                                        <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                                                            <polyline points="17 8 12 3 7 8" />
-                                                                            <line x1="12" x2="12" y1="3" y2="15" />
-                                                                        </svg>
-                                                                        Upload photo
-                                                                    </button>
+                                                                    <label for="photo0"></label>
+                                                                    <input id="photo0" type="file" name="photo0" />
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -109,8 +142,8 @@ export default function Profile1() {
 
                                                     <div className="sm:col-span-9">
                                                         <div className="sm:flex">
-                                                            <input id="af-account-full-name" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Hasanki" />
-                                                            <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Didulani" />
+                                                            {/* <input id="af-account-full-name" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Hasanki">{customers.name}</input> */}
+                                                            <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Didulani" value={formData.name} onChange={handleChange} />
                                                         </div>
                                                     </div>
 
@@ -123,7 +156,8 @@ export default function Profile1() {
 
 
                                                     <div className="sm:col-span-9">
-                                                        <input id="af-account-email" type="email" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="hasanki@gmail.com" />
+                                                        <input id="af-account-email" type="email" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder=" " value={formData.email} onChange={handleChange} />
+                                                        {/* <td><%= customers.email%></td> */}
                                                     </div>
 
 
@@ -136,9 +170,9 @@ export default function Profile1() {
 
                                                     <div className="sm:col-span-9">
                                                         <div className="space-y-2">
-                                                            <input id="af-account- " type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Street" />
-                                                            <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Road" />
-                                                            <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Town" />
+                                                            <input id="af-account- " type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Street" value={formData.address} onChange={handleChange} />
+                                                            {/* <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Road">{customers.address}</input>
+                                                            <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Town">{customers.address}</input> */}
                                                         </div>
                                                     </div>
 
@@ -157,7 +191,7 @@ export default function Profile1() {
 
                                                     <div className="sm:col-span-9">
                                                         <div className="sm:flex">
-                                                            <input id="af-account-phone" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="0717650880" />
+                                                            <input id="af-account-phone" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="0717650880" value={formData.phone} onChange={handleChange} />
                                                             <select className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                                                 <option selected>Mobile</option>
                                                                 <option>Home</option>
@@ -185,17 +219,17 @@ export default function Profile1() {
                                                     <div className="sm:col-span-9">
                                                         <div className="sm:flex">
                                                             <label for="af-account-gender-checkbox" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                                                <input type="radio" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox" checked />
+                                                                <input type="radio" name="gender" value="Male" className="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox" checked={formData.gender === "Male"} onChange={handleChange} />
                                                                 <span clclassNameass="text-sm text-gray-500 ms-3 dark:text-neutral-400">Male</span>
                                                             </label>
 
                                                             <label for="af-account-gender-checkbox-female" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                                                <input type="radio" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox-female" />
+                                                                <input type="radio" name="gender" value="Female" className="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox-female" checked={formData.gender === "Female"} onChange={handleChange} />
                                                                 <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Female</span>
                                                             </label>
 
                                                             <label for="af-account-gender-checkbox-other" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                                                <input type="radio" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox-other" />
+                                                                <input type="radio" name="gender" value="Other" className="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox-other" checked={formData.gender === "Other"} onChange={handleChange} />
                                                                 <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Other</span>
                                                             </label>
                                                         </div>
@@ -484,38 +518,38 @@ export default function Profile1() {
                         {/* Vehicle history session start */}
 
                         <div>
-            <div class="about">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="section-header text-left">
-                                <p>Vehicle HIstory</p>
-                                <h2>About Vehicle HIstory</h2>
-                            </div>
-                            <div class="about-content">
-                                <p>
-                                Explore your vehicle's journey at <strong>GearWise! </strong>  
-                                Here, you can easily track and manage your vehicle's service history.
-                                </p>
-                                <ul>
-                                    <li><i class="far fa-check-circle"></i>Every service you schedule is documented here.</li>
-                                    <li><i class="far fa-check-circle"></i>View a comprehensive history of all the services your vehicle has undergone.</li>
-                                    <li><i class="far fa-check-circle"></i>Generate detailed vehicle history reports for your records or future reference.</li>
-                                    <li><i class="far fa-check-circle"></i>Stay informed and up-to-date with your vehicle's maintenance journey, ensuring a smooth and reliable ride.</li>
-                                </ul>
-                                {!hideButton && <a class="btn btn-custom" href="/Vehicle_history">Learn More</a>}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="about-img">
-                                <img src={Img2} alt="Image" />
-                            </div>
+                            <div class="about">
+                                <div class="container">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <div class="section-header text-left">
+                                                <p>Vehicle HIstory</p>
+                                                <h2>About Vehicle HIstory</h2>
+                                            </div>
+                                            <div class="about-content">
+                                                <p>
+                                                    Explore your vehicle's journey at <strong>GearWise! </strong>
+                                                    Here, you can easily track and manage your vehicle's service history.
+                                                </p>
+                                                <ul>
+                                                    <li><i class="far fa-check-circle"></i>Every service you schedule is documented here.</li>
+                                                    <li><i class="far fa-check-circle"></i>View a comprehensive history of all the services your vehicle has undergone.</li>
+                                                    <li><i class="far fa-check-circle"></i>Generate detailed vehicle history reports for your records or future reference.</li>
+                                                    <li><i class="far fa-check-circle"></i>Stay informed and up-to-date with your vehicle's maintenance journey, ensuring a smooth and reliable ride.</li>
+                                                </ul>
+                                                {!hideButton && <a class="btn btn-custom" href="/Vehicle_history">Learn More</a>}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="about-img">
+                                                <img src={Img2} alt="Image" />
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
                         {/* Vehicle history session end */}
                     </div>
@@ -524,3 +558,5 @@ export default function Profile1() {
         </div>
     )
 }
+
+export default U_Profile
