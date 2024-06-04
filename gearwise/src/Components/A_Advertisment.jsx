@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const A_Advertisment = () => {
     const [ads, setAds] = useState([]);
@@ -13,6 +15,7 @@ const A_Advertisment = () => {
             const response = await axios.get('http://localhost:4005/api/ads/admin');
             setAds(response.data);
         } catch (error) {
+            toast.error('Error fetching advertisements');
             console.error('Error fetching advertisements:', error);
         }
     };
@@ -21,7 +24,9 @@ const A_Advertisment = () => {
         try {
             await axios.post(`http://localhost:4005/api/ads/admin/approve/${id}`);
             setAds(prevAds => prevAds.map(ad => ad._id === id ? { ...ad, approved: true } : ad));
+            toast.success('Successfully approved the advertisement');
         } catch (error) {
+            toast.error('Error approving advertisement');
             console.error('Error approving advertisement:', error);
         }
     };
@@ -30,13 +35,18 @@ const A_Advertisment = () => {
         try {
             await axios.delete(`http://localhost:4005/api/ads/admin/${id}`);
             setAds(prevAds => prevAds.filter(ad => ad._id !== id));
+            toast.success('Successfully deleted the advertisement');
+
         } catch (error) {
             console.error('Error deleting advertisement:', error);
+            toast.error('Error deleting advertisement');
         }
     };
 
     return (
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+                      <ToastContainer />
+
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {ads.map(ad => (
                     <div key={ad._id} className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">

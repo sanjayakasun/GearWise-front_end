@@ -62,9 +62,12 @@ const UploadAd = () => {
               <form onSubmit={handleSubmit}>
                   <div className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
                       <div className="sm:col-span-12">
-                          <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                              Submit your advertisement
-                          </h2>
+                      <h6 className="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-2xl dark:text-white">
+                      <span className="text-blue-800 dark:text-blue-500">Submit </span> your   
+                      <span className="text-blue-800 dark:text-blue-500"> Advertisements </span> to   
+                      <span className="text-blue-800 dark:text-blue-500"> Promote </span> your   
+                      <span className="text-blue-800 dark:text-blue-500"> Products</span> 
+                        </h6>
                       </div>
 
                       <div className="sm:col-span-3">
