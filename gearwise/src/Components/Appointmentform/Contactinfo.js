@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 
 export default function Contactinfo() {
+
+    const customerId = "665e144096c5017136fb33a0"
+    const [customer , setCustomer] = useState([])
+    useEffect(()=>{
+        //for testing only 665e144096c5017136fb33a0 otherwise remove the id
+        axios.get('http://localhost:4005/api/customers/customerspro/'+customerId)
+        .then(customer => setCustomer(customer.data))
+        .catch(err =>console.log(err))
+    }, [])
+
     return (
         <div>
             <div className="container">
@@ -17,30 +28,26 @@ export default function Contactinfo() {
                                 <div className="col-md-6">
                                     <Card.Body>
                                         <Card.Title></Card.Title>
-                                        <Card.Text>
-                                            <Form.Floating>
-                                                <Form.Control
+                                        <Card.Text  style={{textAlign:'left'}}>
+                                            <Form.Label>Name<span>*</span></Form.Label>
+                                                <Form.Control size="lg" type="name" placeholder={customer.name} readOnly />
+                                            {/* <Form.Floating>
+                                                    <Form.Control
                                                     id="floatingPasswordCustom"
                                                     type="text"
-                                                    placeholder="Name"
+                                                    placeholder={customer.name}
                                                 />
-                                                <label htmlFor="floatingPasswordCustom">Name <span>*</span></label>
-                                            </Form.Floating>
+                                                <label htmlFor="floatingPasswordCustom">Name <span>*</span> </label>
+                                            </Form.Floating> */}
                                         </Card.Text>
                                     </Card.Body>
                                 </div>
                                 <div className="col-md-6">
                                     <Card.Body>
                                         <Card.Title></Card.Title>
-                                        <Card.Text>
-                                            <Form.Floating className="mb-3">
-                                                <Form.Control
-                                                    id="floatingInputCustom"
-                                                    type="email"
-                                                    placeholder="name@example.com"
-                                                />
-                                                <label htmlFor="floatingInputCustom">Email address <span>*</span></label>
-                                            </Form.Floating>
+                                        <Card.Text  style={{textAlign:'left'}}>
+                                        <Form.Label>E-mail<span>*</span></Form.Label>
+                                                <Form.Control size="lg" type="email" placeholder={customer.email} readOnly />
                                         </Card.Text>
                                     </Card.Body>
                                 </div>
@@ -49,15 +56,9 @@ export default function Contactinfo() {
                                 <div className="col-md-6">
                                     <Card.Body>
                                         <Card.Title></Card.Title>
-                                        <Card.Text>
-                                            <Form.Floating>
-                                                <Form.Control
-                                                    id="floatingPasswordCustom"
-                                                    type="text"
-                                                    placeholder="Cotact NO"
-                                                />
-                                                <label htmlFor="floatingPasswordCustom">Contact NO <span>*</span></label>
-                                            </Form.Floating>
+                                        <Card.Text  style={{textAlign:'left'}}>
+                                        <Form.Label>Contact No<span>*</span></Form.Label>
+                                                <Form.Control size="lg" type="email" placeholder={customer.phone} readOnly />
                                         </Card.Text>
                                     </Card.Body>
                                 </div>
