@@ -240,19 +240,19 @@ export default function Appointments() {
                         <Card.Text>
                           <FloatingLabel controlId="floatingSelect" label="Time Sots">
                             <Form.Select aria-label="Floating label select example" value={timeSlot} onChange={handleSelectTimeSlot}>
-                              <option value="1">08.00 a.m- 09.00 a.m<span>*</span></option>
-                              <option value="2">09.00 a.m- 10.00 a.m</option>
-                              <option value="3">10.00 a.m- 11.00 a.m</option>
-                              <option value="4">11.00 a.m- 12.00 p.m</option>
-                              <option value="5">01.00 p.m- 02.00 p.m</option>
-                              <option value="6">02.00 p.m- 03.00 p.m</option>
-                              <option value="7">03.00 p.m- 04.00 p.m</option>
-                              <option value="8">04.00 p.m- 05.00 p.m</option>
-                              <option value="9">05.00 p.m- 06.00 p.m</option>
-                              <option value="10">06.00 p.m- 07.00 p.m</option>
+                              <option value="08.00 a.m- 09.00 a.m">08.00 a.m- 09.00 a.m<span>*</span></option>
+                              <option value="09.00 a.m- 10.00 a.m">09.00 a.m- 10.00 a.m</option>
+                              <option value="10.00 a.m- 11.00 a.m">10.00 a.m- 11.00 a.m</option>
+                              <option value="11.00 a.m- 12.00 p.m">11.00 a.m- 12.00 p.m</option>
+                              <option value="01.00 p.m- 02.00 p.m">01.00 p.m- 02.00 p.m</option>
+                              <option value="02.00 p.m- 03.00 p.m">02.00 p.m- 03.00 p.m</option>
+                              <option value="03.00 p.m- 04.00 p.m">03.00 p.m- 04.00 p.m</option>
+                              <option value="04.00 p.m- 05.00 p.m">04.00 p.m- 05.00 p.m</option>
+                              <option value="05.00 p.m- 06.00 p.m">05.00 p.m- 06.00 p.m</option>
+                              <option value="06.00 p.m- 07.00 p.m">06.00 p.m- 07.00 p.m</option>
                               <option>Off Peak Pricing Time Slot</option>
-                              <option value="11">08.00 p.m - 09.00 p.m</option>
-                              <option value="12">09.00 p.m- 10.00 p.m</option>
+                              <option value="08.00 p.m - 09.00 p.m">08.00 p.m - 09.00 p.m</option>
+                              <option value="09.00 p.m- 10.00 p.m">09.00 p.m- 10.00 p.m</option>
                             </Form.Select>
                           </FloatingLabel>
                         </Card.Text>

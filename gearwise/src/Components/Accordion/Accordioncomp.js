@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 
 export default function Accordioncomp() {
+
+  const customerId = "665e144096c5017136fb33a0"
+  const [appointments, setappointment] = useState([])
+  useEffect(() => {
+    //for testing only 665e144096c5017136fb33a0 otherwise remove the id
+    axios.get('http://localhost:4005/api/appointments/viewappointment/' + customerId)
+      .then(appointments => setappointment(appointments.data))
+      .catch(err => console.log(err))
+  }, [])
+
   return (
     <div>
 
@@ -15,42 +26,40 @@ export default function Accordioncomp() {
             </div>
             <div className="row">
               <div className="col-md-12">
-                <Accordion >
-                  <Accordion.Item eventKey="0">
-                    <Accordion.Header>Appointment 01</Accordion.Header>
-                    <Accordion.Body style={{ visibility: 'visible' }}>
-                      <Form.Group>
-                        <Form.Label>Vehicle Registration Number</Form.Label>
-                        <Form.Control placeholder="CAM 9364" disabled />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Appointment Time</Form.Label>
-                        <Form.Control placeholder="11.00 a.m - 12.00 p.m" disabled />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Appointment Date</Form.Label>
-                        <Form.Control placeholder="2024/05/16" disabled />
-                      </Form.Group>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                  <Accordion.Item eventKey="1">
-                    <Accordion.Header>Appointment 02</Accordion.Header>
-                    <Accordion.Body style={{ visibility: 'visible' }}>
-                      <Form.Group>
-                        <Form.Label>Vehicle Registration Number</Form.Label>
-                        <Form.Control placeholder="VK 9067" disabled />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Appointment Time</Form.Label>
-                        <Form.Control placeholder="1.00 p.m - 2.00 p.m" disabled />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Appointment Date</Form.Label>
-                        <Form.Control placeholder="2024/05/16" disabled />
-                      </Form.Group>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
+                {
+                  appointments.map(appointment => {
+                    return (
+                      <Accordion >
+                        <Accordion.Item eventKey="0">
+                          <Accordion.Header>Appointment</Accordion.Header>
+                          <Accordion.Body style={{ visibility: 'visible' }}>
+                          <Form.Group>
+                              <Form.Label>Appointment ID</Form.Label>
+                              <Form.Control placeholder="vr" disabled
+                                value={appointment._id} />
+                            </Form.Group>
+                            <Form.Group>
+                              <Form.Label>Vehicle Registration Number</Form.Label>
+                              <Form.Control placeholder="vr" disabled
+                                value={appointment.vrNo} />
+                            </Form.Group>
+                            <Form.Group>
+                              <Form.Label>Appointment Time</Form.Label>
+                              <Form.Control placeholder="11.00 a.m - 12.00 p.m" disabled 
+                              value={appointment.timeSlot} />
+                            </Form.Group>
+                            <Form.Group>
+                              <Form.Label>Appointment Date</Form.Label>
+                              <Form.Control placeholder="2024/05/16" disabled 
+                              value={appointment.date} />
+                            </Form.Group>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    )
+
+                  })
+                }
               </div>
             </div>
           </div>
