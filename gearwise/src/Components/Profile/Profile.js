@@ -38,7 +38,7 @@ export const U_Profile = () => {
         }
     };
 
-//Formdata 
+    //Formdata 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -47,7 +47,7 @@ export const U_Profile = () => {
         });
     };
 
-//fileChanging - img
+    //fileChanging - img
     const handleFileChange = (e) => {
         const { name, files } = e.target;
         setFormData({
@@ -56,7 +56,7 @@ export const U_Profile = () => {
         });
     };
 
-//update
+    //update
     const handleSubmit = async (e) => {
         e.preventDefault();
 
