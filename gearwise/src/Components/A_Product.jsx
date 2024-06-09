@@ -10,7 +10,16 @@ const Product = () => {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get('http://localhost:4005/api/products');
-                setProducts(response.data);
+                const productsWithSupplierNames = await Promise.all(
+                    response.data.map(async (product) => {
+                        // Fetch supplier name for each product
+                        const supplierResponse = await axios.get(`http://localhost:4005/api/customers/suppliers`);
+                        const supplier = supplierResponse.data.find(supplier => supplier._id === product.s_name);
+                        const supplierName = supplier ? supplier.name : 'Unknown Supplier';
+                        return { ...product, supplierName };
+                    })
+                );
+                setProducts(productsWithSupplierNames);
             } catch (error) {
                 console.error("There was an error fetching the products!", error);
                 toast.error("There was an error fetching the products!");
@@ -26,10 +35,11 @@ const Product = () => {
                     <div className="-m-1.5 overflow-x-auto">
                         <div className="p-1.5 min-w-full inline-block align-middle">
                             <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
-                            <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+                                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                     <div>
-                                    <h3 class=" tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white"> <span class="text-blue-800 dark:text-blue-500">Supplier </span> Product <span class="text-blue-800 dark:text-blue-500">Details</span></h3>
-
+                                        <h3 className="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">
+                                            <span className="text-blue-800 dark:text-blue-500">Supplier </span> Product <span className="text-blue-800 dark:text-blue-500">Details</span>
+                                        </h3>
                                     </div>
                                 </div>
                                 <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
@@ -48,7 +58,7 @@ const Product = () => {
                                                 Quantity
                                             </th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                Price
+                                                Unit Price
                                             </th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 Action
@@ -63,7 +73,7 @@ const Product = () => {
                                                         <h2 className="text-sm font-normal">{product.name}</h2>
                                                     </td>
                                                     <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                                        {product.s_name}
+                                                        {product.supplierName}
                                                     </td>
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                         <h2 className="text-sm font-medium text-gray-800 dark:text-white">{new Date(product.date).toLocaleDateString()}</h2>

@@ -139,7 +139,7 @@ const Appointment = () => {
                                                     </td>
                                                     <td className="h-px w-72 whitespace-nowrap">
                                                         <div className="px-6 py-3">
-                                                            <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{appointment.vehicleId.vehicle_no}</span>
+                                                            <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{appointment.vrNo}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-72 whitespace-nowrap">

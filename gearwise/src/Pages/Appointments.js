@@ -15,7 +15,7 @@ import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn'
 
 export default function Appointments() {
 
-  const customerId = "665e144096c5017136fb33a0"
+  const customerId = "6655bd63f434d50c4b26a672"
 
   const [customer, setCustomer] = useState([])
   const [vehicleType, setVehicleType] = useState("")
