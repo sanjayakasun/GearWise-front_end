@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from "react";
 import axios from 'axios';
 
 export const Review_ratings = () => {
@@ -7,18 +7,31 @@ export const Review_ratings = () => {
   const reviewsPerPage = 2; // Number of reviews to display per page
   const [name, setName] = useState('');
   const [reviewText, setReviewText] = useState('');
-  // const newReview = {
-  //   text: reviewText,
-  //   name: name,
-  //   // position: 'Customer', // You can change this or add a field for position if needed
-  //   // image: 'https://via.placeholder.com/150', // Add your image URL logic if needed
-  //   rating: userRating,
-  // };
+  const [reviews, setReviews] = useState([]);
 
+
+  useEffect(() => {
+    // Fetch all reviews from the backend
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get('http://localhost:4005/api/reviews/reviews');
+        // console.log(response.data); 
+        setReviews(response.data);
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
+
+  //sets the user's rating when a star is clicked
   const handleRatingSelect = (rating) => {
     setUserRating(rating);
   };
 
+  //updates the name state when input field changes
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -29,6 +42,7 @@ export const Review_ratings = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //handles the form submission, sends review data to the backend
     const Review_ratings = {
       review: reviewText,
       name: name,
@@ -44,51 +58,57 @@ export const Review_ratings = () => {
       setName('');
       setReviewText('');
       setUserRating(0);
+
+      //Fetch all updated reviews
+      const response = await axios.get('http://localhost:4005/api/reviews/reviews');
+      setReviews(response.data);
+
     } catch (error) {
       console.error('Error submitting review:', error);
       alert('Failed to submit review');
     }
   };
 
-  const reviews = [
-    {
-      text:
-        '“Remarkable service! Gearwise Automotive provided exceptional care for my vehicle, delivering not only excellent repairs but also valuable advice on maintenance. With their attention to detail and commitment to customer satisfaction, I have full confidence in their expertise.”',
-      name: 'Robbert',
-      // position: 'CTO, Robert Consultancy',
-      // image:
-      //   'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-      rating: 4, // Add rating property
-    },
-    {
-      text:
-        '“Prompt, efficient, and friendly service at Gearwise Auto Repairs. Highly recommended for all your automotive needs!”',
-      name: 'Hasanki',
-      // position: 'Marketing Manager at Stech',
-      // image:
-      //   'https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-      rating: 5, // Add rating property
-    },
-    {
-      text:
-        '“Cruising through the city streets, my cars engine purred like a contented lion, thanks to the exceptional service I received at Gearwise Auto Service Center.The skilled technicians meticulously examined every aspect of my vehicle, diagnosing and fixing the issue promptly.”',
-      name: 'Didulani',
-      position: 'CTO, Robert Consultancy',
-      // image:
-      //   'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-      rating: 4, // Add rating property
-    },
-    {
-      text:
-        '“Exceptional service! My experience at Gearwise Auto was nothing short of fantastic. Courteous staff, quick turnaround, and my car drives like new. Highly recommended!”',
-      name: 'Mia Brown',
-      position: 'Marketing Manager at Stech',
-      // image:
-      //   'https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-      rating: 5, // Add rating property
-    },
-    // Add more reviews with ratings as needed
-  ];
+  //review array
+  // const reviewss = [
+  //   {
+  //     text:
+  //       '“Remarkable service! Gearwise Automotive provided exceptional care for my vehicle, delivering not only excellent repairs but also valuable advice on maintenance. With their attention to detail and commitment to customer satisfaction, I have full confidence in their expertise.”',
+  //     name: 'Robbert',
+  //     // position: 'CTO, Robert Consultancy',
+  //     // image:
+  //     //   'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+  //     rating: 4, // Add rating property
+  //   },
+  //   {
+  //     text:
+  //       '“Prompt, efficient, and friendly service at Gearwise Auto Repairs. Highly recommended for all your automotive needs!”',
+  //     name: 'Hasanki',
+  //     // position: 'Marketing Manager at Stech',
+  //     // image:
+  //     //   'https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+  //     rating: 5, // Add rating property
+  //   },
+  //   {
+  //     text:
+  //       '“Cruising through the city streets, my cars engine purred like a contented lion, thanks to the exceptional service I received at Gearwise Auto Service Center.The skilled technicians meticulously examined every aspect of my vehicle, diagnosing and fixing the issue promptly.”',
+  //     name: 'Didulani',
+  //     position: 'CTO, Robert Consultancy',
+  //     // image:
+  //     //   'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+  //     rating: 4, // Add rating property
+  //   },
+  //   {
+  //     text:
+  //       '“Exceptional service! My experience at Gearwise Auto was nothing short of fantastic. Courteous staff, quick turnaround, and my car drives like new. Highly recommended!”',
+  //     name: 'Henry Brown',
+  //     position: 'Marketing Manager at Stech',
+  //     // image:
+  //     //   'https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+  //     rating: 5, // Add rating property
+  //   },
+  //   // Add more reviews with ratings as needed
+  // ];
 
   const totalPages = Math.ceil(reviews.length / reviewsPerPage);
 
@@ -120,7 +140,7 @@ export const Review_ratings = () => {
           <div className="grid grid-cols-1 gap-8 mx-auto mt-8 lg:grid-cols-2 xl:mt-10 max-w-7xl">
             {visibleReviews.map((review, index) => (
               <div key={index} className="p-6 bg-gray-100 rounded-lg dark:bg-gray-800 md:p-8">
-                <p className="leading-loose text-gray-500 dark:text-gray-300">{review.text}</p>
+                <p className="leading-loose text-gray-500 dark:text-gray-300">{review.review}</p> {/* Change here */}
                 <div className="flex items-center mt-6">
                   {/* <img className="object-cover rounded-full w-14 h-14" src={review.image} alt="" /> */}
                   <div className="mx-4">
