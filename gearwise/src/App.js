@@ -31,6 +31,7 @@ import Moderator_alert from './Pages/Moderator_alert.jsx';
 import Supp_dash from './Pages/Supp_dash.jsx';
 import Supp_ad from './Pages/Supp_ad.jsx';
 import Profile1 from './Components/Profile/Profile.js';
+import Mod_Product from './Pages/Mod_Product.jsx';
  
 
 const App = () => {
@@ -65,6 +66,8 @@ const App = () => {
        <Route path="/supp" element={<Supp_dash />} />
        <Route path="/upload_ad" element={<Supp_ad />} />
         <Route path="/Reward" element={<Rewardpage />} /> 
+        <Route path="/MProduct" element={<Mod_Product />} /> 
+
       </Routes>
       </BrowserRouter>
  

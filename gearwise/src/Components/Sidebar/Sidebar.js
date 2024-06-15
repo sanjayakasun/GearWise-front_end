@@ -3,7 +3,6 @@ import './styles.css';
 import {
     FaTh,
     FaBars,
-    FaUserAlt,
     FaAd,
     FaSignOutAlt,
 }from "react-icons/fa";
@@ -19,11 +18,7 @@ const Sidebar = ({children}) => {
             name:"Dashboard",
             icon:<FaTh/>
         },
-        {
-            path:"/profile",
-            name:"Profile",
-            icon:<FaUserAlt/>
-        },
+       
         {
             path:"/upload_ad",
             name:"Advertisment",

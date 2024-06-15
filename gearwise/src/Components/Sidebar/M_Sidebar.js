@@ -3,7 +3,7 @@ import './styles.css';
 import {
     FaTh,
     FaBars,
-    FaUserAlt,
+    FaBox,
     FaSignOutAlt,
     FaExclamationTriangle,
     
@@ -25,12 +25,12 @@ const Sidebar = ({children}) => {
             name:"Alert",
             icon:<FaExclamationTriangle  />
         },
-        {
-            path:"/profile",
-            name:"Profile",
-            icon:<FaUserAlt/>
-        },
        
+        {
+            path:"/mProduct",
+            name:"Product",
+            icon:<FaBox  />
+        },
         {
             path:"/logout",
             name:"Logout",

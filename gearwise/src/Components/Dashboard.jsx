@@ -18,7 +18,20 @@ const Product = () => {
         };
         fetchProducts();
     }, []);
+    const [customers, setCustomers] = useState([]);
 
+    useEffect(() => {
+        // Fetch customers cause there is no way to enter the cus id manually/cus dont know their id
+        const fetchCustomers = async () => {
+            try {
+                const response = await axios.get('http://localhost:4005/api/customers');
+                setCustomers(response.data);
+            } catch (error) {
+                console.error('Error fetching customers', error);
+            }
+        };
+        fetchCustomers();
+    }, []);
     return (
         <div>
             <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

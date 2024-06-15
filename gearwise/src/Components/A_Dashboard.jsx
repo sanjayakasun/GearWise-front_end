@@ -38,7 +38,7 @@ const A_Dashboard = () => {
   useEffect(() => {
     const fetchAppoinmentCount = async () => {
       try {
-        const response = await axios.get('http://localhost:4005/api/appoinments/count');
+        const response = await axios.get('http://localhost:4005/api/appointments/count');
         setAppoinmentCount(response.data.count);
       } catch (error) {
         console.error("There was an error fetching the customer count!", error);

@@ -91,14 +91,7 @@ const Customer = () => {
                                             <th scope="col" className="px-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                                                        Vehicle Number
-                                                    </span>
-                                                </div>
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-start">
-                                                <div className="flex items-center gap-x-2">
-                                                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                                                        Vehicle Type
+                                                        Address
                                                     </span>
                                                 </div>
                                             </th>
@@ -143,17 +136,12 @@ const Customer = () => {
                                                         <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{customer.phone}</span>
                                                     </div>
                                                 </td>
-                                                <td className="h-px w-72 whitespace-nowrap">
-                                                    <div className="px-6 py-3">
-                                                        <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{customer.vehicle ? customer.vehicle.vehicle_no : 'N/A'}</span>
-                                                    </div>
-                                                </td>
-                                                <td className="h-px w-72 whitespace-nowrap">
-                                                    <div className="px-6 py-3">
-                                                        <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{customer.vehicle ? customer.vehicle.v_type : 'N/A'}</span>
-                                                    </div>
-                                                </td>
-                                                <td className="size-px whitespace-nowrap">
+                                                                                            <td className="h-px w-72 whitespace-nowrap">
+                                                <div className="px-6 py-3">
+                                                    <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{customer.address}</span>
+                                                </div>
+                                            </td>
+                                              <td className="size-px whitespace-nowrap">
                                                     <div className="px-6 py-3">
                                                         <span className="text-sm text-gray-500 dark:text-neutral-500">{customer.appointmentCount}</span>
                                                     </div>
