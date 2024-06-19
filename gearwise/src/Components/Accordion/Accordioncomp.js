@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+const moment = require('moment');
 
 
 export default function Accordioncomp() {
@@ -12,6 +13,14 @@ export default function Accordioncomp() {
   const customerId = "665e144096c5017136fb33a0"
   const [appointments, setappointment] = useState([])
   const [selectedAppointmentId,setSelectedAppointmentId] = useState(null);
+
+
+function formatDateTime(isoString) {
+  return moment(isoString).format('YYYY/MM/DD');
+  //return moment(isoString).format('MMMM Do YYYY, h:mm:ss a');
+}
+// Example usage
+
   useEffect(() => {
     //for testing only 665e144096c5017136fb33a0 otherwise remove the id
     axios.get('http://localhost:4005/api/appointments/viewappointment/' + customerId)
@@ -33,7 +42,7 @@ export default function Accordioncomp() {
         const response = await axios.put('http://localhost:4005/api/appointments/cancelappointmnet/'+appointmentId, { status: status });
         console.log(response.data); // Optionally handle the response
         props.onHide(); // Hide the modal after updating the status
-        
+        window.location.reload();
       } catch (error) {
         console.error('Error updating appointment status', error);
       }
@@ -83,6 +92,18 @@ export default function Accordioncomp() {
               <div className="col-md-12">
                 {
                   appointments.map(appointment => {
+                    const isoString = appointment.date;
+                    const createdate = appointment.createtime;
+                    const formattedDate = formatDateTime(isoString);
+                    const datetohidecancelbutton = new Date();
+                    console.log("today ",datetohidecancelbutton)
+                    console.log("create date ",createdate)
+                    const checkbutton = datetohidecancelbutton === createdate
+                    if(checkbutton === 1){
+                      console.log("1")
+                    }else{
+                      console.log('0')
+                    }
                     if(appointment.status === "Active"){
                       return (
                         <Accordion >
@@ -107,13 +128,14 @@ export default function Accordioncomp() {
                               <Form.Group>
                                 <Form.Label>Appointment Date</Form.Label>
                                 <Form.Control placeholder="2024/05/16" disabled
-                                  value={appointment.date} />
+                                  value={formattedDate} />
+                                  
                               </Form.Group>
                               <center>
                               {/* ,{...props.appointment._id} */}
-                                <Button variant="danger" onClick={() => handleButtonClick(appointment._id)}>
+                                {!checkbutton && <Button variant="danger" onClick={() => handleButtonClick(appointment._id)}>
                                   Cancel Appointment
-                                </Button></center>
+                                </Button>}</center>
                               <MyVerticallyCenteredModal
                                 show={modalShow}
                                 onHide={() => setModalShow(false)}

@@ -40,6 +40,7 @@ export default function Appointments() {
   };
   console.log('Selected date:', date);
 
+
   const createAppointment = async (e)=>{
     e.preventDefault();
     let result = await fetch('http://localhost:4005/api/appointments/createappointment',{
@@ -49,6 +50,14 @@ export default function Appointments() {
         'Content-Type' : 'application/json'
       },
     })
+    console.log(customerId);
+    console.log(vehicleType);
+    console.log(vehicleModel);
+    console.log(mfYear);
+    console.log(vrNo);
+    console.log(serviceType);// meke thami awula tynne
+    console.log(timeSlot);
+    console.log(date);
     result = await result.json
   }
 
