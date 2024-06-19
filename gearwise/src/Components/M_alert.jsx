@@ -46,7 +46,6 @@ const M_alert = () => {
         }
         setUsedProducts(updatedUsedProducts);
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.vehicle_no) {
@@ -65,6 +64,7 @@ const M_alert = () => {
             toast.error('There was an error submitting the form!');
         }
     };
+    
 
     return (
         <div className='background'>

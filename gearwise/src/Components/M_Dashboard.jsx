@@ -8,37 +8,39 @@ import axios from 'axios';
 const M_Dashboard = () => {
     const [formData, setFormData] = useState({
         vehicleNumber: '',
-        vehicleType: 'Sedan',
-        serviceType: 'Full Service',
-        serviceDate: new Date(),
-        owner: ''
+        vehicleType: 'Sedan', // Default to 'Sedan'
+        serviceType: 'Full Service', // Default to 'Full Service'
+        serviceDate: new Date(), // Default to current date
+        owner: '' // Should be initialized as an empty string
     });
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        // Fetch customers cause there is no way to enter the cus id manually/cus dont know their id
+        // Fetch the list of customers from the backend API
         const fetchCustomers = async () => {
             try {
                 const response = await axios.get('http://localhost:4005/api/customers');
                 setCustomers(response.data);
             } catch (error) {
-                console.error('Error fetching customers', error);
+                console.error('Error fetching customers:', error);
+                toast.error('Failed to load customers.');
             }
         };
         fetchCustomers();
     }, []);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        console.log(`Updated formData:`, formData); // Log the updated formData
     };
+    
 
     const handleDateChange = (date) => {
         setFormData({ ...formData, serviceDate: date });
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
         const dataToSend = {
             vehicle_no: formData.vehicleNumber,
             v_type: formData.vehicleType,
@@ -46,15 +48,31 @@ const M_Dashboard = () => {
             s_date: formData.serviceDate,
             owner: formData.owner
         };
+    
+        console.log('Data being sent to backend:', dataToSend); // Log the data for debugging
+    
         try {
             const response = await axios.post('http://localhost:4005/api/vehicles', dataToSend);
             console.log(response.data);
             toast.success('Vehicle service details submitted successfully!');
+            // Clear the form after successful submission
+            setFormData({
+                vehicleNumber: '',
+                vehicleType: 'Sedan',
+                serviceType: 'Full Service',
+                serviceDate: new Date(),
+                owner: ''
+            });
         } catch (error) {
-            console.error('There was an error!', error);
-            toast.error('There was an error submitting the form!');
+            console.error('Error submitting the form:', error);
+            if (error.response && error.response.data) {
+                toast.error('Submission failed');
+            } else {
+                toast.error('There was an error submitting the form!');
+            }
         }
     };
+    
 
     return (
         <div className='background'>
@@ -71,6 +89,7 @@ const M_Dashboard = () => {
                         className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
                         required
+                        value={formData.vehicleNumber}
                         onChange={handleChange}
                     />
                     <label
@@ -79,7 +98,8 @@ const M_Dashboard = () => {
                     >
                         Vehicle Number
                     </label>
-                </div> <div className="relative z-0 w-full mb-4 group">
+                </div>
+                <div className="relative z-0 w-full mb-4 group">
                     <label
                         htmlFor="owner"
                         className="block px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white"
@@ -90,6 +110,7 @@ const M_Dashboard = () => {
                         id="owner"
                         name="owner"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={formData.owner}
                         onChange={handleChange}
                     >
                         <option value="">Select Customer</option>
@@ -103,14 +124,15 @@ const M_Dashboard = () => {
                 <div className="relative z-0 w-full mb-4 group">
                     <label
                         htmlFor="vehicleType"
-                        className="block  px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white"
+                        className="block px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white"
                     >
-                        Vehicle type
+                        Vehicle Type
                     </label>
                     <select
                         id="vehicleType"
                         name="vehicleType"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={formData.vehicleType}
                         onChange={handleChange}
                     >
                         <option value="Sedan">Sedan</option>
@@ -124,12 +146,13 @@ const M_Dashboard = () => {
                         htmlFor="serviceType"
                         className="block px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white"
                     >
-                        Service type
+                        Service Type
                     </label>
                     <select
                         id="serviceType"
                         name="serviceType"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={formData.serviceType}
                         onChange={handleChange}
                     >
                         <option value="Full Service">Full Service</option>
@@ -137,9 +160,14 @@ const M_Dashboard = () => {
                         <option value="Tire Rotation">Tire Rotation</option>
                         <option value="Brake Inspection">Brake Inspection</option>
                     </select>
-                            </div>
-                            <div className="relative z-0 w-full mb-5 group">
-                    <label htmlFor="serviceDate" className="block py-0.5 px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white">Service Date</label>
+                </div>
+                <div className="relative z-0 w-full mb-5 group">
+                    <label
+                        htmlFor="serviceDate"
+                        className="block py-0.5 px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white"
+                    >
+                        Service Date
+                    </label>
                     <div className="relative my-6">
                         <DatePicker
                             id="serviceDate"
@@ -150,8 +178,10 @@ const M_Dashboard = () => {
                         />
                     </div>
                 </div>
-
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button
+                    type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
                     Submit
                 </button>
             </form>
