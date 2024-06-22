@@ -12,6 +12,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Packages from '../Components/Packages/Packages'
 import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn'
+import ToastMessage from '../Components/Toast/Toast';
+const moment = require('moment');
 
 export default function Appointments() {
 
@@ -25,6 +27,11 @@ export default function Appointments() {
   const [serviceType, setWashingPlan] = useState("")
   const [timeSlot, setTimeSlot] = useState("")
 
+  // for toast message
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVariant, setToastVariant] = useState('success');
+
   const handleSelectChangeWashingPlan = (event) => {
     setWashingPlan(event.target.value);
   };
@@ -36,10 +43,15 @@ export default function Appointments() {
   };
   const [date, setSelectedDate] = useState(null);
   const handleDateChange = date => {
-    setSelectedDate(date);
+    const fdate = formatDateTime( date );
+    setSelectedDate(fdate);
   };
+  // to input formated date to db for user feindly date reading
+  function formatDateTime(isoString) {
+    return moment(isoString).format("MM/DD/yyyy");
+    //return moment(isoString).format('MMMM Do YYYY, h:mm:ss a');
+  }
   console.log('Selected date:', date);
-
 
   const createAppointment = async (e)=>{
     e.preventDefault();
@@ -50,14 +62,27 @@ export default function Appointments() {
         'Content-Type' : 'application/json'
       },
     })
-    console.log(customerId);
-    console.log(vehicleType);
-    console.log(vehicleModel);
-    console.log(mfYear);
-    console.log(vrNo);
-    console.log(serviceType);// meke thami awula tynne
-    console.log(timeSlot);
-    console.log(date);
+    // console.log(customerId);
+    // console.log(timeSlot);
+    // console.log(date);
+
+    if (result.ok) { // `response.ok` is true if the status is 200-299
+      setToastMessage('Appointment successfully created!');
+      setToastVariant('success');
+      window.location.reload();
+    // add a success msg box
+    // and after click ok it mus redirect to the view appointmne t for user page
+    
+  } else {
+    setToastMessage('Failed to create appointment.');
+    setToastVariant('danger');
+  }
+  setShowToast(true);
+
+  console.log(result.status);
+  let results = await result.json();
+  console.log(results);
+
     result = await result.json
   }
 
@@ -290,6 +315,7 @@ export default function Appointments() {
           </div>
         </div >
         <br/>
+        <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} />
         <Appointmentbtn/>
       </form>
       <Fotter />

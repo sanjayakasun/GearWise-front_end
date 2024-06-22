@@ -118,25 +118,25 @@ export default function Accordioncomp() {
     const appointmentId = selectedAppointmentId;
     const [date, setSelectedDate] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState([]);
-    const handleresheduledata = (timeSlot,date) =>{
-      reshedule(timeSlot,date);
+    const handleresheduledata = (timeSlot, date) => {
+      reshedule(timeSlot, date);
     }
     const handleSelectTimeSlot = (event) => {
       // setting new selected values for resheduling
-        setSelectedTimeSlot(event.target.value);
-      };
+      setSelectedTimeSlot(event.target.value);
+    };
 
-      const handleDateChange = date => {
-        setSelectedDate(date);
-      };
-      console.log("slected new date",date);
-      console.log("Selected tinmeslot",selectedTimeSlot);
+    const handleDateChange = date => {
+      setSelectedDate(date);
+    };
+    console.log("slected new date", date);
+    console.log("Selected tinmeslot", selectedTimeSlot);
 
-    const reshedule = async (timeSlot,date) => {
+    const reshedule = async (timeSlot, date) => {
       console.log(timeSlot);
       console.log(date);
       try {
-        const responsereshedule = await axios.put('http://localhost:4005/api/appointments/resheduleappointmnet/' + appointmentId, { timeSlot:timeSlot,date:date });
+        const responsereshedule = await axios.put('http://localhost:4005/api/appointments/resheduleappointmnet/' + appointmentId, { timeSlot: timeSlot, date: date });
         console.log(responsereshedule.data); // Optionally handle the response
         setShow(false);// Hide the modal after updating the status
         window.location.reload();
@@ -147,7 +147,7 @@ export default function Accordioncomp() {
     return (
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Rescheduling Appointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -175,12 +175,12 @@ export default function Accordioncomp() {
             >
               <Form.Label>Date</Form.Label><br />
               <DatePicker
-                              id="datePicker"
-                              selected={date}
-                              onChange={handleDateChange}
-                              dateFormat="MM/dd/yyyy" // Format of the displayed date
-                              placeholderText="Select a date" // Placeholder text when no date is selected
-                            />
+                id="datePicker"
+                selected={date}
+                onChange={handleDateChange}
+                dateFormat="MM/dd/yyyy" // Format of the displayed date
+                placeholderText="Select a date" // Placeholder text when no date is selected
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -188,7 +188,7 @@ export default function Accordioncomp() {
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={()=>handleresheduledata(selectedTimeSlot,date)}>
+          <Button variant="success" onClick={() => handleresheduledata(selectedTimeSlot, date)}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -212,70 +212,67 @@ export default function Accordioncomp() {
               <div className="col-md-12">
                 {
                   appointments.map(appointment => {
-                    const isoString = appointment.date;
+                    const appointmentdate = appointment.date;
                     const createdate = appointment.createtime;
-                    const formattedDate = formatDateTime(isoString);
-                    const datetohidecancelbutton = new Date();
-                    console.log("today ", datetohidecancelbutton)
-                    console.log("create date ", createdate)
+                    const formattedDate = formatDateTime(appointmentdate);
+                    const today = new Date();
+                    const datetohidecancelbutton = formatDateTime(today);
                     const checkbutton = datetohidecancelbutton === createdate
-                    if (checkbutton === 1) {
-                      console.log("1")
-                    } else {
-                      console.log('0')
-                    }
-                    if (appointment.status === "Active") {
-                      return (
-                        <Accordion >
-                          <Accordion.Item eventKey="0">
-                            <Accordion.Header>Appointment</Accordion.Header>
-                            <Accordion.Body style={{ visibility: 'visible' }}>
-                              <Form.Group>
-                                <Form.Label>Appointment ID</Form.Label>
-                                <Form.Control placeholder="vr" disabled
-                                  value={appointment._id} />
-                              </Form.Group>
-                              <Form.Group>
-                                <Form.Label>Vehicle Registration Number</Form.Label>
-                                <Form.Control placeholder="vr" disabled
-                                  value={appointment.vrNo} />
-                              </Form.Group>
-                              <Form.Group>
-                                <Form.Label>Appointment Time</Form.Label>
-                                <Form.Control placeholder="11.00 a.m - 12.00 p.m" disabled
-                                  value={appointment.timeSlot} />
-                              </Form.Group>
-                              <Form.Group>
-                                <Form.Label>Appointment Date</Form.Label>
-                                <Form.Control placeholder="2024/05/16" disabled
-                                  value={formattedDate} />
 
-                              </Form.Group>
-                              <br />
-                              <center>
-                                {/* ,{...props.appointment._id} */}
-                                {!checkbutton && <Button variant="danger" onClick={() => handleButtonClick(appointment._id)}>
-                                  Cancel Appointment
-                                </Button>} &ensp;
-                                <Button variant="success" onClick={()=>handleShow(appointment._id)}>
-                                  Reshedule appointment
-                                </Button>
+                    if (datetohidecancelbutton < formattedDate) { // to show the upcomming appointmnets only
+                      if (appointment.status === "Active") { // to display only active appointmnets
+                        return (
+                          <Accordion >
+                            <Accordion.Item eventKey="0">
+                              <Accordion.Header>Appointment</Accordion.Header>
+                              <Accordion.Body style={{ visibility: 'visible' }}>
+                                <Form.Group>
+                                  <Form.Label>Appointment ID</Form.Label>
+                                  <Form.Control placeholder="vr" disabled
+                                    value={appointment._id} />
+                                </Form.Group>
+                                <Form.Group>
+                                  <Form.Label>Vehicle Registration Number</Form.Label>
+                                  <Form.Control placeholder="vr" disabled
+                                    value={appointment.vrNo} />
+                                </Form.Group>
+                                <Form.Group>
+                                  <Form.Label>Appointment Time</Form.Label>
+                                  <Form.Control placeholder="11.00 a.m - 12.00 p.m" disabled
+                                    value={appointment.timeSlot} />
+                                </Form.Group>
+                                <Form.Group>
+                                  <Form.Label>Appointment Date</Form.Label>
+                                  <Form.Control placeholder="2024/05/16" disabled
+                                    value={formattedDate} />
 
-                              </center>
-                              {/* used to show the msg model  */}
-                              <MyVerticallyCenteredModal
-                                show={modalShow}
-                                onHide={() => setModalShow(false)}
-                              />
-                              {/* used to show the reshedule msg modle */}
-                              <Example
-                                show={show}
-                                onHide={() => setShow(false)}
-                              />
-                            </Accordion.Body>
-                          </Accordion.Item>
-                        </Accordion>
-                      )
+                                </Form.Group>
+                                <br />
+                                <center>
+                                  {/* ,{...props.appointment._id} */}
+                                  {checkbutton && <Button variant="danger" onClick={() => handleButtonClick(appointment._id)}>
+                                    Cancel Appointment
+                                  </Button>} &ensp;
+                                  {checkbutton && <Button variant="success" onClick={() => handleShow(appointment._id)}>
+                                    Reshedule appointment
+                                  </Button>}
+
+                                </center>
+                                {/* used to show the msg model  */}
+                                <MyVerticallyCenteredModal
+                                  show={modalShow}
+                                  onHide={() => setModalShow(false)}
+                                />
+                                {/* used to show the reshedule msg modle */}
+                                <Example
+                                  show={show}
+                                  onHide={() => setShow(false)}
+                                />
+                              </Accordion.Body>
+                            </Accordion.Item>
+                          </Accordion>
+                        )
+                      }
                     }
 
 
