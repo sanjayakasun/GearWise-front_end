@@ -10,8 +10,8 @@ import Test from '../Components/Carousel/Test';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Advertistments from '../Components/Advertistments/Advertistments';
 import Fotter from '../Components/Fotter/Fotter';
-import Upbutton from '../Components/Upbutton/Upbutton';
-import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn';
+// import Upbutton from '../Components/Upbutton/Upbutton';
+// import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn';
 import Rewarding from '../Components/Rewarding/Rewarding';
 
 
@@ -29,7 +29,7 @@ export default function Home() {
         {/* <Reviews/> */}
         <Advertistments/>
         <Fotter/>
-        <Upbutton/>
+        {/* <Upbutton/> */}
     </div>
   )
 }

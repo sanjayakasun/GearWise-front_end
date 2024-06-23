@@ -12,8 +12,8 @@ export default function Rewardpage() {
       <Topbar/>
       <Navbar/>
       <Pageheader/>
-      <Rewarding/>
       <Rewardearn/>
+      <Rewarding/>
       <Fotter/>
     </div>
   )
