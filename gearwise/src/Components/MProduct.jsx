@@ -36,7 +36,7 @@ const MProduct = () => {
         const fetchProductIdBySupplier = async () => {
             if (formData.s_name) {
                 try {
-                    console.log(`Fetching product ID for supplier ID: ${formData.s_name}`); // Log supplierId
+                   console.log(`Fetching product ID for supplier ID: ${formData.s_name}`); // Log supplierId
                     const response = await axios.get(`http://localhost:4005/api/products/bySupplier/${formData.s_name}`);
                    console.log('API response:', response.data); // Log productId
                     if (response.data.productId) {
