@@ -40,61 +40,80 @@ const M_alert = () => {
         const updatedUsedProducts = [...usedProducts];
         const existingProductIndex = usedProducts.findIndex(product => product.productId === productId);
         if (existingProductIndex !== -1) {
-            updatedUsedProducts[existingProductIndex].quantity = parseInt(quantity);
+            updatedUsedProducts[existingProductIndex].quantity = parseInt(quantity, 10);
         } else {
-            updatedUsedProducts.push({ productId, quantity: parseInt(quantity) }); 
+            updatedUsedProducts.push({ productId, quantity: parseInt(quantity, 10) }); 
         }
         setUsedProducts(updatedUsedProducts);
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.vehicle_no) {
             toast.error('Please select a vehicle');
             return;
         }
+
+        const vehicleData = {
+            replacedParts: usedProducts
+        };
+
+        const appointmentData = {
+            nextS_date: formData.serviceDate,
+        };
+
+        console.log('Vehicle Data:', vehicleData);  // Debugging log
+        console.log('Appointment Data:', appointmentData);  // Debugging log
+
         try {
-            const response = await axios.patch(`http://localhost:4005/api/vehicles/${formData.vehicle_no}`, {
-                nextS_date: formData.serviceDate,
-                replacedParts: usedProducts
-            });
-            console.log(response.data);
+            // First request to update vehicle data
+            const vehicleResponse = await axios.patch(`http://localhost:4005/api/vehicles/${formData.vehicle_no}`, vehicleData);
+            console.log('Vehicle Response:', vehicleResponse.data);
+
+            // Second request to update the next service date in the appointment table
+            const appointmentResponse = await axios.patch(`http://localhost:4005/api/appointments/${formData.vehicle_no}`, appointmentData);
+            console.log('Appointment Response:', appointmentResponse.data);
+
             toast.success('Vehicle service details submitted successfully!');
         } catch (error) {
-            console.error('There was an error!', error);
-            toast.error('There was an error submitting the form!');
+            console.error('Error response:', error.response);
+            if (error.response) {
+                console.error('Error data:', error.response.data);
+                console.error('Error status:', error.response.status);
+                console.error('Error headers:', error.response.headers);
+                toast.error(`Error: ${error.response.data.message || 'There was an error submitting the form!'}`);
+            } else {
+                toast.error('There was an error submitting the form!');
+            }
         }
     };
-    
 
     return (
         <div className='background'>
             <ToastContainer />
-           
             <div className="max-w-md mx-auto">
-            <div className="flex items-center justify-center mb-6">
-    <a
-        href="#"
-        onClick={() => setCurrentSection('vehicleDetails')}
-        className={`w-1/2 pb-4 font-medium text-center capitalize border-b-2 ${currentSection === 'vehicleDetails' ? 'border-blue-700 text-blue-800 dark:text-white' : 'border-gray-300 text-gray-500 dark:text-gray-300'}`}
-        style={{ borderBottomWidth: currentSection === 'vehicleDetails' ? '2px' : '1px', color: currentSection === 'vehicleDetails' ? '#ffffff' : '#000000', textDecoration: 'none' }}
-    >
-        Vehicle Details
-    </a>
-    <a
-        href="#"
-        onClick={() => setCurrentSection('productDetails')}
-        className={`w-1/2 pb-4 font-medium text-center capitalize border-b-2 ${currentSection === 'productDetails' ? 'border-blue-700 text-blue-800 dark:text-white' : 'border-gray-300 text-gray-500 dark:text-gray-300'}`}
-        style={{ borderBottomWidth: currentSection === 'productDetails' ? '2px' : '1px', color: currentSection === 'productDetails' ? '#ffffff' : '#000000', textDecoration: 'none' }}
-    >
-        Product Details
-    </a>
-</div>
-
-
+                <div className="flex items-center justify-center mb-6">
+                    <a
+                        href="#"
+                        onClick={() => setCurrentSection('vehicleDetails')}
+                        className={`w-1/2 pb-4 font-medium text-center capitalize border-b-2 ${currentSection === 'vehicleDetails' ? 'border-blue-700 text-blue-800 dark:text-white' : 'border-gray-300 text-gray-500 dark:text-gray-300'}`}
+                        style={{ borderBottomWidth: currentSection === 'vehicleDetails' ? '2px' : '1px', color: currentSection === 'vehicleDetails' ? '#ffffff' : '#000000', textDecoration: 'none' }}
+                    >
+                        Vehicle Details
+                    </a>
+                    <a
+                        href="#"
+                        onClick={() => setCurrentSection('productDetails')}
+                        className={`w-1/2 pb-4 font-medium text-center capitalize border-b-2 ${currentSection === 'productDetails' ? 'border-blue-700 text-blue-800 dark:text-white' : 'border-gray-300 text-gray-500 dark:text-gray-300'}`}
+                        style={{ borderBottomWidth: currentSection === 'productDetails' ? '2px' : '1px', color: currentSection === 'productDetails' ? '#ffffff' : '#000000', textDecoration: 'none' }}
+                    >
+                        Product Details
+                    </a>
+                </div>
 
                 {currentSection === 'vehicleDetails' && (
                     <form className="form1" onSubmit={handleSubmit}>
-                         <h6 className="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-2xl dark:text-white">
+                        <h6 className="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-2xl dark:text-white">
                             Vehicle <span className="text-blue-800 dark:text-blue-500">Service </span>Details
                         </h6>
                         <div className="relative z-0 w-full mb-4 group">
