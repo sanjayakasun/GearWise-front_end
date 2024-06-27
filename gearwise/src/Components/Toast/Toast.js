@@ -4,7 +4,7 @@ import { Toast } from 'react-bootstrap';
 const ToastMessage = ({ show, setShow, message, variant }) => {
   return (
     <center>
-    <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide bg={variant}>
+    <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide bg={variant}>
       <Toast.Header>
         <strong className="me-auto">Sucess</strong>
       </Toast.Header>
