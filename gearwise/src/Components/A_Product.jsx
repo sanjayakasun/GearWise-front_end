@@ -17,7 +17,7 @@ const Product = () => {
                     const supplier = suppliers.find(supplier => supplier._id === product.s_name);
                     const supplierName = supplier ? supplier.name : 'Unknown Supplier';
                     const supplierEmail = supplier ? supplier.email : 'Unknown Email';
-                    return { ...product, supplierName, supplierEmail, alertSent: false }; // Initialize alertSent as false
+                    return { ...product, supplierName, supplierEmail, alertSent: false }; 
                 });
 
                 setProducts(productsWithSupplierDetails);
