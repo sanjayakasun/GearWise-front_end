@@ -8,15 +8,15 @@ import axios from 'axios';
 const M_Dashboard = () => {
     const [formData, setFormData] = useState({
         vehicleNumber: '',
-        vehicleType: 'Sedan', // Default to 'Sedan'
-        serviceType: 'Full Service', // Default to 'Full Service'
-        serviceDate: new Date(), // Default to current date
-        owner: '' // Should be initialized as an empty string
+        vehicleType: 'Sedan', 
+        serviceType: 'Full Service', 
+        serviceDate: new Date(), 
+        owner: '' 
     });
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        // Fetch the list of customers from the backend API
+        // Fetch the list of customers 
         const fetchCustomers = async () => {
             try {
                 const response = await axios.get('http://localhost:4005/api/customers');
@@ -31,7 +31,7 @@ const M_Dashboard = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        console.log(`Updated formData:`, formData); // Log the updated formData
+        console.log(`Updated formData:`, formData); 
     };
     
 
@@ -49,13 +49,13 @@ const M_Dashboard = () => {
             owner: formData.owner
         };
     
-        console.log('Data being sent to backend:', dataToSend); // Log the data for debugging
+        console.log('Data being sent to backend:', dataToSend); 
     
         try {
             const response = await axios.post('http://localhost:4005/api/vehicles', dataToSend);
             console.log(response.data);
             toast.success('Vehicle service details submitted successfully!');
-            // Clear the form after successful submission
+            
             setFormData({
                 vehicleNumber: '',
                 vehicleType: 'Sedan',

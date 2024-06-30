@@ -62,8 +62,8 @@ const M_alert = () => {
             nextS_date: formData.serviceDate,
         };
 
-        console.log('Vehicle Data:', vehicleData);  // Debugging log
-        console.log('Appointment Data:', appointmentData);  // Debugging log
+        console.log('Vehicle Data:', vehicleData);  
+        console.log('Appointment Data:', appointmentData);  
 
         try {
             // First request to update vehicle data
