@@ -50,7 +50,7 @@ const Customer = () => {
                 },
                 {
                     label: 'No',
-                    onClick: () => { /* Do nothing */ }
+                    onClick: () => {  }
                 }
             ]
         });

@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const MProduct = () => {
     const [formData, setFormData] = useState({
-        owner: '',
+        s_name: '',  
         quantity: '',
         price: '',
         serviceDate: new Date()
@@ -16,7 +16,6 @@ const MProduct = () => {
     const [suppliers, setSuppliers] = useState([]);
     const [productId, setProductId] = useState('');
 
-    // Fetch suppliers when the component mounts
     useEffect(() => {
         const fetchSuppliers = async () => {
             try {
@@ -31,14 +30,13 @@ const MProduct = () => {
         fetchSuppliers();
     }, []);
 
-    // Fetch product ID when the selected supplier changes
     useEffect(() => {
         const fetchProductIdBySupplier = async () => {
             if (formData.s_name) {
                 try {
-                    console.log(`Fetching product ID for supplier ID: ${formData.s_name}`); // Log supplierId
+                    console.log(`Fetching product ID for supplier ID: ${formData.s_name}`); 
                     const response = await axios.get(`http://localhost:4005/api/products/bySupplier/${formData.s_name}`);
-                   console.log('API response:', response.data); // Log productId
+                    console.log('API response:', response.data); 
                     if (response.data.productId) {
                         setProductId(response.data.productId);
                     } else {
@@ -51,9 +49,9 @@ const MProduct = () => {
                 }
             }
         };
-    
+
         fetchProductIdBySupplier();
-    }, [formData.owner]);
+    }, [formData.s_name]);  
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -62,37 +60,35 @@ const MProduct = () => {
     const handleDateChange = (date) => {
         setFormData({ ...formData, serviceDate: date });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         if (!productId) {
             toast.error('No product ID found for the selected supplier');
             return;
         }
-    
+
         const dataToSend = {
             s_name: formData.s_name,
             quantity: parseInt(formData.quantity), // Parse the new quantity to integer
             price: formData.price,
             date: formData.serviceDate,
         };
-    
+
         try {
             const response = await axios.get(`http://localhost:4005/api/products/${productId}`);
             const currentProduct = response.data;
-    
-            // Calculate the updated quantity
+
             const updatedQuantity = currentProduct.quantity + dataToSend.quantity;
-    
-            // Prepare the data to send with the updated quantity
+
             const updatedData = {
                 s_name: formData.s_name,
                 quantity: updatedQuantity,
                 price: formData.price,
                 date: formData.serviceDate,
             };
-    
-            // Send the updated data to the server for patching
+
             const updateResponse = await axios.patch(`http://localhost:4005/api/products/${productId}`, updatedData);
             console.log('Product updated successfully:', updateResponse.data);
             toast.success('Product updated successfully');
@@ -101,7 +97,7 @@ const MProduct = () => {
             toast.error('Error updating product');
         }
     };
-    
+
     return (
         <div className='background'>
             <ToastContainer />
