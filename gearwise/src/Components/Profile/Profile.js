@@ -123,14 +123,14 @@ export const U_Profile = () => {
                                             <form onSubmit={handleSubmit}>
 
                                                 <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
-                                                    <div className="sm:col-span-3">
+                                                    {/* <div className="sm:col-span-3">
                                                         <label className="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                             Profile photo
                                                         </label>
-                                                    </div>
+                                                    </div> */}
 
 
-                                                    <div className="sm:col-span-9">
+                                                    {/* <div className="sm:col-span-9">
                                                         <div className="flex items-center gap-5">
                                                             <img
                                                                 className="cv"
@@ -145,7 +145,7 @@ export const U_Profile = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> */}
 
 
 
@@ -219,12 +219,12 @@ export const U_Profile = () => {
                                                     <div className="sm:col-span-9">
                                                         <div className="sm:flex">
                                                             <input id="af-account-phone" name="phone" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="0717650880" value={formData.phone} onChange={handleChange} />
-                                                            <select className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                                            {/* <select className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                                                 <option selected>Mobile</option>
                                                                 <option>Home</option>
                                                                 <option>Work</option>
                                                                 <option>Fax</option>
-                                                            </select>
+                                                            </select> */}
                                                         </div>
 
                                                         {/* <p className="mt-3">
@@ -551,7 +551,7 @@ export const U_Profile = () => {
                                         <div class="col-lg-6">
                                             <div class="section-header text-left">
                                                 <p>Vehicle HIstory</p>
-                                                <h2>About Vehicle HIstory</h2>
+                                                <h2>About Vehicle History</h2>
                                             </div>
                                             <div class="about-content">
                                                 <p>
