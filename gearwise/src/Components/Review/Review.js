@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Review_ratings = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -53,7 +55,7 @@ export const Review_ratings = () => {
 
     try {
       await axios.post('http://localhost:4005/api/reviews/reviews', Review_ratings);
-      alert('Review submitted successfully!');
+      toast.success('Review submitted successfully!');
       // Optionally, reset the form fields
       setName('');
       setReviewText('');
@@ -65,7 +67,7 @@ export const Review_ratings = () => {
 
     } catch (error) {
       console.error('Error submitting review:', error);
-      alert('Failed to submit review');
+      toast.error('Failed to submit review');
     }
   };
 
@@ -126,7 +128,9 @@ export const Review_ratings = () => {
   const visibleReviews = reviews.slice(startIndex, endIndex);
 
   return (
+    
     <div>
+      <ToastContainer />
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto relative">
           <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">

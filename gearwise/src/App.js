@@ -12,7 +12,7 @@ import Queue_page from './Pages/Queue_page';
 import Profile from './Components/Profile/Profile.js';
 import Profile_page from './Pages/Profile_page.js';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
-import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
+// import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
 import Appointments_admin from './Components/Appoinment.jsx';
 import Vehicle_history from './Pages/Vehicle_history';
 import Review from './Pages/Review';
@@ -51,7 +51,7 @@ const App = () => {
         <Route path="/Profile" element={<Profile />} />
         {/* <Route path="/dashboard" element={<MDashboard />} /> */}
         <Route path="/Vehicle_history" element={<Vehicle_history />} />
-        <Route path="/Reviews" element={<Reviewsfromdb />} />
+        <Route path="/Review" element={<Review />} />
         <Route path="/Review" element={<Review />} />
         <Route path="/Appointment" element={<Appointments />} />
         <Route path="/Admin" element={<Admin_dash />} />
