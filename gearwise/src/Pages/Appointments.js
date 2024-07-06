@@ -16,8 +16,8 @@ import ToastMessage from '../Components/Toast/Toast';
 const moment = require('moment');
 
 export default function Appointments() {
-
-  const customerId = "6655bf924abd57d59f2f1b66"
+//changing the customer id for each team member 
+  const customerId = "665e144096c5017136fb33a0"
 
   const [customer, setCustomer] = useState([])
   const [vehicleType, setVehicleType] = useState("")
