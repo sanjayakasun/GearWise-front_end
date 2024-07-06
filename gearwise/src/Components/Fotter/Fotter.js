@@ -43,7 +43,7 @@ export default function Fotter() {
                             <a href="" style={{textDecoration:'none'}}>Privacy policy</a>
                             <a href="" style={{textDecoration:'none'}}>Cookies</a>
                             <a href="" style={{textDecoration:'none'}}>Help</a>
-                            <a href="/Reviews" style={{textDecoration:'none'}}>Reviews</a>
+                            <a href="/Review" style={{textDecoration:'none'}}>Reviews</a>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-6">
