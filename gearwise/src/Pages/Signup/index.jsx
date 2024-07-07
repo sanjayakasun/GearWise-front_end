@@ -16,40 +16,36 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setUsername] = useState("");
   const [gender, setGender] = useState("");
   const [address, setAddress] = useState("");
   const [profilephoto, setProfilephoto] = useState("");
-  const [phoneno, setPhoneno] = useState("");
+  const [phone, setPhoneno] = useState("");
 
   const submit = async (e)=> {
     e.preventDefault();
-      let result = await fetch('http://localhost:4005/api/customers/signup',{
+      let response = await fetch('http://localhost:4005/api/customers/signup',{
       method:'post',
-      body: JSON.stringify({username,email,phoneno,gender,address,password}),
+      body: JSON.stringify({name,email,phone,gender,address,password}),
       headers:{
         'Content-Type' : 'application/json'
       },})
-      // const response = await axios
-      //   .post("http://localhost:4005/api/customers/signup", {
-      //     username,
-      //     email,
-      //     phoneno,
-      //     gender,address,password
-      //   })
-      console.log("user",username);
+      console.log("user",name);
       console.log("mail",email);
-      console.log(phoneno);
+      console.log(phone);
       console.log(gender);
       console.log(address);
       console.log(password);
-          // if (result === "user exist") {
-          //   alert("User already exists");
-          // } else {
-          //   alert("sucess");
-          //   // history("/Login", { state: { id: email } });
-          // }
-    result = await result.json
+      console.log(response);
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Success:", result);
+        alert("User register Sucessfully")
+    } else {
+        const error = await response.json();
+        console.log("Error:", error);
+        alert("User Alreday Exists")
+    }
   }
   return (
     <div>

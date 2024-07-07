@@ -32,7 +32,7 @@ function Login() {
 
     try{
 
-      const response = await axios.get("http://localhost:4005/api/customers/logincustomer",{
+      const response = await axios.post("http://localhost:4005/api/customers/logincustomer",{
           email,password
       })
       console.log(response.data)
