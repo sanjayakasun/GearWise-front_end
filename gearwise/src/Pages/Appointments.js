@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import { Link ,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import '../Components/Appointmentform/Appointmentform.css'
@@ -13,12 +14,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Packages from '../Components/Packages/Packages'
 import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn'
 import ToastMessage from '../Components/Toast/Toast';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const moment = require('moment');
+
 
 export default function Appointments() {
 //changing the customer id for each team member 
   const customerId = "665e144096c5017136fb33a0"
-
+  const navigate = useNavigate();
   const [customer, setCustomer] = useState([])
   const [vehicleType, setVehicleType] = useState("")
   const [vehicleModel, setVehicleModel] = useState("")
@@ -67,17 +71,21 @@ export default function Appointments() {
     // console.log(date);
 
     if (result.ok) { // `response.ok` is true if the status is 200-299
-      setToastMessage('Appointment successfully created!');
-      setToastVariant('success');
-      window.location.reload();
+      // setToastMessage('Appointment successfully created!');
+      // setToastVariant('success');
+      toast.success('Appointment successfully created!');
+      setTimeout(() => {
+        navigate('/AppointmentList');
+      }, 3000);
+      // window.location.reload();
     // add a success msg box
     // and after click ok it mus redirect to the view appointmne t for user page
     
   } else {
-    setToastMessage('Failed to create appointment.');
-    setToastVariant('danger');
+    toast.error("Failed to create appointment.Check all the feilds");
+    // setToastMessage('Failed to create appointment.');
+    // setToastVariant('danger');
   }
-  setShowToast(true);
 
   console.log(result.status);
   let results = await result.json();
@@ -98,7 +106,7 @@ export default function Appointments() {
     <div>
       <Topbar />
       <Navbar />
-      <Pageheader />
+      <Pageheader /> <ToastContainer />
 
       <form onSubmit={createAppointment}>
         <div>
@@ -315,7 +323,7 @@ export default function Appointments() {
           </div>
         </div >
         <br/>
-        <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} />
+        {/* <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} /> */}
         <Appointmentbtn/>
       </form>
       <Fotter />

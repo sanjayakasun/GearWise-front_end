@@ -6,6 +6,8 @@ import React from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import Googleimg from '../../img/google.png'
 import ToastMessage from '../../Components/Toast/Toast';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   //google oauth function
@@ -44,25 +46,23 @@ function Login() {
       if (response.ok) {
         const result = await response.json();
         console.log("Success:", result);
-        // alert("User register Sucessfully")
-        setToastMessage("User register Sucessfully");
-        setToastVariant('success');
-        window.location.href = '/login';
+        toast.success('User register Sucessfully');
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
+        // window.location.href = '/login';
         // navigate('/login');
     } else {
         const error = await response.json();
         console.log("Error:", error);
-        // alert("User Alreday Exists")
-        setToastMessage("User Alreday Exists! Use Different email");
-        setToastVariant('danger');
+        toast.error("User Alreday Exists! Use Different email");
     }
-    setShowToast(true);
+    // toast.error("Please fill all the feilds");
   }
   return (
     <div>
-    <Navbar/>
+    <Navbar/> <ToastContainer />
     <br/>
-    <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} />
     <div className={styles.container}>
       {/* <h1 className={styles.heading}>Sign up</h1> */}
       <div className={styles.form_container}>

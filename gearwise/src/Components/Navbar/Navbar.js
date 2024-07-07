@@ -1,7 +1,16 @@
-import React from 'react'
+import React,{ useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Navbar() {
+export default function Navbar({ customerId, onLogout }) {
+
+    // const setCustomerId = customerId;
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        // onLogout();
+        navigate('/');
+      };
   return (
     <div>
       <div className="nav-bar">
@@ -23,14 +32,19 @@ export default function Navbar() {
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div className="dropdown-menu">
-                                    <a href="/AppointmentList" className="dropdown-item">View Appointment</a>
-                                    <a href="/profile" className="dropdown-item">profile</a>
-                                    <a href="/Booking" className="dropdown-item"></a>
+                                <a href="/AppointmentList" className="dropdown-item">View Appointment</a>
+                                    {/* <a href={{ pathname: "/AppointmentList", state: { customerId } }} className="dropdown-item">View Appointment</a> */}
+                                    <a href="/Profile" className="dropdown-item">profile</a>
+                                    {/* <a href={{ pathname: "/Profile", state: { customerId } }} className="dropdown-item">profile</a> */}
+                                    {/* <a href="/Booking" className="dropdown-item"></a> */}
                                 </div>
                             </div>
                         </div>
                         <div className="ml-auto">
-                            <a className="btn btn-custom" href="/Login">Login</a>
+                        {customerId ? (
+                <button className="btn btn-custom" onClick={handleLogout}>Logout</button>
+              ) :(
+                            <a className="btn btn-custom" href="/Login">Login</a>)}
                         </div>
                     </div>
                 </nav>

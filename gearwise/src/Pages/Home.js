@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Topbar from '../Components/Topbar/Topbar';
 import Navbar from '../Components/Navbar/Navbar';
@@ -19,11 +19,17 @@ import Rewarding from '../Components/Rewarding/Rewarding';
 export default function Home() {
   const location = useLocation();
   const customerId = location.state?.customerId;
+  // const [customerId, setCustomerId] = location.state?.customerId;
   console.log("cusid",customerId)
+
+  const handleLogout = () => {
+    // setCustomerId(null);
+    customerId = "";
+  };
   return (
     <div>
       <Topbar/>
-        <Navbar/>
+        <Navbar customerId={customerId} onLogout={handleLogout} />
         <Test/>
         <Aboutus/>
         <Service/>

@@ -6,6 +6,8 @@ import React from 'react';
 import Navbar from "../../Components/Navbar/Navbar";
 import Googleimg from '../../img/google.png'
 import ToastMessage from '../../Components/Toast/Toast';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // import { Link } from 'react-router-dom';
@@ -44,17 +46,20 @@ function Login() {
             const customerId = response.data.customerId;
             //toast ekk display krmu login success kiyala
             console.log("Logged in success",email)
-            setToastMessage("Logged in success");
-            setToastVariant('success');
-            setShowToast(true);
+            toast.success('Logged in success');
+            // setToastMessage("Logged in success");
+            // setToastVariant('success');
+            // Delay navigation to show toast message
+          setTimeout(() => {
             navigate('/', { state: { customerId } });
+          }, 3000); // 3 seconds delay
           }
           else if(response.data.status==="notexist"){
               // alert("User have not sign up")
-              setToastMessage("User have not sign up");
-              setToastVariant('danger');
+              toast.error("User have not sign up");
+              // setToastMessage("User have not sign up");
+              // setToastVariant('danger');
           }
-          setShowToast(true);
 
   }
   catch(e){
@@ -65,9 +70,9 @@ function Login() {
 
   return (
     <div>
-    <Navbar/>
+    <Navbar/> <ToastContainer />
     <br/>
-    <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} />
+    {/* <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} /> */}
     <div className={styles.container}>
       {/* <h1 className={styles.heading}>Log in</h1> */}
       <div className={styles.form_container}>

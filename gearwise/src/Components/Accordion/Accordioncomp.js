@@ -5,6 +5,8 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import DatePicker from 'react-datepicker';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const moment = require('moment');
 
 
@@ -74,11 +76,15 @@ export default function Accordioncomp() {
     const updateStatus = async (status) => {
       try {
         const response = await axios.put('http://localhost:4005/api/appointments/cancelappointmnet/' + appointmentId, { status: status });
-        console.log(response.data); // Optionally handle the response
+        console.log("status ",response.data); // Optionally handle the response
         props.onHide(); // Hide the modal after updating the status
-        window.location.reload();
+        toast.success('Appointment successfully Canceled');
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000); // 3 seconds delay to reload page
       } catch (error) {
         console.error('Error updating appointment status', error);
+        toast.error("Failed to Cancel appointment");
       }
     };
 
@@ -138,10 +144,14 @@ export default function Accordioncomp() {
       try {
         const responsereshedule = await axios.put('http://localhost:4005/api/appointments/resheduleappointmnet/' + appointmentId, { timeSlot: timeSlot, date: date });
         console.log(responsereshedule.data); // Optionally handle the response
-        setShow(false);// Hide the modal after updating the status
-        window.location.reload();
+        setShow(false);// Hide the modal after resheduling
+        toast.success('Appointment successfully Rescheduled ');
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000); // 3 seconds delay to reload page
       } catch (error) {
         console.error('Error resheduling appointment', error);
+        toast.error("Failed to Reschedule appointment");
       }
     };
     return (
@@ -201,7 +211,7 @@ export default function Accordioncomp() {
 
   return (
     <div>
-
+<ToastContainer />
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
@@ -219,7 +229,7 @@ export default function Accordioncomp() {
                     const datetohidecancelbutton = formatDateTime(today);
                     const checkbutton = datetohidecancelbutton === createdate
 
-                    if (datetohidecancelbutton < formattedDate) { // to show the upcomming appointmnets only
+                    if (datetohidecancelbutton <= formattedDate) { // to show the upcomming appointmnets only
                       if (appointment.status === "Active") { // to display only active appointmnets
                         return (
                           <Accordion >
@@ -247,7 +257,8 @@ export default function Accordioncomp() {
                                     value={formattedDate} />
 
                                 </Form.Group>
-                                <br />
+                                <br/>
+                                <h6 style={{textAlign:"right"}}>Appointment created date : {createdate}</h6>
                                 <center>
                                   {/* ,{...props.appointment._id} */}
                                   {checkbutton && <Button variant="danger" onClick={() => handleButtonClick(appointment._id)}>

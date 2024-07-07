@@ -32,7 +32,7 @@ export default function Fotter() {
                             <a href="/About"  style={{textDecoration:'none'}}>About Us</a>
                             <a href="/Contact" style={{textDecoration:'none'}}>Contact Us</a>
                             <a href="/Service" style={{textDecoration:'none'}}>Our Service</a>
-                            <a href="" style={{textDecoration:'none'}}>Service Reward Points</a>
+                            <a href="/Reward" style={{textDecoration:'none'}}>Service Reward Points</a>
                             <a href="/Packages" style={{textDecoration:'none'}}>Pricing Plan</a>
                         </div>
                     </div>
