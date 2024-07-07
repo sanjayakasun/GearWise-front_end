@@ -5,6 +5,7 @@ import { useState} from "react";
 import React from 'react';
 import Navbar from "../../Components/Navbar/Navbar";
 import Googleimg from '../../img/google.png'
+import ToastMessage from '../../Components/Toast/Toast';
 
 
 // import { Link } from 'react-router-dom';
@@ -20,9 +21,12 @@ function Login() {
 
   //login function manual
 
-  const history=useNavigate();
+  const navigate = useNavigate();
 
-
+  // for toast message
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVariant, setToastVariant] = useState('success');
  
   const [email, setEmail] = useState('');
   const [password, setPassword] =useState('') ;
@@ -36,13 +40,22 @@ function Login() {
           email,password
       })
       console.log(response.data)
-          if(response.data==="exist"){
+          if(response.data.status==="exist"){
+            const customerId = response.data.customerId;
             //toast ekk display krmu login success kiyala
             console.log("Logged in success",email)
+            setToastMessage("Logged in success");
+            setToastVariant('success');
+            setShowToast(true);
+            navigate('/', { state: { customerId } });
           }
-          else if(response.data==="notexist"){
-              alert("User have not sign up")
+          else if(response.data.status==="notexist"){
+              // alert("User have not sign up")
+              setToastMessage("User have not sign up");
+              setToastVariant('danger');
           }
+          setShowToast(true);
+
   }
   catch(e){
       console.log(e);
@@ -53,6 +66,8 @@ function Login() {
   return (
     <div>
     <Navbar/>
+    <br/>
+    <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} />
     <div className={styles.container}>
       {/* <h1 className={styles.heading}>Log in</h1> */}
       <div className={styles.form_container}>

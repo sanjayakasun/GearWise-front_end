@@ -5,6 +5,7 @@ import { useState } from "react";
 import React from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import Googleimg from '../../img/google.png'
+import ToastMessage from '../../Components/Toast/Toast';
 
 function Login() {
   //google oauth function
@@ -12,8 +13,11 @@ function Login() {
     window.open(`${"http://localhost:8080"}/auth/google/callback`, "_self");
   };
 
-  const history = useNavigate();
-
+    // for toast message
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [toastVariant, setToastVariant] = useState('success');
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setUsername] = useState("");
@@ -40,16 +44,25 @@ function Login() {
       if (response.ok) {
         const result = await response.json();
         console.log("Success:", result);
-        alert("User register Sucessfully")
+        // alert("User register Sucessfully")
+        setToastMessage("User register Sucessfully");
+        setToastVariant('success');
+        window.location.href = '/login';
+        // navigate('/login');
     } else {
         const error = await response.json();
         console.log("Error:", error);
-        alert("User Alreday Exists")
+        // alert("User Alreday Exists")
+        setToastMessage("User Alreday Exists! Use Different email");
+        setToastVariant('danger');
     }
+    setShowToast(true);
   }
   return (
     <div>
     <Navbar/>
+    <br/>
+    <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} />
     <div className={styles.container}>
       {/* <h1 className={styles.heading}>Sign up</h1> */}
       <div className={styles.form_container}>

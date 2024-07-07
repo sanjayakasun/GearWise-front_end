@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom';
 import Topbar from '../Components/Topbar/Topbar';
 import Navbar from '../Components/Navbar/Navbar';
 import Aboutus from '../Components/Aboutus/Aboutus';
@@ -16,6 +17,9 @@ import Rewarding from '../Components/Rewarding/Rewarding';
 
 
 export default function Home() {
+  const location = useLocation();
+  const customerId = location.state?.customerId;
+  console.log("cusid",customerId)
   return (
     <div>
       <Topbar/>
