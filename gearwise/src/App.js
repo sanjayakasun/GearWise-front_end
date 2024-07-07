@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { BrowserRouter,Route, Router, Routes,useLocation} from 'react-router-dom';
 import Home from './Pages/Home';
 import Aboutus_page from './Pages/Aboutus_page';
@@ -32,14 +34,35 @@ import Supp_dash from './Pages/Supp_dash.jsx';
 import Supp_ad from './Pages/Supp_ad.jsx';
 import Profile1 from './Components/Profile/Profile.js';
 import Mod_Product from './Pages/Mod_Product.jsx';
- 
+import Login from './Pages/Login/index.jsx'
+import Signup from './Pages/Signup/index.jsx'
 
 const App = () => {
+  const [user, setUser] = useState(null);
+  //google oauth
+  const getUser = async () => {
+    try {
+      const url = `${"http://localhost:4005"}/auth/login/success`;
+      const { data } = await axios.get(url, { withCredentials: true });
+      setUser(data.user._json);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    //google oauth switch
+    getUser();
+  }, []);
+
+
   return (
     <div className="">
         <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/Signup" element={<Signup/>} />
         <Route path="/About" element={<Aboutus_page/>} />
         <Route path="/Service" element={<Service_page/>} />
         <Route path="/Packages" element={<Packages_page/>} />
