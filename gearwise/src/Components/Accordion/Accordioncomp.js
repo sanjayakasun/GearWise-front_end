@@ -124,6 +124,8 @@ export default function Accordioncomp() {
     const appointmentId = selectedAppointmentId;
     const [date, setSelectedDate] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState([]);
+
+    // handle the reschedule data
     const handleresheduledata = (timeSlot, date) => {
       reshedule(timeSlot, date);
     }

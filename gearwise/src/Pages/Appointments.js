@@ -31,10 +31,6 @@ export default function Appointments() {
   const [serviceType, setWashingPlan] = useState("")
   const [timeSlot, setTimeSlot] = useState("")
 
-  // for toast message
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastVariant, setToastVariant] = useState('success');
 
   const handleSelectChangeWashingPlan = (event) => {
     setWashingPlan(event.target.value);
@@ -71,20 +67,16 @@ export default function Appointments() {
     // console.log(date);
 
     if (result.ok) { // `response.ok` is true if the status is 200-299
-      // setToastMessage('Appointment successfully created!');
-      // setToastVariant('success');
       toast.success('Appointment successfully created!');
       setTimeout(() => {
         navigate('/AppointmentList');
       }, 3000);
       // window.location.reload();
     // add a success msg box
-    // and after click ok it mus redirect to the view appointmne t for user page
+    // and after click ok it mus redirect to the view appointmnet for user page
     
   } else {
     toast.error("Failed to create appointment.Check all the feilds");
-    // setToastMessage('Failed to create appointment.');
-    // setToastVariant('danger');
   }
 
   console.log(result.status);
@@ -323,7 +315,6 @@ export default function Appointments() {
           </div>
         </div >
         <br/>
-        {/* <ToastMessage show={showToast} setShow={setShowToast} message={toastMessage} variant={toastVariant} /> */}
         <Appointmentbtn/>
       </form>
       <Fotter />
