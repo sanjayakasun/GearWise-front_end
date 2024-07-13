@@ -76,7 +76,7 @@ export default function Accordioncomp() {
     const updateStatus = async (status) => {
       try {
         const response = await axios.put('http://localhost:4005/api/appointments/cancelappointmnet/' + appointmentId, { status: status });
-        console.log("status ",response.data); // Optionally handle the response
+        console.log("status ", response.data); // Optionally handle the response
         props.onHide(); // Hide the modal after updating the status
         toast.success('Appointment successfully Canceled');
         setTimeout(() => {
@@ -121,22 +121,79 @@ export default function Accordioncomp() {
 
 
   function Example() {
+    // for new update of selecting
+    const [date, setDate] = useState('');
+    const [timeSlots, setTimeSlots] = useState([]);
+    const [appointments, setAppointments] = useState([]);
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+
+    const availableTimeSlots = [
+      '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
+      '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM',
+      '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM'
+    ];
+
+    useEffect(() => {
+      if (date) {
+        axios.get(`http://localhost:4005/api/appointments/createappointment?date=${date}`)
+          .then(response => {
+            setAppointments(response.data);
+          });
+      }
+    }, [date]);
+
+    const isTimeSlotAvailable = (time) => {
+      console.log("Appointments for toay", appointments)
+      const appointmentsAtTime = appointments.filter(appointment => appointment.timeSlot === time);
+      console.log("appointments at this slot", appointmentsAtTime);
+      if (appointmentsAtTime.length >= 2) {
+        return false;
+      }
+
+      if (date === new Date().toISOString().split('T')[0]) {
+        const currentTime = new Date().getHours();
+        const slotHour = parseInt(time.split(':')[0], 10);
+        const slotPeriod = time.split(' ')[1];
+        const slotTime24 = slotPeriod === 'PM' && slotHour !== 12 ? slotHour + 12 : slotHour;
+        if (slotTime24 <= currentTime) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+
+    const handleDateChange = (event) => {
+      setDate(event.target.value);
+      setTimeSlots(availableTimeSlots);
+    };
+
+    const handleBooking = (time) => {
+      setSelectedTimeSlot(time); // <-- Set the selected time slot
+    };
+
+    const disablePastDates = () => {
+      const today = new Date().toISOString().split('T')[0];
+      return today;
+    };
+
+
+
     const appointmentId = selectedAppointmentId;
-    const [date, setSelectedDate] = useState(null);
-    const [selectedTimeSlot, setSelectedTimeSlot] = useState([]);
+    // const [date, setSelectedDate] = useState(null);
+    // const [selectedTimeSlot, setSelectedTimeSlot] = useState([]);
 
     // handle the reschedule data
     const handleresheduledata = (timeSlot, date) => {
       reshedule(timeSlot, date);
     }
     const handleSelectTimeSlot = (event) => {
-      // setting new selected values for resheduling
-      setSelectedTimeSlot(event.target.value);
+      setSelectedTimeSlot(event.target.value); // <-- Update the state on selection
     };
 
-    const handleDateChange = date => {
-      setSelectedDate(date);
-    };
+    // const handleDateChange = date => {
+    //   setSelectedDate(date);
+    // };
     console.log("slected new date", date);
     console.log("Selected tinmeslot", selectedTimeSlot);
 
@@ -163,36 +220,40 @@ export default function Accordioncomp() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Time Slot</Form.Label>
-              <Form.Select aria-label="Floating label select example" value={selectedTimeSlot} onChange={handleSelectTimeSlot}>
-                <option value="08.00 a.m- 09.00 a.m">08.00 a.m- 09.00 a.m<span>*</span></option>
-                <option value="09.00 a.m- 10.00 a.m">09.00 a.m- 10.00 a.m</option>
-                <option value="10.00 a.m- 11.00 a.m">10.00 a.m- 11.00 a.m</option>
-                <option value="11.00 a.m- 12.00 p.m">11.00 a.m- 12.00 p.m</option>
-                <option value="01.00 p.m- 02.00 p.m">01.00 p.m- 02.00 p.m</option>
-                <option value="02.00 p.m- 03.00 p.m">02.00 p.m- 03.00 p.m</option>
-                <option value="03.00 p.m- 04.00 p.m">03.00 p.m- 04.00 p.m</option>
-                <option value="04.00 p.m- 05.00 p.m">04.00 p.m- 05.00 p.m</option>
-                <option value="05.00 p.m- 06.00 p.m">05.00 p.m- 06.00 p.m</option>
-                <option value="06.00 p.m- 07.00 p.m">06.00 p.m- 07.00 p.m</option>
-                <option>Off Peak Pricing Time Slot</option>
-                <option value="08.00 p.m - 09.00 p.m">08.00 p.m - 09.00 p.m</option>
-                <option value="09.00 p.m- 10.00 p.m">09.00 p.m- 10.00 p.m</option>
-              </Form.Select>
-            </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Date</Form.Label><br />
-              <DatePicker
+              <input
+                type="date"
+                min={disablePastDates()}
+                onChange={handleDateChange}
+                selected={date}
+              />
+              {/* <DatePicker
                 id="datePicker"
                 selected={date}
                 onChange={handleDateChange}
                 dateFormat="MM/dd/yyyy" // Format of the displayed date
                 placeholderText="Select a date" // Placeholder text when no date is selected
-              />
+              /> */}
+            </Form.Group>
+            <Form.Group className="time-slots" controlId="exampleForm.ControlInput1">
+              <div className="time-slots">
+                <Form.Label>Time Slot</Form.Label>
+                <Form.Select aria-label="Floating label select example" value={selectedTimeSlot} onChange={handleSelectTimeSlot} > {/* <-- Bind value and onChange */}
+                  {timeSlots.map((time, index) => (
+                    <option value={time}
+                      key={index}
+                      disabled={!isTimeSlotAvailable(time)}
+                      className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
+                    >
+                      {time}
+                    </option>
+                  ))}
+                </Form.Select>
+              </div>
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -213,7 +274,7 @@ export default function Accordioncomp() {
 
   return (
     <div>
-<ToastContainer />
+      <ToastContainer />
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
@@ -259,8 +320,8 @@ export default function Accordioncomp() {
                                     value={formattedDate} />
 
                                 </Form.Group>
-                                <br/>
-                                <h6 style={{textAlign:"right"}}>Appointment created date : {createdate}</h6>
+                                <br />
+                                <h6 style={{ textAlign: "right" }}>Appointment created date : {createdate}</h6>
                                 <center>
                                   {/* ,{...props.appointment._id} */}
                                   {checkbutton && <Button variant="danger" onClick={() => handleButtonClick(appointment._id)}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import '../Components/Appointmentform/Appointmentform.css'
@@ -20,7 +20,7 @@ const moment = require('moment');
 
 
 export default function Appointments() {
-//changing the customer id for each team member 
+  //changing the customer id for each team member 
   const customerId = "665e144096c5017136fb33a0"
   const navigate = useNavigate();
   const [customer, setCustomer] = useState([])
@@ -30,6 +30,66 @@ export default function Appointments() {
   const [vrNo, setVRNo] = useState("")
   const [serviceType, setWashingPlan] = useState("")
   const [timeSlot, setTimeSlot] = useState("")
+
+  // for updated time slot selecting
+  const [date, setDate] = useState('');
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+
+  const availableTimeSlots = [
+    '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
+    '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM',
+    '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM'
+  ];
+
+  useEffect(() => {
+    if (date) {
+      axios.get(`http://localhost:4005/api/appointments/createappointment?date=${date}`)
+        .then(response => {
+          setAppointments(response.data);
+        });
+    }
+  }, [date]);
+
+  const isTimeSlotAvailable = (time) => {
+    console.log("Appointments for toay", appointments)
+    const appointmentsAtTime = appointments.filter(appointment => appointment.timeSlot === time);
+    console.log("appointments at this slot", appointmentsAtTime);
+    if (appointmentsAtTime.length >= 2) {
+      return false;
+    }
+
+    if (date === new Date().toISOString().split('T')[0]) {
+      const currentTime = new Date().getHours();
+      const slotHour = parseInt(time.split(':')[0], 10);
+      const slotPeriod = time.split(' ')[1];
+      const slotTime24 = slotPeriod === 'PM' && slotHour !== 12 ? slotHour + 12 : slotHour;
+      if (slotTime24 <= currentTime) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+    setTimeSlots(availableTimeSlots);
+  };
+
+  const handleBooking = (time) => {
+    setTimeSlot(time);
+  };
+
+  const disablePastDates = () => {
+    const today = new Date().toISOString().split('T')[0];
+    return today;
+  };
+
+
+
+
+
 
 
   const handleSelectChangeWashingPlan = (event) => {
@@ -41,11 +101,11 @@ export default function Appointments() {
   const handleSelectTimeSlot = (event) => {
     setTimeSlot(event.target.value);
   };
-  const [date, setSelectedDate] = useState(null);
-  const handleDateChange = date => {
-    const fdate = formatDateTime( date );
-    setSelectedDate(fdate);
-  };
+  // const [date, setSelectedDate] = useState(null);
+  // const handleDateChange = date => {
+  //   const fdate = formatDateTime( date );
+  //   setSelectedDate(fdate);
+  // };
   // to input formated date to db for user feindly date reading
   function formatDateTime(isoString) {
     return moment(isoString).format("MM/DD/yyyy");
@@ -53,13 +113,13 @@ export default function Appointments() {
   }
   console.log('Selected date:', date);
 
-  const createAppointment = async (e)=>{
+  const createAppointment = async (e) => {
     e.preventDefault();
-    let result = await fetch('http://localhost:4005/api/appointments/createappointment',{
-      method:'post',
-      body: JSON.stringify({customerId,vehicleType,vehicleModel,mfYear,vrNo,serviceType,timeSlot,date}),
-      headers:{
-        'Content-Type' : 'application/json'
+    let result = await fetch('http://localhost:4005/api/appointments/createappointment', {
+      method: 'post',
+      body: JSON.stringify({ customerId, vehicleType, vehicleModel, mfYear, vrNo, serviceType, timeSlot, date }),
+      headers: {
+        'Content-Type': 'application/json'
       },
     })
     // console.log(customerId);
@@ -72,16 +132,16 @@ export default function Appointments() {
         navigate('/AppointmentList');
       }, 3000);
       // window.location.reload();
-    // add a success msg box
-    // and after click ok it mus redirect to the view appointmnet for user page
-    
-  } else {
-    toast.error("Failed to create appointment.Check all the feilds");
-  }
+      // add a success msg box
+      // and after click ok it mus redirect to the view appointmnet for user page
 
-  console.log(result.status);
-  let results = await result.json();
-  console.log(results);
+    } else {
+      toast.error("Failed to create appointment.Check all the feilds");
+    }
+
+    console.log(result.status);
+    let results = await result.json();
+    console.log(results);
 
     result = await result.json
   }
@@ -191,7 +251,7 @@ export default function Appointments() {
                               type="Text"
                               placeholder="Model of Vehicle"
                               value={vehicleModel}
-                              onChange={(e) =>setVehicleModel(e.target.value)}
+                              onChange={(e) => setVehicleModel(e.target.value)}
                             />
                             <label htmlFor="floatingInputCustom">Model of Vehicle <span>*</span></label>
                           </Form.Floating>
@@ -210,7 +270,7 @@ export default function Appointments() {
                               type="text"
                               placeholder="Manufactured Year"
                               value={mfYear}
-                              onChange={(e) =>setMFYear(e.target.value)}
+                              onChange={(e) => setMFYear(e.target.value)}
                             />
                             <label htmlFor="floatingPasswordCustom">Manufactured Year</label>
                           </Form.Floating>
@@ -227,7 +287,7 @@ export default function Appointments() {
                               type="text"
                               placeholder="Veicle Registerd Number" required
                               value={vrNo}
-                              onChange={(e) =>setVRNo(e.target.value)}
+                              onChange={(e) => setVRNo(e.target.value)}
                             />
                             <label htmlFor="floatingPasswordCustom">Veicle Registerd Number <span>*</span></label>
                           </Form.Floating>
@@ -267,11 +327,16 @@ export default function Appointments() {
                 <br />
                 <Card className="text-center">
                   <div className="row">
-                    <h4>Select time Slots</h4>
+                    <h3>By Selecting the time slot you can easily make the Appointment</h3>
                     <div className="col-md-6">
                       <Card.Body>
-                        <Card.Title>Time Slot</Card.Title>
-                        <Card.Text>
+                        <Card.Title>Pick a Date</Card.Title>
+                        <input
+                          type="date"
+                          min={disablePastDates()}
+                          onChange={handleDateChange}
+                        />
+                        {/*<Card.Text>
                           <FloatingLabel controlId="floatingSelect" label="Time Sots">
                             <Form.Select aria-label="Floating label select example" value={timeSlot} onChange={handleSelectTimeSlot}>
                               <option value="08.00 a.m- 09.00 a.m">08.00 a.m- 09.00 a.m<span>*</span></option>
@@ -289,13 +354,26 @@ export default function Appointments() {
                               <option value="09.00 p.m- 10.00 p.m">09.00 p.m- 10.00 p.m</option>
                             </Form.Select>
                           </FloatingLabel>
-                        </Card.Text>
+                        </Card.Text>*/}
                       </Card.Body>
                     </div>
                     <div className="col-md-6">
                       <Card.Body>
-                        <Card.Title>Pick a Date</Card.Title>
-                        <Card.Text>
+                        <Card.Title>Select Available Time Slot </Card.Title>
+
+                        <div className="time-slots">
+                          {timeSlots.map((time, index) => (
+                            <button
+                              key={index}
+                              disabled={!isTimeSlotAvailable(time)}
+                              onClick={() => handleBooking(time)}
+                              className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
+                            >
+                              {time}
+                            </button>
+                          ))}
+                        </div>
+                        {/*<Card.Text>
                           <Form.Floating className="mb-6">
                             <DatePicker
                               id="datePicker"
@@ -305,7 +383,7 @@ export default function Appointments() {
                               placeholderText="Select a date" // Placeholder text when no date is selected
                             />
                           </Form.Floating>
-                        </Card.Text>
+                        </Card.Text> */}
                       </Card.Body>
                     </div>
                   </div>
@@ -314,8 +392,8 @@ export default function Appointments() {
             </div>
           </div>
         </div >
-        <br/>
-        <Appointmentbtn/>
+        <br />
+        {/* <Appointmentbtn/> */}
       </form>
       <Fotter />
 
