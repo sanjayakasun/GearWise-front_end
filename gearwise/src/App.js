@@ -36,6 +36,7 @@ import Profile1 from './Components/Profile/Profile.js';
 import Mod_Product from './Pages/Mod_Product.jsx';
 import Login from './Pages/Login/index.jsx'
 import Signup from './Pages/Signup/index.jsx'
+import Charts from './Components/Charts/Charts.js';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -73,6 +74,7 @@ const App = () => {
          
         <Route path="/Profile" element={<Profile />} />
         {/* <Route path="/dashboard" element={<MDashboard />} /> */}
+        <Route path="/chart" element={<Charts />} />
         <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Review" element={<Review />} />
         <Route path="/Review" element={<Review />} />

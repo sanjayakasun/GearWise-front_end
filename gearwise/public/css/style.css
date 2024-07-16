@@ -308,7 +308,7 @@ a:focus {
     }
     
     .nav-bar .btn {
-        display: none;
+
     }
 }
 
@@ -825,6 +825,7 @@ a:focus {
 
 .price .col-md-4 {
     padding: 0;
+    padding: 10px;
 }
 
 .price .price-item {
