@@ -16,6 +16,7 @@ import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn'
 import ToastMessage from '../Components/Toast/Toast';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation } from 'react-router-dom';
 const moment = require('moment');
 
 
@@ -35,6 +36,21 @@ export default function Appointments() {
   const [date, setDate] = useState('');
   const [timeSlots, setTimeSlots] = useState([]);
   const [appointments, setAppointments] = useState([]);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
+
+
+
 
   const availableTimeSlots = [
     '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
@@ -300,7 +316,7 @@ export default function Appointments() {
 
                 <br />
                 <Card className="text-center">
-                  <div className="row">
+                  <div className="row" id='container'>
                     <h4>Washing Plan</h4>
                     <div className="col-md-6">
                       <Card.Body>

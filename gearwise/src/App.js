@@ -37,7 +37,7 @@ import Mod_Product from './Pages/Mod_Product.jsx';
 import Login from './Pages/Login/index.jsx'
 import Signup from './Pages/Signup/index.jsx'
 import Charts from './Components/Charts/Charts.js';
-
+// import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
   const [user, setUser] = useState(null);
   //google oauth
@@ -74,6 +74,7 @@ const App = () => {
          
         <Route path="/Profile" element={<Profile />} />
         {/* <Route path="/dashboard" element={<MDashboard />} /> */}
+        {/* <Route path="/Modal" element={<Modal />} /> */}
         <Route path="/chart" element={<Charts />} />
         <Route path="/Vehicle_history" element={<Vehicle_history />} />
         <Route path="/Review" element={<Review />} />

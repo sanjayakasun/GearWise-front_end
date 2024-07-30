@@ -1,0 +1,15 @@
+/* spinner.css */
+.spinner {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
