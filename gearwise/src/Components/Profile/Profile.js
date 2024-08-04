@@ -554,7 +554,7 @@ export const U_Profile = () => {
                                             <div class="about-content">
                                                 <p>
                                                     Manage your entire vehicle fleet with ease at <strong>GearWise! </strong>
-                                                    Here, you can effortlessly add details for each of your vehicles, ensuring a comprehensive and organized record.
+                                                    Here, you can effortlessly add details for each of your vehicles.
                                                 </p>
                                                 <ul>
                                                     <li><i class="far fa-check-circle"></i>Easily manage multiple vehicles: Add information for all your vehicles in one place.</li>
@@ -585,6 +585,8 @@ export const U_Profile = () => {
                             <div class="about">
                                 <div class="container">
                                     <div class="row align-items-center">
+
+
                                         <div class="col-lg-6">
                                             <div class="section-header text-left">
                                                 <p>Vehicle HIstory</p>
@@ -604,12 +606,14 @@ export const U_Profile = () => {
                                                 {!hideButton && <a class="btn btn-custom" href="/Vehicle_history">Learn More</a>}
                                             </div>
                                         </div>
+
                                         <div class="col-lg-6">
                                             <div class="about-img">
                                                 <img src={Img2} alt="Image" />
                                             </div>
 
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
