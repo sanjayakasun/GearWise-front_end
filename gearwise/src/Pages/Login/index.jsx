@@ -16,7 +16,7 @@ function Login() {
   //google oauth function
   const googleAuth = () => {
     window.open(
-      `${"http://localhost:8080"}/auth/google/callback`,
+      `${"http://localhost:4005"}/api/auth/google/callback`,
       "_self"
     );
   };

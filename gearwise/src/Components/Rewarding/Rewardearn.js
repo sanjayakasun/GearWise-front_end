@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Img1 from '../../img/coin.png'
+import Img1 from '../../img/coin.gif'
 import Img2 from '../../img/gold.jpg'
 import Img3 from '../../img/silver.png'
 import Table from 'react-bootstrap/Table';
@@ -34,7 +34,7 @@ export default function Rewardearn() {
                             <br/>
                             <Table>
                                 <tr>
-                                    <td rowSpan={2}><img src={Img1} alt="Image" style={{ width: '100px', animation: 'twinkling 1s infinite alternate' }} /></td>
+                                    <td rowSpan={2}><img src={Img1} alt="Image" style={{ width: '200px'}} /></td>
                                     <td>Total Coins</td>
                                 </tr>
                                 <tr>
@@ -43,23 +43,23 @@ export default function Rewardearn() {
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
-                                        <strong>00-20 coins</strong> : <strong>5%</strong> Discount is for service
+                                        <strong>00-20 coins</strong> : <strong>5%</strong> Discount for service
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
-                                        <strong>20-30 coins</strong> : <strong>8%</strong> Discount is for service
+                                        <strong>20-30 coins</strong> : <strong>8%</strong> Discount for service
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
-                                        <strong>30-50 coins</strong> : <strong>10%</strong> Discount is for service
+                                        <strong>30-50 coins</strong> : <strong>10%</strong> Discount for service
                                         <img src={Img3} alt="Image" style={{ width: '100px' }} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
-                                        <strong>50-100 coins</strong> : <strong>15%</strong> Discount is for service
+                                        <strong>50-100 coins</strong> : <strong>15%</strong> Discount for service
                                         <img src={Img2} alt="Image" style={{ width: '100px' }} />
                                     </td>
                                 </tr>

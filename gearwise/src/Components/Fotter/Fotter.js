@@ -6,76 +6,14 @@ import Img4 from '../../img/wuerth.jpg'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner';
 import './Loader.css';
-import axios from 'axios';
-import Spinner from 'react-bootstrap/Spinner';
+
 
 
 
 export default function Fotter() {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const [modalShow, setModalShow] = React.useState(false);
-  function MyVerticallyCenteredModal(props) {
-
-    const handleyesClick = () => {
-      setLoading(true);
-
-      setTimeout(() => {
-        setLoading(false);
-        navigate('/Appointment', { state: { scrollTo: 'container' } });
-        setModalShow(false);
-      }, 5000);// Simulate a loading process
-      // Hide the modal after updating the status
-    };
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Tips
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>What is Off-Peak Pricing ?</h4>
-          <p>
-            In here we Provide a time range for customers as there free time.
-            as usually from <strong>6.00 p.m to 8.00 p.m.</strong>
-            <br />You can make the appointment as the availability of the time slot.
-          </p>
-          <div className="spinner-container">
-            {loading && (
-              <ThreeDots
-                className="spinner"
-                height="100"
-                width="100"
-                color="#00BFFF"
-                ariaLabel="loading"
-              />
-            )}
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleyesClick} variant='success'>Cehck Off-Peak Pricing</Button>
-          <Button onClick={props.onHide} variant='danger'>Close</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-
-  const handleClick = () => {
-    setModalShow(true);
-  };
-
-
-
 
   return (
     <div >
@@ -111,14 +49,9 @@ export default function Fotter() {
               <div className="footer-link">
                 <h2>Useful Links</h2>
                 <a href="/Review" style={{ textDecoration: 'none' }}>Reviews</a>
-                <a href="#" onClick={handleClick} style={{ textDecoration: 'none' }}>Off Peak Pricing</a>
                 <a href="" style={{ textDecoration: 'none' }}>Terms of use</a>
                 <a href="" style={{ textDecoration: 'none' }}>Privacy policy</a>
                 <a href="" style={{ textDecoration: 'none' }}>Help</a>
-                <MyVerticallyCenteredModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
               </div>
             </div>
             <div className="col-lg-3 col-md-6">

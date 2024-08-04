@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function Location() {
+
+    
+
   return (
     <div>
       <div className="location">
@@ -36,21 +39,11 @@ export default function Location() {
                     </div>
                     <div className="col-lg-5">
                         <div className="location-form">
-                            <h3>Request for a Help</h3>
-                            <form>
-                                <div className="control-group">
-                                    <input type="text" className="form-control" placeholder="Name" required="required" />
-                                </div>
-                                <div className="control-group">
-                                    <input type="email" className="form-control" placeholder="Email" required="required" />
-                                </div>
-                                <div className="control-group">
-                                    <textarea className="form-control" placeholder="Description Ex: number plate, car type, What kind of help" required="required"></textarea>
-                                </div>
-                                <div>
-                                    <button className="btn btn-custom" type="submit">Send Request</button>
-                                </div>
-                            </form>
+                            <div className='Map'>
+
+                            </div>
+                            <h3>Location Track</h3>
+                            <a class="btn btn-custom" href="">Track the Nearest Location</a>
                         </div>
                     </div>
                 </div>

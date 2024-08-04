@@ -37,26 +37,33 @@ export default function Appointments() {
   const [timeSlots, setTimeSlots] = useState([]);
   const [appointments, setAppointments] = useState([]);
 
+  // for off peak
   const location = useLocation();
+  const { scrollTo, buttonClick } = location.state || {};
 
   useEffect(() => {
     if (location.state?.scrollTo) {
       const element = document.getElementById(location.state.scrollTo);
+      // const offpeakbuttonclick = document.getElementById(location.buttonClick);
+      console.log("click the off peak" ,buttonClick)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
   }, [location]);
 
-
-
-
-
-  const availableTimeSlots = [
+  const availableTimeSlotsforall = [
     '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
     '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM',
     '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM'
   ];
+  const defaultTimeSlotsforoffpeak = [
+    '06:00 PM', '07:00 PM', '08:00 PM'
+  ];
+
+  const availableTimeSlots  = buttonClick ? defaultTimeSlotsforoffpeak : availableTimeSlotsforall ;
+
+
 
   useEffect(() => {
     if (date) {
@@ -316,7 +323,7 @@ export default function Appointments() {
 
                 <br />
                 <Card className="text-center">
-                  <div className="row" id='container'>
+                  <div className="row">
                     <h4>Washing Plan</h4>
                     <div className="col-md-6">
                       <Card.Body>
@@ -339,6 +346,9 @@ export default function Appointments() {
                   </div>
                   <Packages />
                 </Card>
+                <div  id='container'>
+
+                </div>
                 {/* service type is over */}
                 <br />
                 <Card className="text-center">
@@ -374,9 +384,46 @@ export default function Appointments() {
                       </Card.Body>
                     </div>
                     <div className="col-md-6">
-                      <Card.Body>
+                    {buttonClick ? (
+        <div>
+          {/* The content you want to show when the button is clicked */}
+          <Card.Body>
+          <Card.Title>Select Available <span style={
+            {color:'green'}
+          }>Off Peak Pricing</span> Time Slot</Card.Title>
+          <div className="time-slots" style={{justifyContent:'center'}}>
+            {timeSlots.map((time, index) => (
+              <button
+                key={index}
+                disabled={!isTimeSlotAvailable(time)}
+                onClick={() => handleBooking(time)}
+                className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+        </Card.Body>
+        </div>
+      ) : (
+        <Card.Body>
+          <Card.Title>Select Available Time Slot</Card.Title>
+          <div className="time-slots">
+            {timeSlots.map((time, index) => (
+              <button
+                key={index}
+                disabled={!isTimeSlotAvailable(time)}
+                onClick={() => handleBooking(time)}
+                className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+        </Card.Body>
+      )}
+                      {/* <Card.Body>
                         <Card.Title>Select Available Time Slot </Card.Title>
-
                         <div className="time-slots">
                           {timeSlots.map((time, index) => (
                             <button
@@ -389,18 +436,7 @@ export default function Appointments() {
                             </button>
                           ))}
                         </div>
-                        {/*<Card.Text>
-                          <Form.Floating className="mb-6">
-                            <DatePicker
-                              id="datePicker"
-                              selected={date}
-                              onChange={handleDateChange}
-                              dateFormat="MM/dd/yyyy" // Format of the displayed date
-                              placeholderText="Select a date" // Placeholder text when no date is selected
-                            />
-                          </Form.Floating>
-                        </Card.Text> */}
-                      </Card.Body>
+                      </Card.Body> */}
                     </div>
                   </div>
                 </Card>
