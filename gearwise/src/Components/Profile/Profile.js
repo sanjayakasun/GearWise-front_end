@@ -1,6 +1,7 @@
 import React from 'react'
 import Img1 from '../../img/vehicleProfile.jpg'
 import Img2 from '../../img/Vehiclehistory.jpg'
+import Img3 from '../../img/P_Addvehicle.jpg'
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from 'axios';
@@ -537,6 +538,46 @@ export const U_Profile = () => {
                         </div>
 
                         {/* Password change Form end */}
+
+
+                        {/* Add vehicle start */}
+
+                        <div>
+                            <div class="about">
+                                <div class="container">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <div class="section-header text-left">
+                                                <p>Vehicle Space</p>
+                                                <h2>Add Vehicle</h2>
+                                            </div>
+                                            <div class="about-content">
+                                                <p>
+                                                    Explore your vehicle's journey at <strong>GearWise! </strong>
+                                                    Here, you can easily track and manage your vehicle's service history.
+                                                </p>
+                                                <ul>
+                                                    <li><i class="far fa-check-circle"></i>Every service you schedule is documented here.</li>
+                                                    <li><i class="far fa-check-circle"></i>View a comprehensive history of all the services your vehicle has undergone.</li>
+                                                    <li><i class="far fa-check-circle"></i>Generate detailed vehicle history reports for your records or future reference.</li>
+                                                    <li><i class="far fa-check-circle"></i>Stay informed and up-to-date with your vehicle's maintenance journey, ensuring a smooth and reliable ride.</li>
+                                                </ul>
+                                                {!hideButton && <a class="btn btn-custom" href="/Vehicle_history">Learn More</a>}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="about-img">
+                                                <img src={Img3} alt="Image" style={{ width: '550px', height: 'auto' }} />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Add vehicle end */}
+
 
                         {/* Vehicle history session start */}
 
