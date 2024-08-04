@@ -553,14 +553,14 @@ export const U_Profile = () => {
                                             </div>
                                             <div class="about-content">
                                                 <p>
-                                                    Explore your vehicle's journey at <strong>GearWise! </strong>
-                                                    Here, you can easily track and manage your vehicle's service history.
+                                                    Manage your entire vehicle fleet with ease at <strong>GearWise! </strong>
+                                                    Here, you can effortlessly add details for each of your vehicles, ensuring a comprehensive and organized record.
                                                 </p>
                                                 <ul>
-                                                    <li><i class="far fa-check-circle"></i>Every service you schedule is documented here.</li>
-                                                    <li><i class="far fa-check-circle"></i>View a comprehensive history of all the services your vehicle has undergone.</li>
-                                                    <li><i class="far fa-check-circle"></i>Generate detailed vehicle history reports for your records or future reference.</li>
-                                                    <li><i class="far fa-check-circle"></i>Stay informed and up-to-date with your vehicle's maintenance journey, ensuring a smooth and reliable ride.</li>
+                                                    <li><i class="far fa-check-circle"></i>Easily manage multiple vehicles: Add information for all your vehicles in one place.</li>
+                                                    <li><i class="far fa-check-circle"></i>Ensure that every vehicle’s details are captured, providing a complete overview of your entire fleet.</li>
+                                                    {/* <li><i class="far fa-check-circle"></i>Generate detailed vehicle history reports for your records or future reference.</li> */}
+                                                    {/* <li><i class="far fa-check-circle"></i>Stay informed and up-to-date with your vehicle's maintenance journey, ensuring a smooth and reliable ride.</li> */}
                                                 </ul>
                                                 {!hideButton && <a class="btn btn-custom" href="/Vehicle_history">Learn More</a>}
                                             </div>
