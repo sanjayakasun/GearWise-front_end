@@ -30,7 +30,7 @@ export const U_Profile = () => {
     //Fetching data
     const getOneCusprofile = async () => {
         try {
-            const result = await axios.get(`http://localhost:4005/api/customers/customerspro/665e144096c5017136fb33a0`);
+            const result = await axios.get(`http://localhost:4005/api/customers/customerspro/665ac56fe1c1526588d9da9d`);
             setFormData(result.data);
             console.log(result.data);
         } catch (error) {
@@ -61,7 +61,7 @@ export const U_Profile = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(`http://localhost:4005/api/customers/customerspro/665e144096c5017136fb33a0`, formData);
+            const response = await axios.put(`http://localhost:4005/api/customers/customerspro/665ac56fe1c1526588d9da9d`, formData);
             console.log("Profile updated successfully:", response.data);
             toast.success('Profile updated successfully!');
         } catch (error) {
