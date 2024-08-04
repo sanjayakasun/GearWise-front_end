@@ -29,13 +29,13 @@ export default function Addvehicle() {
                         </div>
                         <div className="about-content">
                             <p>
-                                Welcome to your <strong>GearWise profile!</strong>
-                                Customize it to reflect your unique style and preferences.
+                                Manage your entire vehicle fleet with ease at <strong>GearWise! </strong>
+                                Here, you can effortlessly add details for each of your vehicles.
                             </p>
                             <ul>
-                                <li><i className="far fa-check-circle red-icon"></i> Personalize Profile: Update your photo, name, and contact details.</li>
-                                <li><i className="far fa-check-circle red-icon"></i> Tailor your profile to showcase who you are.</li>
-                                <li><i className="far fa-check-circle red-icon"></i> Make It Yours</li>
+                                <li><i className="far fa-check-circle red-icon"></i>Easily manage multiple vehicles: Add information for all your vehicles in one place.</li>
+                                <li><i className="far fa-check-circle red-icon"></i> Ensure that every vehicle’s details are captured, providing a complete overview of your entire fleet.</li>
+                                {/* <li><i className="far fa-check-circle red-icon"></i> Make It Yours</li> */}
                             </ul>
                             
                             {/* {!hideButton && <a className="btn btn-custom" href="/Reward">Learn More</a>} */}

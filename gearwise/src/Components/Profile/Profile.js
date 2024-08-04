@@ -549,7 +549,7 @@ export const U_Profile = () => {
                                         <div class="col-lg-6">
                                             <div class="section-header text-left">
                                                 <p>Vehicle Space</p>
-                                                <h2>Add Vehicle</h2>
+                                                <h2>Add Your Vehicle</h2>
                                             </div>
                                             <div class="about-content">
                                                 <p>
@@ -585,7 +585,12 @@ export const U_Profile = () => {
                             <div class="about">
                                 <div class="container">
                                     <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <div class="about-img">
+                                                <img src={Img2} alt="Image" />
+                                            </div>
 
+                                        </div>
 
                                         <div class="col-lg-6">
                                             <div class="section-header text-left">
@@ -607,13 +612,8 @@ export const U_Profile = () => {
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-6">
-                                            <div class="about-img">
-                                                <img src={Img2} alt="Image" />
-                                            </div>
 
-                                        </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
