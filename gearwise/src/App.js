@@ -37,6 +37,7 @@ import Mod_Product from './Pages/Mod_Product.jsx';
 import Login from './Pages/Login/index.jsx'
 import Signup from './Pages/Signup/index.jsx'
 import Charts from './Components/Charts/Charts.js';
+import Addvehicle_page from './Pages/Addvehicle_page.js';
 // import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
   const [user, setUser] = useState(null);
@@ -93,6 +94,7 @@ const App = () => {
        <Route path="/upload_ad" element={<Supp_ad />} />
         <Route path="/Reward" element={<Rewardpage />} /> 
         <Route path="/MProduct" element={<Mod_Product />} /> 
+        <Route path="/Addvehicle" element={<Addvehicle_page />} />
 
       </Routes>
       </BrowserRouter>

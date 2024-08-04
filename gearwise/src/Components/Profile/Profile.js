@@ -1,6 +1,7 @@
 import React from 'react'
 import Img1 from '../../img/vehicleProfile.jpg'
 import Img2 from '../../img/Vehiclehistory.jpg'
+import Img3 from '../../img/P_Addvehicle.jpg'
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from 'axios';
@@ -30,7 +31,7 @@ export const U_Profile = () => {
     //Fetching data
     const getOneCusprofile = async () => {
         try {
-            const result = await axios.get(`http://localhost:4005/api/customers/customerspro/665e144096c5017136fb33a0`);
+            const result = await axios.get(`http://localhost:4005/api/customers/customerspro/665ac56fe1c1526588d9da9d`);
             setFormData(result.data);
             console.log(result.data);
         } catch (error) {
@@ -61,7 +62,7 @@ export const U_Profile = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(`http://localhost:4005/api/customers/customerspro/665e144096c5017136fb33a0`, formData);
+            const response = await axios.put(`http://localhost:4005/api/customers/customerspro/665ac56fe1c1526588d9da9d`, formData);
             console.log("Profile updated successfully:", response.data);
             toast.success('Profile updated successfully!');
         } catch (error) {
@@ -538,12 +539,59 @@ export const U_Profile = () => {
 
                         {/* Password change Form end */}
 
+
+                        {/* Add vehicle start */}
+
+                        <div>
+                            <div class="about">
+                                <div class="container">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <div class="section-header text-left">
+                                                <p>Vehicle Space</p>
+                                                <h2>Add Your Vehicle</h2>
+                                            </div>
+                                            <div class="about-content">
+                                                <p>
+                                                    Manage your entire vehicle fleet with ease at <strong>GearWise! </strong>
+                                                    Here, you can effortlessly add details for each of your vehicles.
+                                                </p>
+                                                <ul>
+                                                    <li><i class="far fa-check-circle"></i>Easily manage multiple vehicles: Add information for all your vehicles in one place.</li>
+                                                    <li><i class="far fa-check-circle"></i>Ensure that every vehicle’s details are captured, providing a complete overview of your entire fleet.</li>
+                                                    {/* <li><i class="far fa-check-circle"></i>Generate detailed vehicle history reports for your records or future reference.</li> */}
+                                                    {/* <li><i class="far fa-check-circle"></i>Stay informed and up-to-date with your vehicle's maintenance journey, ensuring a smooth and reliable ride.</li> */}
+                                                </ul>
+                                                {!hideButton && <a class="btn btn-custom" href="/Vehicle_history">Learn More</a>}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="about-img">
+                                                <img src={Img3} alt="Image" style={{ width: '550px', height: 'auto' }} />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Add vehicle end */}
+
+
                         {/* Vehicle history session start */}
 
                         <div>
                             <div class="about">
                                 <div class="container">
                                     <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <div class="about-img">
+                                                <img src={Img2} alt="Image" />
+                                            </div>
+
+                                        </div>
+
                                         <div class="col-lg-6">
                                             <div class="section-header text-left">
                                                 <p>Vehicle HIstory</p>
@@ -563,12 +611,9 @@ export const U_Profile = () => {
                                                 {!hideButton && <a class="btn btn-custom" href="/Vehicle_history">Learn More</a>}
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="about-img">
-                                                <img src={Img2} alt="Image" />
-                                            </div>
 
-                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
