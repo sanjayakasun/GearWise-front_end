@@ -4,6 +4,22 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Charts() {
+  let complexcount = 0;
+  let basiccount = 0;
+  let premiumcount = 0;
+  let fullservcount = 0;
+  let bodycount = 0;
+  let wheelcount = 0;
+  let othercount = 0;
+  let fullcountfortody = 0;
+  let complexcounttomo = 0;
+  let basiccounttomo = 0;
+  let premiumcounttomo = 0;
+  let fullservcounttomo = 0;
+  let bodycounttomo = 0;
+  let wheelcounttomo = 0;
+  let othercounttomo = 0;
+  let fullcountfortomo = 0;
   const [serviceTypeCounts, setServiceTypeCounts] = useState({ Wheel: 0, body: 0 });
   const [appointmentCount, setAppointmentCount] = useState(0);
   const [appointmentDetails, setAppointmentDetails] = useState([]);
@@ -12,6 +28,9 @@ export default function Charts() {
   const [appointments, setAppointments] = useState([]);
 
   console.log("details:", appointmentDetails);
+  // if(appointmentDetails.serviceType === 'Complex Cleaning'){
+  //   console.log("Complex Cleaning",1)
+  // }
   // console.log("count today :", appointmentCount);
   // console.log("tommorow", appointmentDatesfortomorow);
   // console.log("count tomorrow :", appointmentCountfortomorow);
@@ -32,6 +51,48 @@ export default function Charts() {
     fetchAppointmentCount();
   }, []);
 
+  {appointmentDetails.map((appointment, index) => {
+    if (appointment.serviceType === 'Complex Cleaning') {
+      complexcount++;
+    }else if (appointment.serviceType === 'Basic Cleaning') {
+      basiccount++;
+    }else if (appointment.serviceType === 'Premium Cleaning') {
+      premiumcount++;
+    }else if (appointment.serviceType === 'Full Service') {
+      fullservcount++;
+    }else if (appointment.serviceType === 'Body Wash') {
+      bodycount++;
+    }else if (appointment.serviceType === 'Wheel Alingments') {
+      wheelcount++;
+    }else {
+      othercount++;
+    }
+  })}
+
+  fullcountfortody = complexcount+basiccount+premiumcount+fullservcount+bodycount+wheelcount+othercount;
+
+  {appointmentDatesfortomorow.map((appointment, index) => {
+    if (appointment.serviceType === 'Complex Cleaning') {
+      complexcounttomo++;
+    }else if (appointment.serviceType === 'Basic Cleaning') {
+      basiccounttomo++;
+    }else if (appointment.serviceType === 'Premium Cleaning') {
+      premiumcounttomo++;
+    }else if (appointment.serviceType === 'Full Service') {
+      fullservcounttomo++;
+    }else if (appointment.serviceType === 'Body Wash') {
+      bodycounttomo++;
+    }else if (appointment.serviceType === 'Wheel Alingments') {
+      wheelcounttomo++;
+    }else {
+      othercounttomo++;
+    }
+  })}
+  fullcountfortomo = complexcounttomo+basiccounttomo+premiumcounttomo+fullservcounttomo+bodycounttomo+wheelcounttomo+othercounttomo;
+
+
+
+
   // for line chart
   const dataForBarChart = [
     {
@@ -50,38 +111,38 @@ export default function Charts() {
   const dataforlinear = [
     {
       name: 'Basic',
-      today: 4000,
-      tommorow: 2400,
+      today: basiccount,
+      tommorow: basiccounttomo,
     },
     {
       name: 'Premium',
-      today: 4000,
-      tommorow: 2400,
+      today: premiumcount,
+      tommorow: premiumcounttomo,
     },
     {
       name: 'Complex',
-      today: 4000,
-      tommorow: 2400,
+      today: complexcount,
+      tommorow: complexcounttomo,
     },
     {
       name: 'Full',
-      today: 4000,
-      tommorow: 2400,
+      today: fullservcount,
+      tommorow: fullservcounttomo,
     },
     {
       name: 'Body',
-      today: 4100,
-      tommorow: 2400,
+      today: bodycount,
+      tommorow: bodycounttomo,
     },
     {
       name: 'Wheel A',
-      today: 2000,
-      tommorow: 1400,
+      today: wheelcount,
+      tommorow: wheelcounttomo,
     },
     {
       name: 'Other S',
-      today: 400,
-      tommorow: 2200,
+      today: othercount,
+      tommorow: othercounttomo,
     },
   ];
 
@@ -89,29 +150,48 @@ export default function Charts() {
     <div className="price">
       <div className="container">
         <div className="section-header text-center">
-          <p>Data Analysis</p>
+          <p>Data Analysis & Charts</p>
         </div>
+
+        <div className="max-w-[85rem] px-4 py-0 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+          <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+            <div className="p-4 md:p-5 flex justify-between gap-x-3">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                Total Count for Today
+                </p>
+              </div>
+              <div className="flex-shrink-0 flex justify-center items-center size-[46px] bg-green-600 text-white rounded dark:bg-blue-900 dark:text-blue-200">
+                <h3>
+                {fullcountfortody}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+            <div className="p-4 md:p-5 flex justify-between gap-x-3">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                Total Count for <strong>tommorow</strong>
+                </p>
+              </div>
+              <div className="flex-shrink-0 flex justify-center items-center size-[46px] bg-red-600 text-white rounded dark:bg-blue-900 dark:text-blue-200">
+                <h3>
+                {fullcountfortomo}
+                </h3>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
         {/* for counting the service type */}
-        <div>
-      <h1>Appointment Details</h1>
-      <ul>
-        {appointmentDetails.map((appointment, index) => (
-          <li key={index}>
-            Date: {appointment.date}, Service Type: {appointment.serviceType}
-          </li>
-        ))}
-      </ul>
-      <h2>Service Type Counts</h2>
-      Count : {serviceTypeCounts.Wheel}
-      {/* <p>Full: {serviceTypeCounts.full}</p>
-      <p>Body: {serviceTypeCounts.body}</p> */}
-      {/* Add more service types as needed */}
-    </div>
+        <br/>
         <div className="row">
           <div className="col-md-6">
             <div className="price-item featured-item">
               <div className="price-header">
-                <h3>Cleaning</h3>
+                <h3>service Information</h3>
               </div>
               <div className="price-body">
                 <div style={{ width: "100%", height: 300 }}>

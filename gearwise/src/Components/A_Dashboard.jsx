@@ -142,7 +142,7 @@ const A_Dashboard = () => {
           </div>
         </div>
         <br/><br/>
-        <h3 className="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Queue<br/> <span className="text-blue-800 dark:text-blue-500">& Empty<br/></span> Slots</h3>
+        {/* <h3 className="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Queue<br/> <span className="text-blue-800 dark:text-blue-500">& Empty<br/></span> Slots</h3> */}
       </div>
     </div>
   );

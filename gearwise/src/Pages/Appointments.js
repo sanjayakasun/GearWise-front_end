@@ -55,7 +55,7 @@ export default function Appointments() {
   const availableTimeSlotsforall = [
     '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
     '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM',
-    '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM'
+    '05:00 PM'
   ];
   const defaultTimeSlotsforoffpeak = [
     '06:00 PM', '07:00 PM', '08:00 PM'
@@ -408,7 +408,8 @@ export default function Appointments() {
       ) : (
         <Card.Body>
           <Card.Title>Select Available Time Slot</Card.Title>
-          <div className="time-slots">
+          <h6>6.00 p.m to 8.00 p.m Time slots are Available in Off-Peak Pricing</h6>
+          <div className="time-slots" style={{justifyContent:'center'}}>
             {timeSlots.map((time, index) => (
               <button
                 key={index}
