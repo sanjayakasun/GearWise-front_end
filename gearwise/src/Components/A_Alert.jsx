@@ -65,7 +65,7 @@ const A_Alert = () => {
                                            
                                             <th scope="col" className="px-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
-                                                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                                                    <span className="malsha text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
                                                        Action
                                                     </span>
                                                 </div>
@@ -121,7 +121,7 @@ const A_Alert = () => {
         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div class="flex items-center gap-x-6">
                                        
-                                        <button class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                        <button class="  text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                             Alert
                                         </button>
                                     </div>
