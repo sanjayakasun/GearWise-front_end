@@ -40,21 +40,34 @@ const Appointment = () => {
         };
         fetchCustomers();
     }, []);
-    const handleAlert = async (email) => {
+    const handleAlert = async (email, appointmentId) => {
       try {
-          await axios.post('http://localhost:4005/api/send-email', {
-              to: email,
-              subject: ' Next Service Date Notification',
-              text: `This is to inform you that the next service date is scheduled for ${selectedDate}. If you have any questions, please contact us. \n\nThank You!`
-          });
-          toast.success('Alert email sent successfully');
-
-         
+        // Send the alert email
+        await axios.post('http://localhost:4005/api/send-email', {
+          to: email,
+          subject: 'Next Service Date Notification',
+          text: `This is to inform you that the next service date is scheduled for ${selectedDate}. If you have any questions, please contact us.\n\nThank You!`
+        });
+    
+        // After sending the email, update the alert status in the database
+        await axios.put('http://localhost:4005/api/appointments/alertStatus', {
+          appointmentId
+        });
+    
+        // Optimistically update the UI to show the status as 'Sent'
+        toast.success('Alert email sent and status updated successfully');
+        setAppointments(prevAppointments =>
+          prevAppointments.map(appointment =>
+            appointment._id === appointmentId ? { ...appointment, t_alertStatus: 'Sent' } : appointment
+          )
+        );
+    
       } catch (error) {
-          console.error('Error sending alert email', error);
-          toast.error('Failed to send alert email');
+        console.error('Error processing alert', error);
+        toast.error('Failed to send alert email and update status');
       }
-  };
+    };
+    
     return (
         <div>
             <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -117,13 +130,7 @@ const Appointment = () => {
                                                     </span>
                                                 </div>
                                             </th>
-                                            <th className="px-6 py-3 text-start">
-                                                <div className="flex items-center gap-x-2">
-                                                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                                                        Time Slot
-                                                    </span>
-                                                </div>
-                                            </th>
+                                           
                                             <th className="px-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
@@ -168,26 +175,24 @@ const Appointment = () => {
                                                             <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{appointment.serviceType}</span>
                                                         </div>
                                                     </td>
+                                                   
                                                     <td className="size-px whitespace-nowrap">
                                                         <div className="px-6 py-3">
-                                                            <span className="text-sm text-gray-500 dark:text-neutral-500">{appointment.timeSlot}</span>
-                                                        </div>
-                                                    </td>
-                                                    <td className="size-px whitespace-nowrap">
-                                                        <div className="px-6 py-3">
-                                                            <span className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium 
-                                                                ${appointment.t_alertStatus === "Send" ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400" : 
-                                                                appointment.t_alertStatus === "Pending" ? "bg-red-50 text-red-600 dark:bg-red-500/20 dark:text-red-400" : 
-                                                                "bg-gray-50 text-gray-600 dark:bg-gray-500/20 dark:text-gray-400"}`}>
-                                                                {appointment.t_alertStatus}
-                                                            </span>
+                                                                                                    <span
+                                              className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium 
+                                                ${appointment.t_alertStatus === 'Sent' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400' : 
+                                                appointment.t_alertStatus === 'Pending' ? 'bg-red-50 text-red-600 dark:bg-red-500/20 dark:text-red-400' : 
+                                                'bg-gray-50 text-gray-600 dark:bg-gray-500/20 dark:text-gray-400'}`}>
+                                              {appointment.t_alertStatus}
+                                            </span>
+
                                                         </div>
                                                     </td>
                                                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                         <div className="flex items-center gap-x-6">
                                                             <button
                                                                 className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
-                                                                onClick={() => handleAlert(appointment.customerId.email)} 
+                                                                onClick={() => handleAlert(appointment.customerId.email,appointment._id)} 
 
                                                             >
                                                                 Alert
