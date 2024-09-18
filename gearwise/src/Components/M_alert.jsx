@@ -140,7 +140,7 @@ const M_alert = () => {
                         selected={formData.serviceDate}
                         onChange={handleDateChange}
                         dateFormat="yyyy/MM/dd"
-                        minDate={new Date()} // Restrict past dates
+                        minDate={new Date()} 
                         className="form-control"
                     />
                             </div>
