@@ -39,6 +39,8 @@ import Signup from './Pages/Signup/index.jsx'
 import Charts from './Components/Charts/Charts.js';
 import Addvehicle_page from './Pages/Addvehicle_page.js';
 import Mapp from './Pages/Mapp.js';
+import Queue from "./Pages/Queue.js";
+
 // import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
   const [user, setUser] = useState(null);
@@ -97,6 +99,8 @@ const App = () => {
         <Route path="/MProduct" element={<Mod_Product />} /> 
         <Route path="/Addvehicle" element={<Addvehicle_page />} />
         <Route path="/map" element={<Mapp />} />
+        <Route path="/Queue" element={<Queue />} />
+         
 
       </Routes>
       </BrowserRouter>
