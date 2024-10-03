@@ -158,7 +158,7 @@ export default function Charts() {
           <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
             <div className="p-4 md:p-5 flex justify-between gap-x-3">
               <div>
-                <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                <p className="aa text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
                 Total Count for Today
                 </p>
               </div>

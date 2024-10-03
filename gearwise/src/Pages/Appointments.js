@@ -393,14 +393,14 @@ export default function Appointments() {
           }>Off Peak Pricing</span> Time Slot</Card.Title>
           <div className="time-slots" style={{justifyContent:'center'}}>
             {timeSlots.map((time, index) => (
-              <button
+              <buttona
                 key={index}
                 disabled={!isTimeSlotAvailable(time)}
                 onClick={() => handleBooking(time)}
                 className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
               >
                 {time}
-              </button>
+              </buttona>
             ))}
           </div>
         </Card.Body>
@@ -411,14 +411,14 @@ export default function Appointments() {
           <h6>6.00 p.m to 8.00 p.m Time slots are Available in Off-Peak Pricing</h6>
           <div className="time-slots" style={{justifyContent:'center'}}>
             {timeSlots.map((time, index) => (
-              <button
+              <buttona
                 key={index}
                 disabled={!isTimeSlotAvailable(time)}
                 onClick={() => handleBooking(time)}
                 className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
               >
                 {time}
-              </button>
+              </buttona>
             ))}
           </div>
         </Card.Body>
