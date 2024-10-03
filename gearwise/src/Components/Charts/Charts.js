@@ -115,7 +115,7 @@ export default function Charts() {
       tommorow: basiccounttomo,
     },
     {
-      name: 'Premium',
+      name: 'Premi',
       today: premiumcount,
       tommorow: premiumcounttomo,
     },
@@ -140,7 +140,7 @@ export default function Charts() {
       tommorow: wheelcounttomo,
     },
     {
-      name: 'Other S',
+      name: 'Other',
       today: othercount,
       tommorow: othercounttomo,
     },
