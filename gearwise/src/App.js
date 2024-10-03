@@ -40,7 +40,7 @@ import Charts from './Components/Charts/Charts.js';
 import Addvehicle_page from './Pages/Addvehicle_page.js';
 import Mapp from './Pages/Mapp.js';
 import Queue from "./Pages/Queue.js";
-
+import Admin_mail from './Pages/Admin_mail.jsx'
 // import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
   const [user, setUser] = useState(null);
@@ -100,7 +100,8 @@ const App = () => {
         <Route path="/Addvehicle" element={<Addvehicle_page />} />
         <Route path="/map" element={<Mapp />} />
         <Route path="/Queue" element={<Queue />} />
-         
+        <Route path='/email' element={<Admin_mail/>}/>
+
 
       </Routes>
       </BrowserRouter>

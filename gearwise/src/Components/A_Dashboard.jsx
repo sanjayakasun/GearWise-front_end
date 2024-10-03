@@ -51,7 +51,7 @@ const A_Dashboard = () => {
   return (
     <div>
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
             <div className="p-4 md:p-5 flex justify-between gap-x-3">
               <div>
@@ -119,27 +119,7 @@ const A_Dashboard = () => {
             </a>
           </div>
 
-          <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-            <div className="p-4 md:p-5 flex justify-between gap-x-3">
-              <div>
-                <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                  Pending<br/> Alerts 
-                </p>
-                <div className="mt-1 flex items-center gap-x-2">
-                  <h3 className="mt-1 text-xl font-medium text-gray-800 dark:text-neutral-200">
-                    92,913
-                  </h3>
-                </div>
-              </div>
-              <div className="flex-shrink-0 flex justify-center items-center size-[46px] bg-blue-600 text-white rounded-full dark:bg-blue-900 dark:text-blue-200">
-                <svg className="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z"/><path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/><path d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2"/></svg>
-              </div>
-            </div>
-            <a className="py-3 px-4 md:px-5 inline-flex justify-between items-center text-sm text-gray-600 border-t border-gray-200 hover:bg-gray-50 rounded-b-xl dark:border-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-800" href="#">
-              View more
-              <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          </div>
+         
         </div>
         <br/><br/>
         {/* <h3 className="tpoic6 h6 text-center mb-4 text-5xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Queue<br/> <span className="text-blue-800 dark:text-blue-500">& Empty<br/></span> Slots</h3> */}

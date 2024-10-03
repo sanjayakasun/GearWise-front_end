@@ -5,6 +5,7 @@ import {
     FaBars,
     FaBox,
     FaSignOutAlt,
+    FaWrench,
     FaExclamationTriangle,
     
 }from "react-icons/fa";
@@ -22,10 +23,14 @@ const Sidebar = ({children}) => {
         },
         {
             path:"/mAlert",
+            name:"Update Vehicle",
+            icon:<FaWrench  />
+        },
+        {
+            path:"/email",
             name:"Alert",
             icon:<FaExclamationTriangle  />
         },
-       
         {
             path:"/mProduct",
             name:"Product",

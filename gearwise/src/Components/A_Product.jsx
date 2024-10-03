@@ -35,7 +35,7 @@ const Product = () => {
             await axios.post('http://localhost:4005/api/send-email', {
                 to: email,
                 subject: 'Low Product Quantity - Request for Immediate Supply.',
-                text: `Our current stock of your product is running low. Kindly arrange for immediate supply. Thank you.`
+                text: `Our current stock of your product is running low. Kindly arrange for immediate supply. \n\nThank you.`
             });
             toast.success('Alert email sent successfully');
 
