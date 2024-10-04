@@ -562,7 +562,7 @@ export const U_Profile = () => {
                                                     {/* <li><i class="far fa-check-circle"></i>Generate detailed vehicle history reports for your records or future reference.</li> */}
                                                     {/* <li><i class="far fa-check-circle"></i>Stay informed and up-to-date with your vehicle's maintenance journey, ensuring a smooth and reliable ride.</li> */}
                                                 </ul>
-                                                {!hideButton && <a class="btn btn-custom" href="/Addvehicle">Learn More</a>}
+                                                {!hideButton && <a class="btn btn-custom" href="/Addvehicle">Add Vehicle Details</a>}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">

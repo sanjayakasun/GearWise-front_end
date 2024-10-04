@@ -25,6 +25,7 @@ export default function Appointments() {
   const customerId = "665e144096c5017136fb33a0"
   const navigate = useNavigate();
   const [customer, setCustomer] = useState([])
+  const [customervehicleinfo, setCustomervehicleinfo] = useState([])
   const [vehicleType, setVehicleType] = useState("")
   const [vehicleModel, setVehicleModel] = useState("")
   const [mfYear, setMFYear] = useState("")
@@ -45,7 +46,7 @@ export default function Appointments() {
     if (location.state?.scrollTo) {
       const element = document.getElementById(location.state.scrollTo);
       // const offpeakbuttonclick = document.getElementById(location.buttonClick);
-      console.log("click the off peak" ,buttonClick)
+      console.log("click the off peak", buttonClick)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
@@ -61,7 +62,7 @@ export default function Appointments() {
     '06:00 PM', '07:00 PM', '08:00 PM'
   ];
 
-  const availableTimeSlots  = buttonClick ? defaultTimeSlotsforoffpeak : availableTimeSlotsforall ;
+  const availableTimeSlots = buttonClick ? defaultTimeSlotsforoffpeak : availableTimeSlotsforall;
 
 
 
@@ -177,6 +178,15 @@ export default function Appointments() {
       .catch(err => console.log(err))
   }, [])
 
+  //getting vehicle information releated to customer
+  useEffect(() => {
+    //for testing only 665e144096c5017136fb33a0 otherwise remove the id
+    axios.get('http://localhost:4005/api/vehicles/getvehicleinfo/' + customerId)
+      .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))
+      .catch(err => console.log(err))
+  }, [])
+  console.log("Customer vehicle information",customervehicleinfo);
+
   return (
     <div>
       <Topbar />
@@ -273,7 +283,7 @@ export default function Appointments() {
                               id="floatingInputCustom"
                               type="Text"
                               placeholder="Model of Vehicle"
-                              value={vehicleModel}
+                              value={customervehicleinfo.vehicleModel}
                               onChange={(e) => setVehicleModel(e.target.value)}
                             />
                             <label htmlFor="floatingInputCustom">Model of Vehicle <span>*</span></label>
@@ -346,7 +356,7 @@ export default function Appointments() {
                   </div>
                   <Packages />
                 </Card>
-                <div  id='container'>
+                <div id='container'>
 
                 </div>
                 {/* service type is over */}
@@ -384,45 +394,45 @@ export default function Appointments() {
                       </Card.Body>
                     </div>
                     <div className="col-md-6">
-                    {buttonClick ? (
-        <div>
-          {/* The content you want to show when the button is clicked */}
-          <Card.Body>
-          <Card.Title>Select Available <span style={
-            {color:'green'}
-          }>Off Peak Pricing</span> Time Slot</Card.Title>
-          <div className="time-slots" style={{justifyContent:'center'}}>
-            {timeSlots.map((time, index) => (
-              <buttona
-                key={index}
-                disabled={!isTimeSlotAvailable(time)}
-                onClick={() => handleBooking(time)}
-                className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
-              >
-                {time}
-              </buttona>
-            ))}
-          </div>
-        </Card.Body>
-        </div>
-      ) : (
-        <Card.Body>
-          <Card.Title>Select Available Time Slot</Card.Title>
-          <h6>6.00 p.m to 8.00 p.m Time slots are Available in Off-Peak Pricing</h6>
-          <div className="time-slots" style={{justifyContent:'center'}}>
-            {timeSlots.map((time, index) => (
-              <buttona
-                key={index}
-                disabled={!isTimeSlotAvailable(time)}
-                onClick={() => handleBooking(time)}
-                className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
-              >
-                {time}
-              </buttona>
-            ))}
-          </div>
-        </Card.Body>
-      )}
+                      {buttonClick ? (
+                        <div>
+                          {/* The content you want to show when the button is clicked */}
+                          <Card.Body>
+                            <Card.Title>Select Available <span style={
+                              { color: 'green' }
+                            }>Off Peak Pricing</span> Time Slot</Card.Title>
+                            <div className="time-slots" style={{ justifyContent: 'center' }}>
+                              {timeSlots.map((time, index) => (
+                                <button
+                                  key={index}
+                                  disabled={!isTimeSlotAvailable(time)}
+                                  onClick={() => handleBooking(time)}
+                                  className={isTimeSlotAvailable(time) ? 'available' : 'disabled'}
+                                >
+                                  {time}
+                                </button>
+                              ))}
+                            </div>
+                          </Card.Body>
+                        </div>
+                      ) : (
+                        <Card.Body>
+                          <Card.Title>Select Available Time Slot</Card.Title>
+                          <h6>6.00 p.m to 8.00 p.m Time slots are Available in Off-Peak Pricing</h6>
+                          <div className="time-slots" style={{ justifyContent: 'center' }}>
+                            {timeSlots.map((time, index) => (
+                              <button
+                                key={index}
+                                disabled={!isTimeSlotAvailable(time)}
+                                onClick={() => handleBooking(time)}
+                                className={isTimeSlotAvailable(time) ? 'available' : 'disabled'}
+                              >
+                                {time}
+                              </button>
+                            ))}
+                          </div>
+                        </Card.Body>
+                      )}
                       {/* <Card.Body>
                         <Card.Title>Select Available Time Slot </Card.Title>
                         <div className="time-slots">
