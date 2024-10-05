@@ -81,7 +81,6 @@ export const U_Profile = () => {
                     <div class="row align-items-center">
 
                         {/* Profile change start */}
-
                         <div class="col-lg-5">
                             <div class="section-header text-left">
                                 <p>User Space</p>

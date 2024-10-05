@@ -10,14 +10,14 @@ import Rewarding from '../Components/Rewarding/Rewarding'
 export default function Contactuspage() {
   return (
     <div>
-        <Topbar/>
-        <Navbar/>
-        <Pageheader/>
-       {/* <Profile1/> */}
-       <Profile1/>
-        
-      
-      <Fotter/>
+      <Topbar />
+      <Navbar />
+      <Pageheader />
+      {/* <Profile1/> */}
+      <Profile1 />
+
+
+      <Fotter />
     </div>
   )
 }
