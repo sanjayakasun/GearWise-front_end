@@ -41,6 +41,7 @@ import Addvehicle_page from './Pages/Addvehicle_page.js';
 import Mapp from './Pages/Mapp.js';
 import Queue from "./Pages/Queue.js";
 
+// import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
   // State to store user data
   const [user, setUser] = useState(null);
@@ -63,41 +64,46 @@ const App = () => {
 
   return (
     <div className="">
-      <BrowserRouter>
-        <Routes>
-          {/* Defining routes for all the pages */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/About" element={<Aboutus_page />} />
-          <Route path="/Service" element={<Service_page />} />
-          <Route path="/Packages" element={<Packages_page />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/Advertistments" element={<Ad_page />} />
-          <Route path="/AppointmentList" element={<Viewappointment />} />
-          <Route path="/Profile" element={<Profile_page />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/chart" element={<Charts />} />
-          <Route path="/Vehicle_history" element={<Vehicle_history />} />
-          <Route path="/Review" element={<Review />} />
-          <Route path="/Appointment" element={<Appointments />} />
-          <Route path="/Admin" element={<Admin_dash />} />
-          <Route path="/customer" element={<Admin_cus />} />
-          <Route path="/areview" element={<Admin_rew />} />
-          <Route path="/appoinment_admin" element={<Admin_appoinment />} />
-          <Route path="/advertisment" element={<Admin_ad />} />
-          <Route path="/product" element={<Admin_product />} />
-          <Route path="/alert" element={<Admin_alert />} />
-          <Route path="/moderator" element={<Moderator_dash />} />
-          <Route path="/mAlert" element={<Moderator_alert />} />
-          <Route path="/supp" element={<Supp_dash />} />
-          <Route path="/upload_ad" element={<Supp_ad />} />
-          <Route path="/Reward" element={<Rewardpage />} />
-          <Route path="/MProduct" element={<Mod_Product />} />
-          <Route path="/Addvehicle" element={<Addvehicle_page />} />
-          <Route path="/map" element={<Mapp />} />
-          <Route path="/queue" element={<Queue />} />
-        </Routes>
+        <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/Signup" element={<Signup/>} />
+        <Route path="/About" element={<Aboutus_page/>} />
+        <Route path="/Service" element={<Service_page/>} />
+        <Route path="/Packages" element={<Packages_page/>} />
+        <Route path="/Contact" element={<Contact/>} />
+        <Route path="/Advertistments" element={<Ad_page/>} />
+        <Route path="/AppointmentList" element={<Viewappointment/>} />
+        <Route path="/Profile" element={<Profile_page/>} />
+         
+        <Route path="/Profile" element={<Profile />} />
+        {/* <Route path="/dashboard" element={<MDashboard />} /> */}
+        {/* <Route path="/Modal" element={<Modal />} /> */}
+        <Route path="/chart" element={<Charts />} />
+        <Route path="/Vehicle_history" element={<Vehicle_history />} />
+        <Route path="/Review" element={<Review />} />
+        <Route path="/Review" element={<Review />} />
+        <Route path="/Appointment" element={<Appointments />} />
+        <Route path="/Admin" element={<Admin_dash />} />
+        <Route path="/customer" element={<Admin_cus />} />
+       <Route path="/areview" element={<Admin_rew />} />
+       <Route path="/appoinment_admin" element={<Admin_appoinment />} />
+       <Route path="/advertisment" element={<Admin_ad />} />
+       <Route path="/product" element={<Admin_product />} />
+       <Route path="/alert" element={<Admin_alert />} />
+       <Route path="/moderator" element={<Moderator_dash />} />
+       <Route path="/mAlert" element={<Moderator_alert />} />
+       <Route path="/supp" element={<Supp_dash />} />
+       <Route path="/upload_ad" element={<Supp_ad />} />
+        <Route path="/Reward" element={<Rewardpage />} /> 
+        <Route path="/MProduct" element={<Mod_Product />} /> 
+        <Route path="/Addvehicle" element={<Addvehicle_page />} />
+        <Route path="/map" element={<Mapp />} />
+        <Route path="/Queue" element={<Queue />} />
+         
+
+      </Routes>
       </BrowserRouter>
     </div>
   );

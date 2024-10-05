@@ -136,13 +136,13 @@ const M_alert = () => {
                         <div className="relative z-0 w-full mb-5 group">
                             <label htmlFor="serviceDate" className="block py-0.5 px-0 w-full text-sm mb-2 text-sm font-medium text-gray-500 dark:text-white">Next Service Date</label>
                             <div className="relative my-6">
-                                <DatePicker
-                                    id="serviceDate"
-                                    selected={formData.serviceDate}
-                                    onChange={handleDateChange}
-                                    dateFormat="yyyy/MM/dd"
-                                    className="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-indigo-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                />
+                            <DatePicker
+                        selected={formData.serviceDate}
+                        onChange={handleDateChange}
+                        dateFormat="yyyy/MM/dd"
+                        minDate={new Date()} 
+                        className="form-control"
+                    />
                             </div>
                         </div>
                         <button
