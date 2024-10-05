@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
@@ -6,6 +7,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast, ToastContainer } from 'react-toastify';  
 import 'react-toastify/dist/ReactToastify.css';  
 import Img1 from '../../img/Addvehicle1.jpg';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 export const Addvehicle = () => {
     // State to store form data
@@ -15,13 +18,16 @@ export const Addvehicle = () => {
         mfYear: '',  
         vrNo: '' 
     });
+    // to  get all vehicle details
+    const customerId = "665e144096c5017136fb33a0"
+    const navigate = useNavigate();
+    const [customervehicleinfo, setCustomervehicleinfo] = useState([]);
 
     // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setVehicleData({ ...vehicleData, [name]: value });
     };
-
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,19 +37,27 @@ export const Addvehicle = () => {
                 customerId: "665e144096c5017136fb33a0" // Example customerId, replace with actual ID
             });
             // Show success toast message
-            toast.success('Vehicle added successfully!', {
-                
+            toast.success('Vehicle added successfully!', {     
             });
+            setTimeout(() => {
+                window.location.reload();
+              }, 3000); // 3 seconds delay to reload page
             console.log('Vehicle added successfully:', response.data);
         } catch (error) {
             // Show error toast message
-            toast.error('Error adding vehicle. Please try again.', {
-                
+            toast.error('Error adding vehicle. Please try again.', {           
             });
             console.error('Error adding vehicle:', error.response ? error.response.data : error.message);
         }
     };
 
+    // to get all relevant vehicle information reletaed to customer
+    useEffect(() => {
+        axios.get('http://localhost:4005/api/vehicles/getvehicleinfo/' + customerId)
+          .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))
+          .catch(err => console.log(err));
+      }, []);
+      console.log(customervehicleinfo)
     return (
         <div>
             
@@ -61,27 +75,54 @@ export const Addvehicle = () => {
                 }
             `}</style>
             <div className="container">
-                <div className="row align-items-center">
-                    <div className="col-lg-5">
+                <div className="row">
+                    <div className="col-lg-7">
                         <div className="section-header text-left">
                             <p>Vehicle Space</p>
-                            <h2>Add Your Vehicle</h2>
+                            <h2>My vehicles</h2>
                         </div>
-                        <div className="about-content">
-                            <p>
-                                Manage your entire vehicle fleet with ease at <strong>GearWise!</strong>
-                                Here, you can effortlessly add details for each of your vehicles.
-                            </p>
-                            <ul>
-                                <li><i className="far fa-check-circle red-icon"></i> Easily manage multiple vehicles.</li>
-                                <li><i className="far fa-check-circle red-icon"></i> Capture every vehicle's details.</li>
-                            </ul>
-                        </div>
-                        <img src={Img1} alt="Vehicle Space" style={{ width: '450px', height: 'auto' }} />
+                        <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>Vehicle ID</th>
+          <th>Vechicle Info</th>
+          <th>Vehicle <br/> Registration No</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      {customervehicleinfo.map(vehicleinfo => { 
+        const vehicleid = vehicleinfo._id;
+        console.log("map vehicle id",vehicleid)
+        return(
+        <tbody>
+        <tr>
+          <td>{vehicleid}</td>
+          <td>
+          Vehicle Model : {vehicleinfo.vehicleModel}
+            <br/>
+            Vehicle Type : {vehicleinfo.vehicleType}
+            <br/>
+            Year : {vehicleinfo.mfYear}
+          </td>
+          <td>{vehicleinfo.vrNo}</td>
+          <td><Button variant="success">Edit</Button> 
+          <br/> <br/>
+          <Button variant="danger">Delete</Button> 
+          </td>
+        </tr>
+      </tbody>
+        )
+      }
+    )}
+      
+    </Table>
                     </div>
 
-                    <div className="col-lg-7" style={{ paddingBottom: '60px' }}>
-                        <Card className="text-center">
+                    <div className="col-lg-5">
+                    <div className="section-header text-left">
+                            <p>Add Your Vehicle</p>
+                        </div>
+                        <Card className="text-center" style={{border:'none'}}>
                             <form onSubmit={handleSubmit}>
                                 <div className="row">
                                     <h4>Vehicle Information</h4>
