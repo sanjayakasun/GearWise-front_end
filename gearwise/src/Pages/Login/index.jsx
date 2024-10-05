@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 // import { Link } from 'react-router-dom';
 
 function Login() {
@@ -19,6 +20,7 @@ function Login() {
       `${"http://localhost:4005"}/api/auth/google/callback`,
       "_self"
     );
+    console.log("Logged in success",email)
   };
 
   //login function manual
@@ -32,6 +34,7 @@ function Login() {
  
   const [email, setEmail] = useState('');
   const [password, setPassword] =useState('') ;
+  
 
   async function submit(e) {
     e.preventDefault();
