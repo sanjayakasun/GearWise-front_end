@@ -59,6 +59,18 @@ export const Addvehicle = () => {
           .catch(err => console.log(err));
       }, []);
       console.log(customervehicleinfo)
+
+    // Delete vehicle function
+    const handleDelete = async (vehicleId) => {
+        try {
+            await axios.delete(`http://localhost:4005/api/vehicles/myVehicle/${vehicleId}`);
+            toast.success('Vehicle deleted successfully!');
+            setCustomervehicleinfo(customervehicleinfo.filter(vehicle => vehicle._id !== vehicleId)); // Remove the deleted vehicle from the list
+        } catch (error) {
+            toast.error('Error deleting vehicle. Please try again.');
+        }
+    };
+    
     return (
         <div>
             
@@ -109,7 +121,7 @@ export const Addvehicle = () => {
                                             <td>{vehicleinfo.vrNo}</td>
                                             <td style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                                                 <button><AiOutlineEdit style={{   fontSize: '20px', marginBottom: '10px' }} /></button >
-                                                <button><AiOutlineDelete style={{ fontSize: '20px', color: '#ff4d4f' }} /></button >
+                                                <button onClick={() => handleDelete(vehicleid)}><AiOutlineDelete style={{ fontSize: '20px', color: '#ff4d4f' }} /></button>
                                             </td>
                                         </tr>
                                     </tbody>
