@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';  
-import { useNavigate } from "react-router-dom";  
-import axios from 'axios';  
-import Form from 'react-bootstrap/Form';  
-import Card from 'react-bootstrap/Card';  
-import FloatingLabel from 'react-bootstrap/FloatingLabel';  
-import { toast, ToastContainer } from 'react-toastify';  
-import 'react-toastify/dist/ReactToastify.css';  
-import Img1 from '../../img/Addvehicle1.jpg';  
-import Table from 'react-bootstrap/Table';  
-import Button from 'react-bootstrap/Button'; 
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';  
-import Modal from 'react-bootstrap/Modal';  
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Img1 from '../../img/Addvehicle1.jpg';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
+import Modal from 'react-bootstrap/Modal';
 
 export const Addvehicle = () => {
     // State to hold new vehicle data
@@ -21,11 +21,12 @@ export const Addvehicle = () => {
         vrNo: ''
     });
 
+
     const customerId = "665e144096c5017136fb33a0"; // Customer ID (can be fetched dynamically)
-    const navigate = useNavigate();  
-    const [customervehicleinfo, setCustomervehicleinfo] = useState([]); // State for vehicle info
+    const navigate = useNavigate();
+    const [customervehicleinfo, setCustomervehicleinfo] = useState([]);  
     const [showModal, setShowModal] = useState(false); // State to control modal visibility
-    const [editVehicleData, setEditVehicleData] = useState({ // State for editing vehicle data
+    const [editVehicleData, setEditVehicleData] = useState({  
         vehicleType: '',
         vehicleModel: '',
         mfYear: '',
@@ -33,88 +34,97 @@ export const Addvehicle = () => {
     });
     const [selectedVehicleId, setSelectedVehicleId] = useState(null); // State for selected vehicle ID
 
+
     // Handle change in the vehicle data input fields
     const handleChange = (e) => {
         const { name, value } = e.target;
         setVehicleData({ ...vehicleData, [name]: value });
     };
 
+
     // Handle form submission to add a new vehicle
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();  
+
         try {
-            // API call to add a new vehicle
+            //  Add a new vehicle to (My vehicle)
             const response = await axios.post('http://localhost:4005/api/vehicles/newVehicle', {
                 ...vehicleData,
                 customerId: customerId // Include customer ID in the request
             });
-            toast.success('Vehicle added successfully!', {});  
+            toast.success('Vehicle added successfully!', {});
             // Reload the page after a short delay to show the updated vehicle list
             setTimeout(() => {
                 window.location.reload();
             }, 3000);
             console.log('Vehicle added successfully:', response.data);
         } catch (error) {
-            toast.error('Error adding vehicle. Please try again.', {});  
+            toast.error('Error adding vehicle. Please try again.', {});
             console.error('Error adding vehicle:', error.response ? error.response.data : error.message);
         }
     };
 
+
     // Fetch customer vehicle information when the component mounts
     useEffect(() => {
         axios.get('http://localhost:4005/api/vehicles/getvehicleinfo/' + customerId)
-            .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))  
+            .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))
             .catch(err => console.log(err));
     }, []);
 
-    // Handle vehicle deletion
+
+    // Deleted the vehicle in (My vehicle)
     const handleDelete = async (vehicleId) => {
         try {
-            // delete a vehicle
+             
             await axios.delete(`http://localhost:4005/api/vehicles/myVehicle/${vehicleId}`);
-            toast.success('Vehicle deleted successfully!'); // Show success message
+            toast.success('Vehicle deleted successfully!');  
             // Update state to remove deleted vehicle from the list
             setCustomervehicleinfo(customervehicleinfo.filter(vehicle => vehicle._id !== vehicleId));
+            
         } catch (error) {
-            toast.error('Error deleting vehicle. Please try again.');  
+            toast.error('Error deleting vehicle. Please try again.');
         }
+
     };
 
     // Open modal for editing vehicle data
     const handleEdit = (vehicle) => {
-        setEditVehicleData(vehicle);  
-        setSelectedVehicleId(vehicle._id);  
-        setShowModal(true);  
+        setEditVehicleData(vehicle);
+        setSelectedVehicleId(vehicle._id);
+        setShowModal(true);
     };
+
 
     // Handle change in the modal input fields
     const handleModalChange = (e) => {
         const { name, value } = e.target;
-        setEditVehicleData({ ...editVehicleData, [name]: value });  
+        setEditVehicleData({ ...editVehicleData, [name]: value });
     };
 
-    // Handle vehicle update
+
+    // Update the vehicle in (My vehicle)
     const handleUpdate = async () => {
         try {
-            // update the vehicle 
+            
             await axios.put(`http://localhost:4005/api/vehicles/myVehicle/${selectedVehicleId}`, editVehicleData);
-            toast.success('Vehicle updated successfully!');  
-            setShowModal(false);  
-            window.location.reload();  
+            toast.success('Vehicle updated successfully!');
+            setShowModal(false);
+            window.location.reload();
         } catch (error) {
-            toast.error('Error updating vehicle. Please try again.');  
+            toast.error('Error updating vehicle. Please try again.');
         }
     };
 
+
     // Handle modal close action
     const handleCloseModal = () => {
-        setShowModal(false);  
+        setShowModal(false);
     };
 
-    
     return (
         <div>
-            <ToastContainer />  
+            <ToastContainer />
             <div className="container">
                 <div className="row">
                     <div className="col-lg-7">
@@ -122,7 +132,6 @@ export const Addvehicle = () => {
                             <p>Vehicle Space</p>
                             <h2>My vehicles</h2>
                         </div>
-
 
                         <Table striped bordered hover>
                             <thead>
@@ -157,7 +166,6 @@ export const Addvehicle = () => {
                             })}
                         </Table>
                     </div>
-
 
                     <div className="col-lg-5">
                         <div className="section-header text-left">
@@ -237,7 +245,6 @@ export const Addvehicle = () => {
                 </div>
             </div>
 
-
             {/* Modal for editing vehicle details */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
@@ -287,7 +294,17 @@ export const Addvehicle = () => {
                             <label htmlFor="mfYear">Manufactured Year</label>
                         </Form.Floating>
 
-                         
+                        <Form.Floating className="mb-3">
+                            <Form.Control
+                                id="vrNo"
+                                type="text"
+                                placeholder="Vehicle Registered Number"
+                                name="vrNo"
+                                value={editVehicleData.vrNo}
+                                onChange={handleModalChange}
+                            />
+                            <label htmlFor="vrNo">Vehicle Registered Number</label>
+                        </Form.Floating>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
