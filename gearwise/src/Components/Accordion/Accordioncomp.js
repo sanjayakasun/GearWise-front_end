@@ -297,7 +297,7 @@ export default function Accordioncomp() {
                         return (
                           <Accordion >
                             <Accordion.Item eventKey="0">
-                              <Accordion.Header>Appointment</Accordion.Header>
+                              <Accordion.Header>Appointment Date : &ensp;<span style={{color:'green'}}> {formattedDate} </span> &ensp;& Time :&ensp;<span style={{color:'green'}}> {appointment.timeSlot} </span>. &ensp;<span>Expand for more information</span> </Accordion.Header>
                               <Accordion.Body style={{ visibility: 'visible' }}>
                                 <Form.Group>
                                   <Form.Label>Appointment ID</Form.Label>

@@ -8,17 +8,20 @@ span{
     margin-top: 20px;
   }
   
-  buttona {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    background-color: #4CAF50;
+  button.available {
+    background-color: green;
     color: white;
-    font-size: 16px;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    border-radius:10px;
   }
   
   button.disabled {
     background-color: #ccc;
     cursor: not-allowed;
+    width: 100px;
+    height: 50px;
+    border-radius:10px;
   }
   

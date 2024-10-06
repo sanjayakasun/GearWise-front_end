@@ -96,14 +96,15 @@ export default function Navbar({ customerId, onLogout }) {
                             <a href="/Appointment" className="nav-item nav-link">Get Appointment</a>
                             <a href="#" onClick={handleClick} className="nav-item nav-link"> Off Peak Pricing </a>
                             <a href="/Reward" className="nav-item nav-link">Rewarding</a>
-                            <a href="/Advertistments" className="nav-item nav-link">Advertistments</a>
-                            <a href="/Contact" className="nav-item nav-link">Contact us</a>
+                            <a href="/Addvehicle" className="nav-item nav-link">My Vehicles</a> 
+                            <a href="/Profile" className="nav-item nav-link">profile</a>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div className="dropdown-menu">
                                 <a href="/AppointmentList" className="dropdown-item">View Appointment</a>
+                                <a href="/Contact" className="dropdown-item">Contact us</a>
+                                <a href="/Advertistments" className="dropdown-item">Advertistments</a>
                                     {/* <a href={{ pathname: "/AppointmentList", state: { customerId } }} className="dropdown-item">View Appointment</a> */}
-                                    <a href="/Profile" className="dropdown-item">profile</a>
                                     {/* <a href={{ pathname: "/Profile", state: { customerId } }} className="dropdown-item">profile</a> */}
                                     {/* <a href="/Booking" className="dropdown-item"></a> */}
                                 </div>

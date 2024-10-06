@@ -24,11 +24,12 @@ export default function Appointments() {
   //changing the customer id for each team member 
   const customerId = "665e144096c5017136fb33a0"
   const navigate = useNavigate();
+  const [customervehicleinfo, setCustomervehicleinfo] = useState([]);
   const [customer, setCustomer] = useState([])
   const [vehicleType, setVehicleType] = useState("")
   const [vehicleModel, setVehicleModel] = useState("")
   const [mfYear, setMFYear] = useState("")
-  const [vrNo, setVRNo] = useState("")
+  const [vrNo, setVrNo] = useState("")
   const [serviceType, setWashingPlan] = useState("")
   const [timeSlot, setTimeSlot] = useState("")
 
@@ -45,7 +46,7 @@ export default function Appointments() {
     if (location.state?.scrollTo) {
       const element = document.getElementById(location.state.scrollTo);
       // const offpeakbuttonclick = document.getElementById(location.buttonClick);
-      console.log("click the off peak" ,buttonClick)
+      console.log("click the off peak", buttonClick)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
@@ -61,7 +62,7 @@ export default function Appointments() {
     '06:00 PM', '07:00 PM', '08:00 PM'
   ];
 
-  const availableTimeSlots  = buttonClick ? defaultTimeSlotsforoffpeak : availableTimeSlotsforall ;
+  const availableTimeSlots = buttonClick ? defaultTimeSlotsforoffpeak : availableTimeSlotsforall;
 
 
 
@@ -109,12 +110,6 @@ export default function Appointments() {
     return today;
   };
 
-
-
-
-
-
-
   const handleSelectChangeWashingPlan = (event) => {
     setWashingPlan(event.target.value);
   };
@@ -145,9 +140,10 @@ export default function Appointments() {
         'Content-Type': 'application/json'
       },
     })
-    // console.log(customerId);
-    // console.log(timeSlot);
-    // console.log(date);
+    // console.log(vehicleType);
+    // console.log(vehicleModel);
+    // console.log(mfYear);
+    // console.log(vrNo);
 
     if (result.ok) { // `response.ok` is true if the status is 200-299
       toast.success('Appointment successfully created!');
@@ -176,6 +172,31 @@ export default function Appointments() {
       .then(customer => setCustomer(customer.data))
       .catch(err => console.log(err))
   }, [])
+
+  // Fetch vehicle data on mount
+  useEffect(() => {
+    axios.get('http://localhost:4005/api/vehicles/getvehicleinfo/' + customerId)
+      .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))
+      .catch(err => console.log(err));
+  }, []);
+  console.log("Vehicle info", customervehicleinfo)
+  //getting vehicle information releated to customer
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
+
+  // Handle vehicle selection
+  const handleVehicleSelection = (event) => {
+    const selectedVrNo = event.target.value;
+    setVrNo(selectedVrNo);
+    const selectedVehicleInfo = customervehicleinfo.find(vehicle => vehicle.vrNo === selectedVrNo);
+    if (selectedVehicleInfo) {
+      setSelectedVehicle(selectedVehicleInfo);
+      setVehicleModel(selectedVehicleInfo.vehicleModel);
+      setMFYear(selectedVehicleInfo.mfYear);
+      setVehicleType(selectedVehicleInfo.vehicleType);
+    }
+  };
+  console.log(vehicleModel)
+
 
   return (
     <div>
@@ -250,42 +271,45 @@ export default function Appointments() {
                     <h4>Vehicle Information</h4>
                     <div className="col-md-6">
                       <Card.Body>
-                        <Card.Title></Card.Title>
                         <Card.Text>
-                          <FloatingLabel controlId="floatingSelect" label="Vehicle Type">
-                            <Form.Select aria-label="Floating label select example" value={vehicleType} onChange={handleSelectChangeVehicleType}>
-                              <option value="Car">Car <span>*</span></option>
-                              <option value="Van">Van</option>
-                              <option value="SUV">SUV</option>
-                              <option value="Truck">Truck</option>
-                              <option value="Bus">Bus</option>
+                          <FloatingLabel controlId="floatingSelect" label="Vehicle Registration Number">
+                            <Form.Select aria-label="Select vehicle registration number"
+                              value={vrNo}
+                              onChange={handleVehicleSelection}
+                            >
+                              <option value="">Select Vehicle</option>
+                              {customervehicleinfo.map((vehicle, index) => (
+                                <option key={index} value={vehicle.vrNo}>
+                                  {vehicle.vrNo}
+                                </option>
+                              ))}
                             </Form.Select>
                           </FloatingLabel>
                         </Card.Text>
                       </Card.Body>
                     </div>
+
                     <div className="col-md-6">
                       <Card.Body>
-                        <Card.Title></Card.Title>
                         <Card.Text>
                           <Form.Floating className="mb-3">
                             <Form.Control
                               id="floatingInputCustom"
-                              type="Text"
+                              type="text"
                               placeholder="Model of Vehicle"
                               value={vehicleModel}
                               onChange={(e) => setVehicleModel(e.target.value)}
                             />
-                            <label htmlFor="floatingInputCustom">Model of Vehicle <span>*</span></label>
+                            <label htmlFor="floatingInputCustom">Model of Vehicle</label>
                           </Form.Floating>
                         </Card.Text>
                       </Card.Body>
                     </div>
                   </div>
+
                   <div className="row">
                     <div className="col-md-6">
                       <Card.Body>
-                        <Card.Title></Card.Title>
                         <Card.Text>
                           <Form.Floating>
                             <Form.Control
@@ -300,19 +324,19 @@ export default function Appointments() {
                         </Card.Text>
                       </Card.Body>
                     </div>
+
                     <div className="col-md-6">
                       <Card.Body>
-                        <Card.Title></Card.Title>
                         <Card.Text>
                           <Form.Floating>
                             <Form.Control
                               id="floatingPasswordCustom"
                               type="text"
-                              placeholder="Veicle Registerd Number" required
-                              value={vrNo}
-                              onChange={(e) => setVRNo(e.target.value)}
+                              placeholder="Manufactured Year"
+                              value={vehicleType}
+                              onChange={(e) => setVehicleType(e.target.value)}
                             />
-                            <label htmlFor="floatingPasswordCustom">Veicle Registerd Number <span>*</span></label>
+                            <label htmlFor="floatingSelectCustom">Vehicle Type</label>
                           </Form.Floating>
                         </Card.Text>
                       </Card.Body>
@@ -346,7 +370,7 @@ export default function Appointments() {
                   </div>
                   <Packages />
                 </Card>
-                <div  id='container'>
+                <div id='container'>
 
                 </div>
                 {/* service type is over */}
@@ -362,82 +386,48 @@ export default function Appointments() {
                           min={disablePastDates()}
                           onChange={handleDateChange}
                         />
-                        {/*<Card.Text>
-                          <FloatingLabel controlId="floatingSelect" label="Time Sots">
-                            <Form.Select aria-label="Floating label select example" value={timeSlot} onChange={handleSelectTimeSlot}>
-                              <option value="08.00 a.m- 09.00 a.m">08.00 a.m- 09.00 a.m<span>*</span></option>
-                              <option value="09.00 a.m- 10.00 a.m">09.00 a.m- 10.00 a.m</option>
-                              <option value="10.00 a.m- 11.00 a.m">10.00 a.m- 11.00 a.m</option>
-                              <option value="11.00 a.m- 12.00 p.m">11.00 a.m- 12.00 p.m</option>
-                              <option value="01.00 p.m- 02.00 p.m">01.00 p.m- 02.00 p.m</option>
-                              <option value="02.00 p.m- 03.00 p.m">02.00 p.m- 03.00 p.m</option>
-                              <option value="03.00 p.m- 04.00 p.m">03.00 p.m- 04.00 p.m</option>
-                              <option value="04.00 p.m- 05.00 p.m">04.00 p.m- 05.00 p.m</option>
-                              <option value="05.00 p.m- 06.00 p.m">05.00 p.m- 06.00 p.m</option>
-                              <option value="06.00 p.m- 07.00 p.m">06.00 p.m- 07.00 p.m</option>
-                              <option>Off Peak Pricing Time Slot</option>
-                              <option value="08.00 p.m - 09.00 p.m">08.00 p.m - 09.00 p.m</option>
-                              <option value="09.00 p.m- 10.00 p.m">09.00 p.m- 10.00 p.m</option>
-                            </Form.Select>
-                          </FloatingLabel>
-                        </Card.Text>*/}
                       </Card.Body>
                     </div>
                     <div className="col-md-6">
-                    {buttonClick ? (
-        <div>
-          {/* The content you want to show when the button is clicked */}
-          <Card.Body>
-          <Card.Title>Select Available <span style={
-            {color:'green'}
-          }>Off Peak Pricing</span> Time Slot</Card.Title>
-          <div className="time-slots" style={{justifyContent:'center'}}>
-            {timeSlots.map((time, index) => (
-              <buttona
-                key={index}
-                disabled={!isTimeSlotAvailable(time)}
-                onClick={() => handleBooking(time)}
-                className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
-              >
-                {time}
-              </buttona>
-            ))}
-          </div>
-        </Card.Body>
-        </div>
-      ) : (
-        <Card.Body>
-          <Card.Title>Select Available Time Slot</Card.Title>
-          <h6>6.00 p.m to 8.00 p.m Time slots are Available in Off-Peak Pricing</h6>
-          <div className="time-slots" style={{justifyContent:'center'}}>
-            {timeSlots.map((time, index) => (
-              <buttona
-                key={index}
-                disabled={!isTimeSlotAvailable(time)}
-                onClick={() => handleBooking(time)}
-                className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
-              >
-                {time}
-              </buttona>
-            ))}
-          </div>
-        </Card.Body>
-      )}
-                      {/* <Card.Body>
-                        <Card.Title>Select Available Time Slot </Card.Title>
-                        <div className="time-slots">
-                          {timeSlots.map((time, index) => (
-                            <button
-                              key={index}
-                              disabled={!isTimeSlotAvailable(time)}
-                              onClick={() => handleBooking(time)}
-                              className={!isTimeSlotAvailable(time) ? 'disabled' : ''}
-                            >
-                              {time}
-                            </button>
-                          ))}
+                      {buttonClick ? (
+                        <div>
+                          {/* The content you want to show when the button is clicked */}
+                          <Card.Body>
+                            <Card.Title>Select Available <span style={
+                              { color: 'green' }
+                            }>Off Peak Pricing</span> Time Slot</Card.Title>
+                            <div className="time-slots" style={{ justifyContent: 'center' }}>
+                              {timeSlots.map((time, index) => (
+                                <button
+                                  key={index}
+                                  disabled={!isTimeSlotAvailable(time)}
+                                  onClick={() => handleBooking(time)}
+                                  className={isTimeSlotAvailable(time) ? 'available' : 'disabled'}
+                                >
+                                  {time}
+                                </button>
+                              ))}
+                            </div>
+                          </Card.Body>
                         </div>
-                      </Card.Body> */}
+                      ) : (
+                        <Card.Body>
+                          <Card.Title>Select Available Time Slot</Card.Title>
+                          <h6>6.00 p.m to 8.00 p.m Time slots are Available in Off-Peak Pricing</h6>
+                          <div className="time-slots" style={{ justifyContent: 'center' }}>
+                            {timeSlots.map((time, index) => (
+                              <button
+                                key={index}
+                                disabled={!isTimeSlotAvailable(time)}
+                                onClick={() => handleBooking(time)}
+                                className={isTimeSlotAvailable(time) ? 'available' : 'disabled'}
+                              >
+                                {time}
+                              </button>
+                            ))}
+                          </div>
+                        </Card.Body>
+                      )}
                     </div>
                   </div>
                 </Card>
@@ -445,6 +435,7 @@ export default function Appointments() {
             </div>
           </div>
         </div >
+
         <br />
         {/* <Appointmentbtn/> */}
       </form>
