@@ -3,7 +3,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BrowserRouter,Route, Router, Routes,useLocation} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+// Importing all the necessary components and pages
 import Home from './Pages/Home';
 import Aboutus_page from './Pages/Aboutus_page';
 import Service_page from './Pages/Service_page';
@@ -14,7 +16,6 @@ import Queue_page from './Pages/Queue_page';
 import Profile from './Components/Profile/Profile.js';
 import Profile_page from './Pages/Profile_page.js';
 import Profilevehicle from './Components/Profilevehicle/Profilevehicle';
-// import Reviewsfromdb from './Components/Reviews/Reviewsfromdb';
 import Appointments_admin from './Components/Appoinment.jsx';
 import Vehicle_history from './Pages/Vehicle_history';
 import Review from './Pages/Review';
@@ -32,34 +33,34 @@ import Admin_ad from './Pages/Admin_ad.jsx';
 import Moderator_alert from './Pages/Moderator_alert.jsx';
 import Supp_dash from './Pages/Supp_dash.jsx';
 import Supp_ad from './Pages/Supp_ad.jsx';
-import Profile1 from './Components/Profile/Profile.js';
 import Mod_Product from './Pages/Mod_Product.jsx';
-import Login from './Pages/Login/index.jsx'
-import Signup from './Pages/Signup/index.jsx'
+import Login from './Pages/Login/index.jsx';
+import Signup from './Pages/Signup/index.jsx';
 import Charts from './Components/Charts/Charts.js';
 import Addvehicle_page from './Pages/Addvehicle_page.js';
 import Mapp from './Pages/Mapp.js';
 import Queue from "./Pages/Queue.js";
-import Admin_mail from './Pages/Admin_mail.jsx'
+
 // import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
+  // State to store user data
   const [user, setUser] = useState(null);
-  //google oauth
+
+  // Function to get the authenticated user
   const getUser = async () => {
     try {
       const url = `${"http://localhost:4005"}/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
-      setUser(data.user._json);
+      setUser(data.user._json);  // Set user data from Google OAuth
     } catch (err) {
-      console.log(err);
+      console.log(err);  // Log error if something goes wrong
     }
   };
 
+  // Hook to trigger the getUser function on component mount
   useEffect(() => {
-    //google oauth switch
-    getUser();
+    getUser();  // Fetch user info if authenticated
   }, []);
-
 
   return (
     <div className="">
@@ -100,13 +101,10 @@ const App = () => {
         <Route path="/Addvehicle" element={<Addvehicle_page />} />
         <Route path="/map" element={<Mapp />} />
         <Route path="/Queue" element={<Queue />} />
-        <Route path='/email' element={<Admin_mail/>}/>
-
+         
 
       </Routes>
       </BrowserRouter>
- 
-      
     </div>
   );
 };
