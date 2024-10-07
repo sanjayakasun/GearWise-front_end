@@ -12,7 +12,11 @@ import 'react-toastify/dist/ReactToastify.css';
 function Login() {
   //google oauth function
   const googleAuth = () => {
-    window.open(`${"http://localhost:8080"}/auth/google/callback`, "_self");
+    window.open(
+      `${"http://localhost:4005"}/api/auth/google/callback`,
+      "_self"
+    );
+    console.log("Logged in success",email)
   };
 
     // for toast message
@@ -44,6 +48,7 @@ function Login() {
       console.log(password);
       console.log(response);
       if (response.ok) {
+        
         const result = await response.json();
         console.log("Success:", result);
         toast.success('User register Sucessfully');
@@ -57,6 +62,7 @@ function Login() {
         console.log("Error:", error);
         toast.error("User Alreday Exists! Use Different email");
     }
+    
     // toast.error("Please fill all the feilds");
   }
   return (
@@ -127,7 +133,7 @@ function Login() {
               placeholder="Password"
             />
             <br/>
-            <button type="submit" className="btn btn-custom" onClick={submit}>
+            <button type="submit" className="btn btn-custom" onSubmit={submit}>
               Sign Up
             </button>
           </form>
