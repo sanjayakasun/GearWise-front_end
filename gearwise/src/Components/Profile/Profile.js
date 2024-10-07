@@ -20,6 +20,42 @@ export const U_Profile = () => {
         profilePhoto: null // Initialize profilePhoto as null
     });
 
+    // State to hold password data
+    const [passwordData, setPasswordData] = useState({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
+
+    // Handle password input changes
+    const handlePasswordChange = (e) => {
+        const { name, value } = e.target;
+        setPasswordData({
+            ...passwordData,
+            [name]: value
+        });
+    };
+
+    // Handle password update submission
+    const handlePasswordSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.put(
+                `http://localhost:4005/api/customers/updatePassword/67039c3e5e3ca7f7f8935a8e`,
+                passwordData
+            );
+            toast.success('Password updated successfully!');
+            setPasswordData({
+                currentPassword: '',
+                newPassword: '',
+                confirmPassword: ''
+            });
+        } catch (error) {
+            console.error('Error updating password:', error);
+            toast.error('There was an error updating the password!');
+        }
+    };
+
     const location = useLocation();
     const hideButtonPath = '/Vehicle_history';
     const hideButton = location.pathname === hideButtonPath;
@@ -72,6 +108,7 @@ export const U_Profile = () => {
     };
 
 
+    
 
     return (
         <div>
@@ -124,14 +161,17 @@ export const U_Profile = () => {
                                             <form onSubmit={handleSubmit}>
 
                                                 <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
+
+
+                                                 
                                                     {/* <div className="sm:col-span-3">
                                                         <label className="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                             Profile photo
                                                         </label>
-                                                    </div> */}
+                                                    </div>
 
 
-                                                    {/* <div className="sm:col-span-9">
+                                                    <div className="sm:col-span-9">
                                                         <div className="flex items-center gap-5">
                                                             <img
                                                                 className="cv"
@@ -334,7 +374,7 @@ export const U_Profile = () => {
                                             </p>
                                         </div>
 
-                                        <form>
+                                        <form onSubmit={handlePasswordSubmit}>
 
                                             <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
                                                 {/* <div className="sm:col-span-3">
@@ -406,7 +446,7 @@ export const U_Profile = () => {
 
                                                 <div className="sm:col-span-9">
                                                     <div className="space-y-2">
-                                                        <input id="af-account-password" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter current password" />
+                                                        <input type="password" name="currentPassword" className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm focus:ring-blue-500" value={passwordData.currentPassword} onChange={handlePasswordChange} placeholder="Current Password" />
                                                         {/* <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter new password" /> */}
                                                     </div>
                                                 </div>
@@ -424,7 +464,7 @@ export const U_Profile = () => {
 
                                                 <div className="sm:col-span-9">
                                                     <div className="space-y-2">
-                                                        <input id="af-account-password" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter New password" />
+                                                        <input type="password" name="newPassword" className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm focus:ring-blue-500" value={passwordData.newPassword} onChange={handlePasswordChange} placeholder="New Password" />
                                                         {/* <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter new password" /> */}
                                                     </div>
                                                 </div>
@@ -441,7 +481,7 @@ export const U_Profile = () => {
 
                                                 <div className="sm:col-span-9">
                                                     <div className="space-y-2">
-                                                        <input id="af-account-password" type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Confirm new password" />
+                                                        <input type="password" name="confirmPassword" className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm focus:ring-blue-500" value={passwordData.confirmPassword} onChange={handlePasswordChange} placeholder="Confirm New Password" />
                                                         {/* <input type="text" className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter new password" /> */}
                                                     </div>
                                                 </div>
@@ -522,7 +562,7 @@ export const U_Profile = () => {
                                                 {/* <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
                                                     Cancel
                                                 </button> */}
-                                                <button type="button" onSubmit={handleSubmit} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-800 disabled:opacity-50 disabled:pointer-events-none">
+                                                <button type="submit" onSubmit={handleSubmit} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-800 disabled:opacity-50 disabled:pointer-events-none">
                                                     Save changes
                                                 </button>
                                             </div>
