@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Img1 from '../../img/Addvehicle1.jpg';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 
 export const Addvehicle = () => {
     // State to store form data
@@ -58,6 +59,18 @@ export const Addvehicle = () => {
           .catch(err => console.log(err));
       }, []);
       console.log(customervehicleinfo)
+
+    // Delete vehicle function
+    const handleDelete = async (vehicleId) => {
+        try {
+            await axios.delete(`http://localhost:4005/api/vehicles/myVehicle/${vehicleId}`);
+            toast.success('Vehicle deleted successfully!');
+            setCustomervehicleinfo(customervehicleinfo.filter(vehicle => vehicle._id !== vehicleId)); // Remove the deleted vehicle from the list
+        } catch (error) {
+            toast.error('Error deleting vehicle. Please try again.');
+        }
+    };
+    
     return (
         <div>
             
@@ -81,41 +94,41 @@ export const Addvehicle = () => {
                             <p>Vehicle Space</p>
                             <h2>My vehicles</h2>
                         </div>
+
                         <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Vehicle ID</th>
-          <th>Vechicle Info</th>
-          <th>Vehicle <br/> Registration No</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      {customervehicleinfo.map(vehicleinfo => { 
-        const vehicleid = vehicleinfo._id;
-        console.log("map vehicle id",vehicleid)
-        return(
-        <tbody>
-        <tr>
-          <td>{vehicleid}</td>
-          <td>
-          Vehicle Model : {vehicleinfo.vehicleModel}
-            <br/>
-            Vehicle Type : {vehicleinfo.vehicleType}
-            <br/>
-            Year : {vehicleinfo.mfYear}
-          </td>
-          <td>{vehicleinfo.vrNo}</td>
-          <td><Button variant="success">Edit</Button> 
-          <br/> <br/>
-          <Button variant="danger">Delete</Button> 
-          </td>
-        </tr>
-      </tbody>
-        )
-      }
-    )}
-      
-    </Table>
+                            <thead>
+                                <tr>
+                                    <th>Vehicle ID</th>
+                                    <th>Vehicle Info</th>
+                                    <th>Vehicle <br /> Registration No</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            {customervehicleinfo.map(vehicleinfo => {
+                                const vehicleid = vehicleinfo._id;
+                                console.log("map vehicle id", vehicleid);
+                                return (
+                                    <tbody key={vehicleid}>
+                                        <tr>
+                                            <td>{vehicleid}</td>
+                                            <td>
+                                                Vehicle Model : {vehicleinfo.vehicleModel}
+                                                <br />
+                                                Vehicle Type : {vehicleinfo.vehicleType}
+                                                <br />
+                                                Year : {vehicleinfo.mfYear}
+                                            </td>
+                                            <td>{vehicleinfo.vrNo}</td>
+                                            <td style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                                <button><AiOutlineEdit style={{   fontSize: '20px', marginBottom: '10px' }} /></button >
+                                                <button onClick={() => handleDelete(vehicleid)}><AiOutlineDelete style={{ fontSize: '20px', color: '#ff4d4f' }} /></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                );
+                            })}
+                        </Table>
+                        
                     </div>
 
                     <div className="col-lg-5">
