@@ -43,7 +43,7 @@ export default function Location() {
 
                             </div>
                             <h3>Location Track</h3>
-                            <a class="btn btn-custom" href="">Track the Nearest Location</a>
+                            <a class="btn btn-custom" href="/map">Track the Nearest Location</a>
                         </div>
                     </div>
                 </div>
