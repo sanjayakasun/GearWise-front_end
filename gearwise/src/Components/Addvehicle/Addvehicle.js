@@ -22,7 +22,7 @@ export const Addvehicle = () => {
     });
 
 
-    const customerId = "665e144096c5017136fb33a0"; // Customer ID (can be fetched dynamically)
+    const customerId = "6704e63ca5bd42aad58b2af4"; // Customer ID (can be fetched dynamically)
     const navigate = useNavigate();
     const [customervehicleinfo, setCustomervehicleinfo] = useState([]);  
     const [showModal, setShowModal] = useState(false); // State to control modal visibility

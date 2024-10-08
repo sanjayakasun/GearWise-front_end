@@ -11,7 +11,8 @@ import Test from '../Components/Carousel/Test';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Advertistments from '../Components/Advertistments/Advertistments';
 import Fotter from '../Components/Fotter/Fotter';
-import Review from '../Components/Review/Review'
+import Review from '../Components/Review/Review';
+import Tabs from '../Components/Tabs/Tabs';
 // import Upbutton from '../Components/Upbutton/Upbutton';
 // import Appointmentbtn from '../Components/Appoinmentbtn/Appointmentbtn';
 import Rewarding from '../Components/Rewarding/Rewarding';
@@ -32,6 +33,7 @@ export default function Home() {
       <Topbar/>
         <Navbar customerId={customerId} onLogout={handleLogout} />
         <Test/>
+        <Tabs/>
         <Aboutus/>
         <Service/>
         <Packages/>

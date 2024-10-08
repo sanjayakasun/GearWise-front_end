@@ -51,6 +51,7 @@ export default function Charts() {
     fetchAppointmentCount();
   }, []);
 
+  
   {appointmentDetails.map((appointment, index) => {
     if (appointment.serviceType === 'Complex Cleaning') {
       complexcount++;

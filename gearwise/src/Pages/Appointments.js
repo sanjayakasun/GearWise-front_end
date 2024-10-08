@@ -22,7 +22,7 @@ const moment = require('moment');
 
 export default function Appointments() {
   //changing the customer id for each team member 
-  const customerId = "665e144096c5017136fb33a0"
+  const customerId = "6704e63ca5bd42aad58b2af4"
   const navigate = useNavigate();
   const [customervehicleinfo, setCustomervehicleinfo] = useState([]);
   const [customer, setCustomer] = useState([])
@@ -79,7 +79,8 @@ export default function Appointments() {
     console.log("Appointments for toay", appointments)
     const appointmentsAtTime = appointments.filter(appointment => appointment.timeSlot === time);
     console.log("appointments at this slot", appointmentsAtTime);
-    if (appointmentsAtTime.length >= 2) {
+    // ensuring the avaiblability of relevant time slot
+    if (appointmentsAtTime.length >= 5) {
       return false;
     }
 
