@@ -27,7 +27,7 @@ const Sidebar = ({children}) => {
             icon:<FaWrench  />
         },
         {
-            path:"/email",
+            path:"/mail",
             name:"Alert",
             icon:<FaExclamationTriangle  />
         },
