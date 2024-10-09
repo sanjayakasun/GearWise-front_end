@@ -13,6 +13,7 @@ import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import Modal from 'react-bootstrap/Modal';
 
 export const Addvehicle = () => {
+
     // State to hold new vehicle data
     const [vehicleData, setVehicleData] = useState({
         vehicleType: '',
@@ -22,7 +23,8 @@ export const Addvehicle = () => {
     });
 
 
-    const customerId = "6704e63ca5bd42aad58b2af4"; // Customer ID (can be fetched dynamically)
+    // const customerId = "6704e63ca5bd42aad58b2af4"; // Customer ID (can be fetched dynamically)
+    // const [customerId, setCustomerId] = useState(null); // State to store customerId
     const navigate = useNavigate();
     const [customervehicleinfo, setCustomervehicleinfo] = useState([]);  
     const [showModal, setShowModal] = useState(false); // State to control modal visibility
@@ -33,13 +35,28 @@ export const Addvehicle = () => {
         vrNo: ''
     });
     const [selectedVehicleId, setSelectedVehicleId] = useState(null); // State for selected vehicle ID
-
+    
 
     // Handle change in the vehicle data input fields
     const handleChange = (e) => {
         const { name, value } = e.target;
         setVehicleData({ ...vehicleData, [name]: value });
     };
+
+    // for authonticated users
+    const [customerId, setCustomerId] = useState(null); // Store customer ID
+    // Fetch customer ID from localStorage
+    useEffect(() => {
+        const storedCustomerId = localStorage.getItem('customerId');
+        if (storedCustomerId) {
+            setCustomerId(storedCustomerId);
+        } else {
+            // toast.error('Unauthorized Access! Please Login');
+            // Redirect to login page if customerId is not available
+            navigate('/login');
+        }
+    }, [navigate]);
+
 
 
     // Handle form submission to add a new vehicle
@@ -63,14 +80,22 @@ export const Addvehicle = () => {
             console.error('Error adding vehicle:', error.response ? error.response.data : error.message);
         }
     };
-
-
+    console.log("customer id for addvehicle",customerId);
     // Fetch customer vehicle information when the component mounts
+    // useEffect(() => {
+    //     axios.get('http://localhost:4005/api/vehicles/getvehicleinfo/' + customerId)
+    //         .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))
+    //         .catch(err => console.log(err));
+    // }, []);
+// edited for getting relevant vehicle information of logged customer
     useEffect(() => {
-        axios.get('http://localhost:4005/api/vehicles/getvehicleinfo/' + customerId)
-            .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))
-            .catch(err => console.log(err));
-    }, []);
+        if (customerId) {
+            axios.get(`http://localhost:4005/api/vehicles/getvehicleinfo/${customerId}`)
+                .then(response => setCustomervehicleinfo(response.data))
+                .catch(err => console.log(err));
+        }
+    }, [customerId]);
+    
 
 
     // Deleted the vehicle in (My vehicle)

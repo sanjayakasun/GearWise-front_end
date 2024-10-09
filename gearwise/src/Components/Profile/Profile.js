@@ -4,6 +4,7 @@ import Img2 from '../../img/Vehiclehistory.jpg'
 import Img3 from '../../img/P_Addvehicle.jpg'
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +12,21 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export const U_Profile = () => {
+    const navigate = useNavigate();
+    const [customerId, setCustomerId] = useState(null); // Store customer ID
+  // Fetch customer ID from localStorage
+  useEffect(() => {
+      const storedCustomerId = localStorage.getItem('customerId');
+      if (storedCustomerId) {
+          setCustomerId(storedCustomerId);
+      } else {
+          // toast.error('Unauthorized Access! Please Login');
+          // Redirect to login page if customerId is not available
+          navigate('/login');
+      }
+  }, [navigate]);
+
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -40,8 +56,9 @@ export const U_Profile = () => {
     const handlePasswordSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (customerId) {
             const response = await axios.put(
-                `http://localhost:4005/api/customers/updatePassword/67039c3e5e3ca7f7f8935a8e`,
+                `http://localhost:4005/api/customers/updatePassword/${customerId}`,
                 passwordData
             );
             toast.success('Password updated successfully!');
@@ -49,7 +66,7 @@ export const U_Profile = () => {
                 currentPassword: '',
                 newPassword: '',
                 confirmPassword: ''
-            });
+            }); }
         } catch (error) {
             console.error('Error updating password:', error);
             toast.error('There was an error updating the password!');
@@ -67,9 +84,11 @@ export const U_Profile = () => {
     //Fetching data
     const getOneCusprofile = async () => {
         try {
-            const result = await axios.get(`http://localhost:4005/api/customers/customerspro/665ac56fe1c1526588d9da9d`);
+            if (customerId) {
+            const result = await axios.get(`http://localhost:4005/api/customers/customerspro/${customerId}`);
             setFormData(result.data);
             console.log(result.data);
+            }
         } catch (error) {
             console.error('Error loading data:', error);
         }
@@ -98,9 +117,11 @@ export const U_Profile = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(`http://localhost:4005/api/customers/customerspro/665ac56fe1c1526588d9da9d`, formData);
+            if (customerId) {
+            const response = await axios.put(`http://localhost:4005/api/customers/customerspro/${customerId}`, formData);
             console.log("Profile updated successfully:", response.data);
             toast.success('Profile updated successfully!');
+            }
         } catch (error) {
             console.error("Error updating profile:", error);
             toast.error('There was an error updating the profile!');

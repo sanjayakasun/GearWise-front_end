@@ -19,19 +19,19 @@ import Rewarding from '../Components/Rewarding/Rewarding';
 
 
 export default function Home() {
-  const location = useLocation();
-  const customerId = location.state?.customerId;
-  // const [customerId, setCustomerId] = location.state?.customerId;
-  console.log("cusid",customerId)
+  // const location = useLocation();
+  // const customerId = location.state?.customerId;
+  // // const [customerId, setCustomerId] = location.state?.customerId;
+  // console.log("cusid",customerId)
 
-  const handleLogout = () => {
-    // setCustomerId(null);
-    customerId = "";
-  };
+  // const handleLogout = () => {
+  //   // setCustomerId(null);
+  //   customerId = "";
+  // };
   return (
     <div>
       <Topbar/>
-        <Navbar customerId={customerId} onLogout={handleLogout} />
+        <Navbar />
         <Test/>
         <Tabs/>
         <Aboutus/>

@@ -3,21 +3,60 @@ import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner';
+import { useEffect} from 'react'
 import './Loader.css';
+import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Img1 from '../../img/offer.png';
 import Img2 from '../../img/offer2.png'
 
-export default function Navbar({ customerId, onLogout }) {
+export default function Navbar() {
 
-    // const setCustomerId = customerId;
+
+    //ksk
+    const [customerId, setCustomerId] = useState(null); // State to store customerId
     const navigate = useNavigate();
+     // Retrieve customerId from localStorage on component mount
+  useEffect(() => {
+    const storedCustomerId = localStorage.getItem('customerId');
+    if (storedCustomerId) {
+      setCustomerId(storedCustomerId);
+    }
+  }, []); // Empty dependency array to run only once when the component mounts
+    // Fetch session info from backend on component mount
+    // useEffect(() => {
+    //     const fetchCustomer = async () => {
+    //         try {
+    //             const response = await axios.get('http://localhost:4005/api/customers/session', { withCredentials: true })
+    //             .then(response => {
+    //                 // Handle the response
+    //                 if (response.data.customerId) {
+    //                   setCustomerId(response.data.customerId);
+    //               }
+    //               console.log('Session ID:', document.cookie); // Logs all cookies, including the session ID
+    //               console.log('Customer ID from Session:', response.data.customerId);
+    //             });
+    //         } catch (error) {
+    //             console.log("Error fetching session info:", error);
+    //         }
+    //     };
+    //     fetchCustomer();
+    // }, []);
 
-    const handleLogout = () => {
-        // onLogout();
-        navigate('/');
-      };
+    // Handle logout
+    const handleLogout = async () => {
+        try {
+            // await axios.post('http://localhost:4005/api/customers/logout');
+            localStorage.removeItem('customerId');
+            setCustomerId(null);
+            navigate('/login');
+        } catch (error) {
+            console.log("Logout error:", error);
+        }
+    };
+    
+    //ksk
 
       const [loading, setLoading] = useState(false);
       const [modalShow, setModalShow] = React.useState(false);

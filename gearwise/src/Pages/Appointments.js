@@ -22,7 +22,7 @@ const moment = require('moment');
 
 export default function Appointments() {
   //changing the customer id for each team member 
-  const customerId = "6704e63ca5bd42aad58b2af4"
+  // const customerId = "6704e63ca5bd42aad58b2af4"
   const navigate = useNavigate();
   const [customervehicleinfo, setCustomervehicleinfo] = useState([]);
   const [customer, setCustomer] = useState([])
@@ -64,7 +64,18 @@ export default function Appointments() {
 
   const availableTimeSlots = buttonClick ? defaultTimeSlotsforoffpeak : availableTimeSlotsforall;
 
-
+  const [customerId, setCustomerId] = useState(null); // Store customer ID
+  // Fetch customer ID from localStorage
+  useEffect(() => {
+      const storedCustomerId = localStorage.getItem('customerId');
+      if (storedCustomerId) {
+          setCustomerId(storedCustomerId);
+      } else {
+          // toast.error('Unauthorized Access! Please Login');
+          // Redirect to login page if customerId is not available
+          navigate('/login');
+      }
+  }, [navigate]);
 
   useEffect(() => {
     if (date) {
@@ -130,7 +141,7 @@ export default function Appointments() {
     return moment(isoString).format("MM/DD/yyyy");
     //return moment(isoString).format('MMMM Do YYYY, h:mm:ss a');
   }
-  console.log('Selected date:', date);
+  console.log('customer id for make appointment:', customerId);
 
   const createAppointment = async (e) => {
     e.preventDefault();
@@ -168,18 +179,21 @@ export default function Appointments() {
 
   // getting customer info using database
   useEffect(() => {
-    //for testing only 665e144096c5017136fb33a0 otherwise remove the id
-    axios.get('http://localhost:4005/api/customers/customerspro/' + customerId)
+    if (customerId) {
+    axios.get(`http://localhost:4005/api/customers/customerspro/${customerId}`)
       .then(customer => setCustomer(customer.data))
-      .catch(err => console.log(err))
-  }, [])
+      .catch(err => console.log(err))}
+  }, [customerId])
+  
 
   // Fetch vehicle data on mount
   useEffect(() => {
-    axios.get('http://localhost:4005/api/vehicles/getvehicleinfo/' + customerId)
+    if (customerId) {
+    axios.get(`http://localhost:4005/api/vehicles/getvehicleinfo/${customerId}`)
       .then(customervehicleinfo => setCustomervehicleinfo(customervehicleinfo.data))
       .catch(err => console.log(err));
-  }, []);
+    }
+  }, [customerId]);
   console.log("Vehicle info", customervehicleinfo)
   //getting vehicle information releated to customer
   const [selectedVehicle, setSelectedVehicle] = useState(null);

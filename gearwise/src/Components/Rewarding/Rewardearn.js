@@ -5,18 +5,31 @@ import Img1 from '../../img/coin.gif'
 import Img2 from '../../img/gold.jpg'
 import Img3 from '../../img/silver.png'
 import Table from 'react-bootstrap/Table';
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Rewardearn() {
+    const navigate = useNavigate();
+    const [customerId, setCustomerId] = useState(null); // Store customer ID
+    // Fetch customer ID from localStorage
+    useEffect(() => {
+        const storedCustomerId = localStorage.getItem('customerId');
+        if (storedCustomerId) {
+            setCustomerId(storedCustomerId);
+        } else {
+            // toast.error('Unauthorized Access! Please Login');
+            // Redirect to login page if customerId is not available
+            navigate('/login');
+        }
+    }, [navigate]);
 
-    const customerId = "665e144096c5017136fb33a0"
     const [appointments, setappointment] = useState([])
     useEffect(() => {
         //for testing only 665e144096c5017136fb33a0 otherwise remove the id
-        axios.get('http://localhost:4005/api/appointments/appointmentcount/' + customerId)
+        axios.get(`http://localhost:4005/api/appointments/appointmentcount/${customerId}`)
             .then(appointments => setappointment(appointments.data))
             .catch(err => console.log(err))
-    }, [])
+    }, [customerId])
 
     const point = appointments.count;
 

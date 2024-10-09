@@ -5,15 +5,29 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import DatePicker from 'react-datepicker';
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const moment = require('moment');
 
 
 export default function Accordioncomp() {
+  const navigate = useNavigate();
+  const [customerId, setCustomerId] = useState(null); // Store customer ID
+  // Fetch customer ID from localStorage
+  useEffect(() => {
+      const storedCustomerId = localStorage.getItem('customerId');
+      if (storedCustomerId) {
+          setCustomerId(storedCustomerId);
+      } else {
+          // toast.error('Unauthorized Access! Please Login');
+          // Redirect to login page if customerId is not available
+          navigate('/login');
+      }
+  }, [navigate]);
 
   const [modalShow, setModalShow] = React.useState(false);
-  const customerId = "6704e63ca5bd42aad58b2af4"
+  // const customerId = "6704e63ca5bd42aad58b2af4"
   const [appointments, setappointment] = useState([])
   const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState([]);
@@ -59,10 +73,10 @@ export default function Accordioncomp() {
 
   useEffect(() => {
     //for testing only 665e144096c5017136fb33a0 otherwise remove the id
-    axios.get('http://localhost:4005/api/appointments/viewappointment/' + customerId)
+    axios.get(`http://localhost:4005/api/appointments/viewappointment/${customerId}`)
       .then(appointments => setappointment(appointments.data))
       .catch(err => console.log(err))
-  }, [])
+  }, [customerId])
   const handleButtonClick = (id) => {
     setModalShow(true);
     setSelectedAppointmentId(id);
