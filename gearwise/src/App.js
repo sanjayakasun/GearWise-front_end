@@ -41,6 +41,7 @@ import Addvehicle_page from './Pages/Addvehicle_page.js';
 import Mapp from './Pages/Mapp.js';
 import Queue from "./Pages/Queue.js";
 import Mod_Mail from './Pages/Mod_mail.jsx';
+import Logout from './Components/Logout.jsx'
 
 // import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
@@ -103,6 +104,7 @@ const App = () => {
         <Route path="/map" element={<Mapp />} />
         <Route path="/Queue" element={<Queue />} />
         <Route path="/mail" element={<Mod_Mail />} />
+        <Route path='/logout' element={<Logout/>}/>
 
          
 
