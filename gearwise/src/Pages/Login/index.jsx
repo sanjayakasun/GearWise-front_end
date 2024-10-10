@@ -8,65 +8,68 @@ import Googleimg from '../../img/google.png'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-// import { Link } from 'react-router-dom';
-
 function Login() {
-  //google oauth function
+  // Google OAuth function
   const googleAuth = () => {
     window.open(
       `${"http://localhost:4005"}/api/auth/google/callback`,
       "_self"
     );
-    console.log("Logged in success", email)
+    console.log("Logged in success", email);
   };
 
-  //login function manual
-
+  // Login function manual
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   async function submit(e) {
     e.preventDefault();
 
     try {
-
       const response = await axios.post("http://localhost:4005/api/customers/logincustomer", {
         email, password
-      })
-      console.log(response.data)
+      });
+
+      console.log(response.data);
       if (response.data.status === "exist") {
         const customerId = response.data.customerId;
-        // Store the customerId for frontend use if needed
+        const role = response.data.role; // Get role from response
         localStorage.setItem('customerId', customerId);
-        //toast ekk display krmu login success kiyala
-        console.log("Logged in success", email)
-        console.log(customerId)
+
+        // Toast message for successful login
         toast.success('Logged in success');
+        console.log("Logged in success", email);
+        console.log("Customer ID:", customerId);
+        console.log("Role:", role);
+
         // Delay navigation to show toast message
         setTimeout(() => {
-          // navigate('/', { state: { customerId } });
-          navigate('/')
+          // Redirect to different dashboards based on role
+          if (role === 'admin') {
+            navigate('/admin');
+          } else if (role === 'moderator') {
+            navigate('/moderator');
+          } else if (role === 'supplier') {
+            navigate('/supp');
+          } else {
+            navigate('/'); // Default dashboard for normal users
+          }
         }, 3000); // 3 seconds delay
       }
       else if (response.data.status === "notexist") {
-        toast.error("User have not sign up");
+        toast.error("User has not signed up");
       } 
-      else if(response.data.status === "Incorrect_password"){
+      else if (response.data.status === "Incorrect_password") {
         toast.error("Incorrect Password Entered");
-      }
+      } 
       else {
-        toast.error("Please fill up all fileds");
+        toast.error("Please fill up all fields");
       }
-
     }
     catch (e) {
       console.log(e);
-
     }
   }
 
