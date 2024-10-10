@@ -141,6 +141,7 @@ export default function Navbar() {
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div className="dropdown-menu">
                                 <a href="/AppointmentList" className="dropdown-item">View Appointment</a>
+                                <a href="/Vehicle_history" className="dropdown-item">Vehicle History</a>
                                 <a href="/Contact" className="dropdown-item">Contact us</a>
                                 <a href="/Advertistments" className="dropdown-item">Advertistments</a>
                                     {/* <a href={{ pathname: "/AppointmentList", state: { customerId } }} className="dropdown-item">View Appointment</a> */}

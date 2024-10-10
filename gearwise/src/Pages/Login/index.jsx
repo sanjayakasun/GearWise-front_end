@@ -37,7 +37,7 @@ function Login() {
         const customerId = response.data.customerId;
         const role = response.data.role; // Get role from response
         localStorage.setItem('customerId', customerId);
-
+        localStorage.setItem('Role',role)
         // Toast message for successful login
         toast.success('Logged in success');
         console.log("Logged in success", email);
@@ -54,7 +54,7 @@ function Login() {
           } else if (role === 'supplier') {
             navigate('/supp');
           } else {
-            navigate('/'); // Default dashboard for normal users
+            navigate('/Addvehicle'); // Default dashboard for normal users
           }
         }, 3000); // 3 seconds delay
       }

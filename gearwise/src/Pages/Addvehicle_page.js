@@ -13,8 +13,12 @@ export default function Addvehicle_page() {
         <div>
             <Topbar />
             <Navbar />
-            <Pageheader />
-
+            <br/>
+            <center>
+            <h1>Add Your Vehicle Information </h1>
+            <p style={{color:'red'}}>Add Your Vehicle information for Easy Make of Appointments by just one click !</p>
+            </center>
+            <br/>
             <Addvehicle />
 
 
