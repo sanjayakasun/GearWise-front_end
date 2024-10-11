@@ -9,10 +9,13 @@
   margin: 0 !important;
   padding: 0 !important;
   background-image: url('./Bg.jpeg');
-  background-size: cover; 
-  position: fixed; /* Fix the background image */
-  background-attachment: fixed; /* Fix the background image */
+  background-size: cover; /* Ensure the background image covers the entire viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: scroll; /* Make the background scroll with the content */
+  min-height: 100vh; /* Ensure the height is at least the height of the viewport */
 }
+
 
 .text-center {
   text-align: center;
