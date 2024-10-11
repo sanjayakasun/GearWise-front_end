@@ -18,7 +18,7 @@ useEffect(() => {
     if (storedCustomerId && storedRole) {            
         setCustomerId(storedCustomerId);            
         setRole(storedRole);            
-        if (storedRole === 'customer') {                
+        if (storedRole === 'customer'  || storedRole=== 'supplier' || storedRole==='moderator') {                
             navigate('/unauth'); // Redirect if not an admin            
         }      
     } else {            

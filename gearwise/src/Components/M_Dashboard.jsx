@@ -135,9 +135,10 @@ const M_Dashboard = () => {
                         value={formData.vehicleType}
                         onChange={handleChange}
                     >
-                        <option value="Sedan">Sedan</option>
+                        <option value="Car">Car</option>
                         <option value="SUV">SUV</option>
                         <option value="Truck">Truck</option>
+                        <option value="Bus">Bus</option>
                         <option value="Van">Van</option>
                     </select>
                 </div>
