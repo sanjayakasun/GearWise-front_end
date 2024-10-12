@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import axios from 'axios';  
 import './Sidebar/styles.css';
-
 import { toast, ToastContainer } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Review_Ratings = () => {
     const [reviews, setReviews] = useState([]);
@@ -39,6 +40,22 @@ const Review_Ratings = () => {
         } catch (error) {
             console.error('Error deleting review:', error);
         }
+    };
+    const showDeleteConfirmation = (id) => {
+        confirmAlert({
+            title: 'Confirm to Delete',
+            message: 'Are you sure you want to delete this review?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => handleDeleteClick(id)
+                },
+                {
+                    label: 'No',
+                    onClick: () => {}
+                }
+            ]
+        });
     };
     return (
         <div>            <ToastContainer />
@@ -81,7 +98,7 @@ const Review_Ratings = () => {
                             <div className="mt-auto flex">
                                 <button
                                     className={`w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-br-xl text-gray-800 shadow-sm disabled:opacity-50 disabled:pointer-events-none ${isClicked ? 'text-blue-500' : 'text-red-500'}`}
-                                    onClick={() => handleDeleteClick(review._id)}
+                                    onClick={() => showDeleteConfirmation(review._id)}
                                 >
                                     <FaTrash />
                                 </button>
