@@ -20,7 +20,7 @@ export default function Advertistments() {
                                 <img src={Img1} alt="Image"/>
                             </div>
                             <div class="blog-text">
-                                <h3><a href="#"> Drive with Confidence<br/>Mobil 1 Oil - Your Engine's Best Companion</a></h3>
+                                <h3><a href=""> Drive with Confidence<br/>Mobil 1 Oil - Your Engine's Best Companion</a></h3>
                                 <p>
                                 Introducing Mobil 1, the ultimate engine oil for peak performance and unmatched protection. 
                                 Trusted by professionals and enthusiasts alike, Mobil 1 delivers unrivaled lubrication,safeguard your engine against wear, heat, and friction. 
@@ -40,7 +40,7 @@ export default function Advertistments() {
                             
                             </div>
                             <div class="blog-text">
-                                <h3><a href="#">Wurth<br/>Your Trusted Partner in Industry Solutions!</a></h3>
+                                <h3><a href="">Wurth<br/>Your Trusted Partner in Industry Solutions!</a></h3>
                                 <p>
                                 Discover the power of Würth, the global leader in quality tools, equipment, and industrial supplies.
                                 From precision-engineered fasteners to cutting-edge machinery, we deliver excellence at every turn.
@@ -60,7 +60,7 @@ export default function Advertistments() {
                             
                             </div>
                             <div class="blog-text">
-                                <h3><a href="#">Discover the Difference with 3M<br/>Your Trusted Partner for Innovation and Excellence!</a></h3>
+                                <h3><a href="">Discover the Difference with 3M<br/>Your Trusted Partner for Innovation and Excellence!</a></h3>
                                 <p>
                                 For over a century, 3M has been at the forefront of innovation, revolutionizing industries and enriching lives worldwide.
                                 From industry-leading solutions in manufacturing and technology to cutting-edge advancements in worker safety, healthcare, and consumer goods, 3M sets the standard for excellence.

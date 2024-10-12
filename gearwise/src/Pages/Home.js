@@ -9,7 +9,7 @@ import Location from '../Components/Location/Location';
 // import Reviews from '../Components/Reviews/Reviews';
 import Test from '../Components/Carousel/Test';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Advertistments from '../Components/Advertistments/Advertistments';
+import Advertistments from '../Components/Advertistments/Ad_from_db';
 import Fotter from '../Components/Fotter/Fotter';
 import Review from '../Components/Review/Review';
 import Tabs from '../Components/Tabs/Tabs';

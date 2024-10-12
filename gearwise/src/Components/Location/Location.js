@@ -20,7 +20,7 @@ export default function Location() {
                                     <i className="fa fa-map-marker-alt"></i>
                                     <div className="location-text">
                                         <h3>Auto Spa</h3>
-                                        <p>No 123, Market Road, Dambulla</p>
+                                        <p>No 132/5, Market Road, Dambulla</p>
                                         <p><strong>Call:</strong>0712209112</p>
                                     </div>
                                 </div>
