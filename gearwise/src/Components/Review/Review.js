@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation } from 'react-router-dom';
 
 export const Review_ratings = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -10,6 +11,7 @@ export const Review_ratings = () => {
   const [name, setName] = useState('');
   const [reviewText, setReviewText] = useState('');
   const [reviews, setReviews] = useState([]);
+  const location = useLocation();
 
 
   useEffect(() => {
@@ -178,7 +180,7 @@ export const Review_ratings = () => {
         </div>
       </section>
 
-
+     
       <div>
         <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
           Share Your Thoughts: Submit your <span className="text-blue-500">Review and Ratings</span>
@@ -188,8 +190,8 @@ export const Review_ratings = () => {
           Your Review and Ratings Shape the Journey."
         </p>
       </div>
+      {location.pathname === '/Review' ? ( 
       <div>
-
         <section class="max-w-4xl p-6 mx-auto bg-gray-200 rounded-md shadow-md dark:bg-gray-800">
           <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Your Review and Rating</h2>
 
@@ -248,7 +250,11 @@ export const Review_ratings = () => {
           </form>
         </section>
       </div>
-
+      ):(
+        <center>
+            <a href="/Review" className="btn btn-custom">Add Your Review</a>
+            </center>
+      )}
 
     </div>
 

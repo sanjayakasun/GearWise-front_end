@@ -172,16 +172,10 @@ export default function Navbar() {
                     Pages
                   </a>
                   <div className="dropdown-menu">
-                    <a href="/AppointmentList" className="dropdown-item">
-                      View Appointment
-                                <a href="/Vehicle_history" className="dropdown-item">Vehicle History</a>
-                    </a>
-                    <a href="/Contact" className="dropdown-item">
-                      Contact Us
-                    </a>
-                    <a href="/Advertisements" className="dropdown-item">
-                      Advertisements
-                    </a>
+                    <a href="/AppointmentList" className="dropdown-item">View Appointment</a>
+                    <a href="/Vehicle_history" className="dropdown-item">Vehicle History</a>
+                    <a href="/Contact" className="dropdown-item">Contact Us</a>
+                    <a href="/Advertistments" className="dropdown-item">Advertisements</a>
                   </div>
                 </div>
               </div>
