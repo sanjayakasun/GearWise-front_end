@@ -16,7 +16,8 @@ function Test() {
           <Carousel.Caption style={{justifyContent:'center',top:'3vh'}}>
             <h3 style={{color:'red',textTransform:'uppercase'}}>Washing & Detailing</h3>
             <h1 style={{fontSize:'50px'}}>Keep your Car Newer</h1>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <p>To keep your car looking and feeling newer for longer, regular maintenance is key. 
+              <br/>Start by following a consistent cleaning routine, both inside and out, to prevent dirt and grime from building up. Regularly waxing your car can protect the paint and give it a lasting shine.</p>
           </Carousel.Caption>      
         </Carousel.Item>
         <Carousel.Item>
@@ -24,7 +25,10 @@ function Test() {
           <Carousel.Caption style={{justifyContent:'center',top:'3vh'}}>
             <h3 style={{color:'red',textTransform:'uppercase'}}>Washing & Detailing</h3>
             <h1 style={{fontSize:'50px'}}>Quality service for you</h1>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Providing exceptional care and attention to meet your specific needs.
+              <br/>
+              Ultimately, it’s about creating a positive experience where you feel valued and your needs are met with excellence.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -33,7 +37,8 @@ function Test() {
             <h3 style={{color:'red',textTransform:'uppercase'}}>Washing & Detailing</h3>
             <h1 style={{fontSize:'50px'}}>Exterior & Interior Washing</h1>
             <p>
-              Praesent commodo cursus magna, tetur.
+            Keep your vehicle clean, fresh, and well-maintained. 
+            <br/>Exterior washing removes dirt, grime, and pollutants that accumulate on your car's surface, helping to protect the paint and maintain a polished look
             </p>
           </Carousel.Caption>
         </Carousel.Item>

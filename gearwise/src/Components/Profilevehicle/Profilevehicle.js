@@ -133,7 +133,7 @@ const VehicleHistory = () => {
                                 <img src={logo2} alt="Service Station Logo" style={{ width: '150px' }} />
                             </div>
                             <h3 className="text-center">GearWise - Auto Spa Service Station</h3>
-                            <p className="text-center">No 123, Market Road, Dambulla. <br /> 071-2209112 / 076-4635795 / 071-7650880 / 077-3236925</p>
+                            <p className="text-center">No 132/5, Market Road, Dambulla. <br /> 071-2209112 / 076-4635795 / 071-7650880 / 077-3236925</p>
                             <hr />
                             <h4 className="text-center">Vehicle History Report</h4>
                             <p><strong>Report Generated Date:</strong>{formatDate(new Date())}</p>
