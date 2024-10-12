@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const A_Advertisment = () => {
     const [ads, setAds] = useState([]);
@@ -42,7 +44,39 @@ const A_Advertisment = () => {
             toast.error('Error deleting advertisement');
         }
     };
+    const showApproveConfirmation = (id) => {
+        confirmAlert({
+            title: 'Confirm to Approve',
+            message: 'Are you sure you want to approve this advertisement?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => handleApprove(id)
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        });
+    };
 
+    const showDeleteConfirmation = (id) => {
+        confirmAlert({
+            title: 'Confirm to Delete',
+            message: 'Are you sure you want to delete this advertisement?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => handleDelete(id)
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        });
+    };
     return (
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                       <ToastContainer />
@@ -66,13 +100,13 @@ const A_Advertisment = () => {
                         </div>
                         <div className="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
                             <button
-                                onClick={() => handleApprove(ad._id)}
+                                onClick={() => showApproveConfirmation(ad._id)}
                                 className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
                             >
                                 Approve
                             </button>
                             <button
-                                onClick={() => handleDelete(ad._id)}
+                                onClick={() => showDeleteConfirmation(ad._id)}
                                 className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
                             >
                                 Delete
