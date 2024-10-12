@@ -11,6 +11,8 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import Modal from 'react-bootstrap/Modal';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export const Addvehicle = () => {
 
@@ -98,6 +100,24 @@ export const Addvehicle = () => {
     }, [customerId]);
     
 
+    // Show delete confirmation
+    const showDeleteConfirmation = (id) => {
+        confirmAlert({
+            title: 'Confirm to Delete',
+            message: 'Are you sure you want to delete this vehicle?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => handleDelete(id)
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        });
+    };
+
 
     // Deleted the vehicle in (My vehicle)
     const handleDelete = async (vehicleId) => {
@@ -182,10 +202,16 @@ export const Addvehicle = () => {
                                                 Year : {vehicleinfo.mfYear}
                                             </td>
                                             <td>{vehicleinfo.vrNo}</td>
+                                            
                                             <td style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                <button onClick={() => handleEdit(vehicleinfo)}><AiOutlineEdit style={{ fontSize: '20px', marginBottom: '10px' }} /></button>
-                                                <button onClick={() => handleDelete(vehicleid)}><AiOutlineDelete style={{ fontSize: '20px', color: '#ff4d4f' }} /></button>
+                                                <button onClick={() => handleEdit(vehicleinfo)}>
+                                                    <AiOutlineEdit style={{ fontSize: '20px', marginBottom: '10px' }} />
+                                                </button>
+                                                <button onClick={() => showDeleteConfirmation(vehicleid)}>
+                                                    <AiOutlineDelete style={{ fontSize: '20px', color: '#ff4d4f' }} />
+                                                </button>
                                             </td>
+
                                         </tr>
                                     </tbody>
                                 );
