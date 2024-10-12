@@ -20,12 +20,14 @@ export default function Navbar() {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
     const loginTypeFromURL = urlParams.get("loginType");
+    const userIDFromURL = urlParams.get("userID");  // Extract userID from URL
+    console.log("UserID from URL:", userIDFromURL);
 
     if (token && loginTypeFromURL === "google") {
       // Store token and loginType in local storage
-      localStorage.setItem("customerId", token);
+      localStorage.setItem("customerId", userIDFromURL);
       localStorage.setItem("loginType", "google");
-      setCustomerId(token);
+      setCustomerId(userIDFromURL);
       setLoginType("google");
 
       // Remove token and loginType from URL after storing them
