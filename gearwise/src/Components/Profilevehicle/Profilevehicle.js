@@ -7,6 +7,8 @@ import { useReactToPrint } from "react-to-print";
 import logo from '../../img/gearwise.png'; // Import your logo image  
 import logo2 from '../../img/wuerth.jpg'; 
 import logo3 from '../../img/verify.png'; 
+import { ToastContainer, toast } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css';
 
 const VehicleHistory = () => {
     const [vehicleData, setVehicleData] = useState([]); // Store all vehicle data     
@@ -40,6 +42,7 @@ const VehicleHistory = () => {
                     setVrNumbers(vrNumbers);
                 } catch (error) {
                     console.error('Error fetching vehicle registration numbers:', error);
+                    toast.error('Error fetching vehicle data!');
                 }
             };
             fetchVehicleVrNumbers();
@@ -72,7 +75,9 @@ const VehicleHistory = () => {
     const handlePrint = useReactToPrint({
         content: () => ComponentsRef.current,
         documentTitle: "Vehicle History",
-        onAfterPrint: () => alert("Vehicle History Successfully Downloaded!"),
+        onAfterPrint: () => {
+            toast.success("Vehicle History Successfully Downloaded!"); // Show toast success
+        },
     });
 
     // Format date function     
@@ -83,6 +88,8 @@ const VehicleHistory = () => {
 
     return (
         <div className="container">
+            <ToastContainer />
+
             <div className="section-header text-center">
                 <h2>Vehicle History</h2>
             </div>
