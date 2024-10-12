@@ -58,7 +58,7 @@ const M_Dashboard = () => {
             
             setFormData({
                 vehicleNumber: '',
-                vehicleType: 'Sedan',
+                vehicleType: 'car',
                 serviceType: 'Full Service',
                 serviceDate: new Date(),
                 owner: ''
