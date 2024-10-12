@@ -23,9 +23,9 @@ export default function Fotter() {
             <div className="col-lg-3 col-md-6">
               <div className="footer-contact">
                 <h2>Get In Touch</h2>
-                <p><i className="fa fa-map-marker-alt"></i>No 123, Market Road, Dambulla</p>
+                <p><i className="fa fa-map-marker-alt"></i>No 132/5, Market Road, Dambulla</p>
                 <p><i className="fa fa-phone-alt"></i>0712209112</p>
-                <p><i className="fa fa-envelope"></i>gearwise@gmail.com</p>
+                <p><i className="fa fa-envelope"></i>gearwise24@gmail.com</p>
                 <div className="footer-social">
                   <a className="btn" href=""><i className="fab fa-twitter"></i></a>
                   <a className="btn" href=""><i className="fab fa-facebook-f"></i></a>

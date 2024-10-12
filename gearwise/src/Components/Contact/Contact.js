@@ -10,7 +10,7 @@ export default function Contact() {
                     <h2>Contact for any query</h2>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <div className="contact-info">
                             <h2>Quick Contact Info</h2>
                             <div className="contact-info-item">
@@ -28,7 +28,7 @@ export default function Contact() {
                                 </div>
                                 <div className="contact-info-text">
                                     <h3>Call Us</h3>
-                                    <p>0712209112</p>
+                                    <p><a href='0712209112' style={{textDecoration:'none',color:'white'}}>0712209112</a> / <a href='0764635795' style={{textDecoration:'none',color:'white'}}>0764635795</a> / <a href='0773236925' style={{textDecoration:'none',color:'white'}}>0773236925</a> / <a href='0717650880' style={{textDecoration:'none',color:'white'}}>0717650880</a></p> 
                                 </div>
                             </div>
                             <div className="contact-info-item">
@@ -37,13 +37,13 @@ export default function Contact() {
                                 </div>
                                 <div className="contact-info-text">
                                     <h3>Email Us</h3>
-                                    <p>gearwise@gmail.com</p>
+                                    <p><a href='gearwise24@gmail.com' style={{textDecoration:'none',color:'white'}}>gearwise24@gmail.com</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-7">
-                        <div className="contact-form">
+                    <div className="col-md-6">
+                        {/* <div className="contact-form">
                             <div id="success"></div>
                             <form name="sentMessage" id="contactForm" novalidate="novalidate">
                                 <div className="control-group">
@@ -66,7 +66,7 @@ export default function Contact() {
                                     <button className="btn btn-custom" type="submit" id="sendMessageButton">Send Message</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-md-12">
                         

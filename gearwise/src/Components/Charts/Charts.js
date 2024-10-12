@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react'; 
+import { Link, useNavigate } from "react-router-dom"; 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Charts() {
+
+  const navigate = useNavigate();     
+  const [customerId, setCustomerId] = useState(null);     
+  const [role, setRole] = useState(null);  // Store user role
+
+// Fetch customer ID and role from localStorage     
+useEffect(() => {         
+    const storedCustomerId = localStorage.getItem('customerId');         
+    const storedRole = localStorage.getItem('Role'); // Assuming role is also stored in localStorage
+  
+    if (storedCustomerId && storedRole) {            
+        setCustomerId(storedCustomerId);            
+        setRole(storedRole);            
+        if (storedRole === 'customer' || storedRole=== 'supplier' || storedRole==='moderator') {                
+            navigate('/unauth'); // Redirect if not an admin            
+        }      
+    } else {            
+        navigate('/unauthrehome'); // Redirect if no customerId or role found
+        // navigate('/login'); // You can also redirect to login if that fits your flow
+    }     
+}, [navigate]);
+
   let complexcount = 0;
   let basiccount = 0;
   let premiumcount = 0;

@@ -26,6 +26,7 @@ export const U_Profile = () => {
       }
   }, [navigate]);
 
+    const [customerVehicleInfo, setCustomerVehicleInfo] = useState([]); // State for storing vehicle info
 
     const [formData, setFormData] = useState({
         name: '',
@@ -77,22 +78,22 @@ export const U_Profile = () => {
     const hideButtonPath = '/Vehicle_history';
     const hideButton = location.pathname === hideButtonPath;
 
-    useEffect(() => {
-        getOneCusprofile();
-    }, []);
+    // useEffect(() => {
+    //     getOneCusprofile();
+    // }, []);
 
-    //Fetching data
-    const getOneCusprofile = async () => {
-        try {
-            if (customerId) {
-            const result = await axios.get(`http://localhost:4005/api/customers/customerspro/${customerId}`);
-            setFormData(result.data);
-            console.log(result.data);
-            }
-        } catch (error) {
-            console.error('Error loading data:', error);
-        }
-    };
+    // //Fetching data
+    // const getOneCusprofile = async () => {
+    //     try {
+    //         if (customerId) {
+    //         const result = await axios.get(`http://localhost:4005/api/customers/customerspro/${customerId}`);
+    //         setFormData(result.data);
+    //         console.log(result.data);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error loading data:', error);
+    //     }
+    // };
 
     //Formdata 
     const handleChange = (e) => {
@@ -128,7 +129,30 @@ export const U_Profile = () => {
         }
     };
 
+    // Fetch customer profile data
+    useEffect(() => {
+        const getOneCusprofile = async () => {
+            try {
+                if (customerId) {
+                    const result = await axios.get(`http://localhost:4005/api/customers/customerspro/${customerId}`);
+                    setFormData(result.data);
+                    console.log(result.data);
+                }
+            } catch (error) {
+                console.error('Error loading customer data:', error);
+            }
+        };
+        getOneCusprofile();
+    }, [customerId]);
 
+    // Fetch vehicle information for the customer
+    useEffect(() => {
+        if (customerId) {
+            axios.get(`http://localhost:4005/api/vehicles/getvehicleinfo/${customerId}`)
+                .then(response => setCustomerVehicleInfo(response.data))
+                .catch(error => console.log('Error fetching vehicle info:', error));
+        }
+    }, [customerId]);
     
 
     return (

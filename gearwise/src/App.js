@@ -41,28 +41,33 @@ import Addvehicle_page from './Pages/Addvehicle_page.js';
 import Mapp from './Pages/Mapp.js';
 import Queue from "./Pages/Queue.js";
 import Mod_Mail from './Pages/Mod_mail.jsx';
+import Logout from './Components/Logout.jsx'
+import UnauthorizedAccess from './Pages/Unauthorized.js';
+import UnauthorizedAccessrehome from './Pages/Unautho.js';
+import Chatbot from './Components/Chatbot/Chatbot.js';
 
 // import Modal from './Components/Modal/MyVerticallyCenteredModal.js'
 const App = () => {
-  // State to store user data
-  const [user, setUser] = useState(null);
 
-  // Function to get the authenticated user
-  const getUser = async () => {
-    try {
-      const url = `${"http://localhost:4005"}/auth/login/success`;
-      const { data } = await axios.get(url, { withCredentials: true });
-      setUser(data.user._json);  // Set user data from Google OAuth
-    } catch (err) {
-      console.log(err);  // Log error if something goes wrong
-    }
-  };
+  // // State to store user data
+  // const [user, setUser] = useState(null);
 
-  // Hook to trigger the getUser function on component mount
-  useEffect(() => {
-    getUser();  // Fetch user info if authenticated
-  }, []);
+  // // Function to get the authenticated user
+  // const getUser = async () => {
+  //   try {
+  //     const url = `${"http://localhost:4005"}/auth/login/success`;
+  //     const { data } = await axios.get(url, { withCredentials: true });
+  //     setUser(data.user._json);  // Set user data from Google OAuth
+  //   } catch (err) {
+  //     console.log(err);  // Log error if something goes wrong
+  //   }
+  // };
 
+  // // Hook to trigger the getUser function on component mount
+  // useEffect(() => {
+  //   getUser();  // Fetch user info if authenticated
+  // }, []);
+const role = localStorage.getItem('Role'); // Retrieve the role from localStorage
   return (
     <div className="">
         <BrowserRouter>
@@ -103,10 +108,13 @@ const App = () => {
         <Route path="/map" element={<Mapp />} />
         <Route path="/Queue" element={<Queue />} />
         <Route path="/mail" element={<Mod_Mail />} />
-
+        <Route path='/logout' element={<Logout/>}/>
+        <Route path='/unauth' element={<UnauthorizedAccess/>}/>
+        <Route path='/unauthrehome' element={<UnauthorizedAccessrehome/>}/>
          
-
       </Routes>
+      {/* Conditionally render the chatbot only on non-admin routes */}
+      {role !== 'admin' && role !== 'moderator' && role !== 'supplier' && <Chatbot />}
       </BrowserRouter>
     </div>
   );

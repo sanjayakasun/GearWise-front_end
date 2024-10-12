@@ -45,7 +45,7 @@ export default function Topbar() {
                                     </div>
                                     <div className="top-bar-text">
                                         <h3>Email Us</h3>
-                                        <p>gearwise@gmail.com</p>
+                                        <p>gearwise24@gmail.com</p>
                                     </div>
                                 </div>
                             </div>

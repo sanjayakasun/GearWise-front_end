@@ -174,6 +174,7 @@ export default function Navbar() {
                   <div className="dropdown-menu">
                     <a href="/AppointmentList" className="dropdown-item">
                       View Appointment
+                                <a href="/Vehicle_history" className="dropdown-item">Vehicle History</a>
                     </a>
                     <a href="/Contact" className="dropdown-item">
                       Contact Us
